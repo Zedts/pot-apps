@@ -46,3 +46,13 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Graphify Tools
+graphify-out/*
+!graphify-out/graph.json
+
+# Enviroment
+.env
+
+# etc
+ref

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231288012913",
+    "project_id": "pot-s-e1db0",
+    "storage_bucket": "pot-s-e1db0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231288012913:android:1994ef6991065c1db61bd0",
+        "android_client_info": {
+          "package_name": "com.zedt.pot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231288012913-1cbo7dsngiukji7oougcc7ik0j85ht3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBruNH1H7yqb9lk4QeB6k9kUTJkzrozHZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231288012913-1cbo7dsngiukji7oougcc7ik0j85ht3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
