@@ -1,9 +1,5 @@
 class ApiEndpoints {
   ApiEndpoints._();
-
-  // Health
-  static const String health = '/health';
-
   // Authentication
   static const String login = '/auth/login';
   static const String register = '/auth/register';
@@ -12,4 +8,8 @@ class ApiEndpoints {
 
   // Users
   static const String users = '/users';
+
+  // Lapak
+  static const String lapak = '/lapak';
+  static String lapakById(String id) => '/lapak/$id';
 }

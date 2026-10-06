@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_images.dart';
 import '../../core/models/user_model.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/google_auth_service.dart';
 import '../../widgets/auth/login/skyline_footer.dart';
+import '../../widgets/common/app_bottom_nav_bar.dart';
+import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
+import '../../widgets/common/info_modal.dart';
+import '../../widgets/home/home_menu_grid.dart';
+import '../../widgets/home/home_unassigned_view.dart';
+import '../../widgets/home/home_user_banner.dart';
 import '../auth/login_screen.dart';
+import 'repositories/home_repository.dart';
+import 'repositories/home_repository_impl.dart';
+import 'viewmodels/home_view_model.dart';
 
-/// Default Home Screen displayed after successful authentication.
+/// Main Home Screen implementing the layout and visual structure of ref/home.html.
+/// Refactored to Clean Architecture & MVVM with reactive ListenableBuilder.
 class HomeScreen extends StatefulWidget {
   final UserModel user;
+  final HomeViewModel? viewModel;
+  final HomeRepository? homeRepository;
   final AuthService? authService;
   final GoogleAuthService? googleAuthService;
 
   const HomeScreen({
     super.key,
     required this.user,
+    this.viewModel,
+    this.homeRepository,
     this.authService,
     this.googleAuthService,
   });
@@ -27,18 +40,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final AuthService _authService;
-  late final GoogleAuthService _googleAuthService;
-  bool _isLoggingOut = false;
+  late final HomeViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _authService = widget.authService ?? AuthService();
-    _googleAuthService = widget.googleAuthService ?? GoogleAuthService();
+    _viewModel = widget.viewModel ??
+        HomeViewModel(
+          user: widget.user,
+          homeRepository: widget.homeRepository ??
+              HomeRepositoryImpl(
+                authService: widget.authService,
+                googleAuthService: widget.googleAuthService,
+              ),
+        );
   }
 
-  /// Prompts confirmation and executes the logout flow.
+  @override
+  void dispose() {
+    if (widget.viewModel == null) {
+      _viewModel.dispose();
+    }
+    super.dispose();
+  }
+
+  /// Prompts confirmation dialog and executes the logout flow via ViewModel.
   Future<void> _handleLogout() async {
     final shouldLogout = await showDialog<bool>(
       context: context,
@@ -98,14 +124,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (shouldLogout != true) return;
 
-    setState(() => _isLoggingOut = true);
+    final success = await _viewModel.logout();
+    if (!mounted) return;
 
-    try {
-      await _authService.logout();
-      await _googleAuthService.signOut();
-
-      if (!mounted) return;
-
+    if (success) {
       AppToast.show(
         context,
         message: 'Berhasil keluar dari akun.',
@@ -117,247 +139,168 @@ class _HomeScreenState extends State<HomeScreen> {
         MaterialPageRoute(builder: (_) => const LoginScreen()),
         (route) => false,
       );
-    } catch (_) {
-      if (!mounted) return;
+    } else if (_viewModel.errorMessage != null) {
       AppToast.show(
         context,
-        message: 'Terjadi kesalahan saat logout.',
+        message: _viewModel.errorMessage!,
         isSuccess: false,
       );
-    } finally {
-      if (mounted) {
-        setState(() => _isLoggingOut = false);
-      }
+    }
+  }
+
+  /// Triggers profile refresh to check if an Admin or Owner assigned a role.
+  Future<void> _handleRefresh() async {
+    await _viewModel.refreshProfile();
+    if (!mounted) return;
+
+    if (_viewModel.errorMessage != null) {
+      AppToast.show(
+        context,
+        message: _viewModel.errorMessage!,
+        isSuccess: false,
+      );
+    } else {
+      AppToast.show(
+        context,
+        message: 'Data akun berhasil diperbarui.',
+        isSuccess: true,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = widget.user;
-    final displayName = user.nama.trim().isNotEmpty ? user.nama.trim() : 'Pengguna';
+    return ListenableBuilder(
+      listenable: _viewModel,
+      builder: (context, _) {
+        final isUnassigned = _viewModel.isUnassigned;
 
-    return Scaffold(
-      backgroundColor: PotColors.bgCream,
-      appBar: AppBar(
-        backgroundColor: PotColors.bgCream,
-        elevation: 0,
-        centerTitle: false,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Image.asset(
-              AppImages.imageLogo,
-              width: 32,
-              height: 32,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(width: 8),
-            const Text(
-              'POT Presensi',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                color: PotColors.primaryRed,
-                letterSpacing: -0.3,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: IconButton(
-              tooltip: 'Keluar Akun',
-              icon: _isLoggingOut
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(PotColors.primaryRed),
-                      ),
-                    )
-                  : const Icon(Iconsax.logout, color: PotColors.primaryRed, size: 22),
-              onPressed: _isLoggingOut ? null : _handleLogout,
-            ),
+        return Scaffold(
+          backgroundColor: PotColors.bgCream,
+          appBar: AppHeader(
+            onNotificationTap: () => InfoModal.show(context),
+            onSupportTap: () {
+              AppToast.show(
+                context,
+                message: 'Menghubungkan ke Admin & Owner...',
+                isSuccess: true,
+              );
+            },
+            trailing: isUnassigned
+                ? IconButton(
+                    tooltip: 'Keluar Akun',
+                    icon: _viewModel.isLoggingOut
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                PotColors.primaryRed,
+                              ),
+                            ),
+                          )
+                        : const Icon(
+                            Iconsax.logout,
+                            color: PotColors.primaryRed,
+                            size: 20,
+                          ),
+                    onPressed: _viewModel.isLoggingOut ? null : _handleLogout,
+                  )
+                : null,
           ),
-        ],
-      ),
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 440),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Greeting Card
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: PotColors.cardCream,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: PotColors.warmBorder),
-                      boxShadow: [
-                        BoxShadow(
-                          color: PotColors.primaryRed.withValues(alpha: 0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
+          body: SafeArea(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 440),
+                child: RefreshIndicator(
+                  color: PotColors.primaryRed,
+                  onRefresh: _handleRefresh,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 14,
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // halo $nama requirement
-                        Text(
-                          'halo $displayName',
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: PotColors.textDark,
-                            letterSpacing: -0.5,
-                          ),
+                        // User Information Banner Card (matching ref/home.html)
+                        HomeUserBanner(
+                          user: _viewModel.user,
+                          formattedDate: _viewModel.formattedDate,
+                          roleBadgeLabel: _viewModel.roleBadgeLabel,
+                          lapakDisplayInfo: _viewModel.lapakDisplayInfo,
                         ),
-                        const SizedBox(height: 6),
-                        const Text(
-                          'Selamat datang di Sistem Presensi Oleh² Turki.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: PotColors.textMuted,
-                            fontWeight: FontWeight.w500,
+
+                        const SizedBox(height: 18),
+
+                        // Role Conditional Rendering
+                        if (isUnassigned) ...[
+                          // When role == 'unassigned': Hide 6 cards & show waiting notice
+                          HomeUnassignedView(
+                            user: _viewModel.user,
+                            isLoading: _viewModel.isLoading,
+                            onRefresh: _handleRefresh,
+                            onLogout: _handleLogout,
                           ),
-                        ),
+                        ] else ...[
+                          // When role is assigned: Show 6 operational menu cards
+                          HomeMenuGrid(
+                            onCardTap: (menuId, menuTitle) {
+                              AppToast.show(
+                                context,
+                                message: 'Menu $menuTitle sedang dalam tahap pengembangan.',
+                                isSuccess: true,
+                              );
+                            },
+                          ),
+
+                          const SizedBox(height: 24),
+
+                          // Skyline Vector Footer + Slogan
+                          const SkylineFooter(),
+                        ],
+
+                        // Extra bottom padding to avoid overlapping the bottom nav bar
+                        if (!isUnassigned) const SizedBox(height: 16),
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 16),
-
-                  // Account Details Card
-                  Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      color: PotColors.pureWhite,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: PotColors.warmBorder),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Informasi Akun',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: PotColors.textDark,
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-
-                        _buildInfoRow(
-                          icon: Iconsax.personalcard,
-                          label: 'Username',
-                          value: user.username.isNotEmpty ? '@${user.username}' : '-',
-                        ),
-                        const Divider(height: 20, color: PotColors.warmBorder),
-
-                        _buildInfoRow(
-                          icon: Iconsax.sms,
-                          label: 'Email',
-                          value: user.email.isNotEmpty ? user.email : '-',
-                        ),
-                        const Divider(height: 20, color: PotColors.warmBorder),
-
-                        _buildInfoRow(
-                          icon: Iconsax.call,
-                          label: 'Nomor Handphone',
-                          value: user.noHp.isNotEmpty ? user.noHp : 'Belum diisi',
-                        ),
-                        const Divider(height: 20, color: PotColors.warmBorder),
-
-                        _buildInfoRow(
-                          icon: Iconsax.shield_security,
-                          label: 'Role / Status',
-                          value: '${user.role.toUpperCase()} (${user.status})',
-                          valueColor: PotColors.primaryRed,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Prominent Logout Button
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: PotColors.primaryRed,
-                      side: const BorderSide(color: PotColors.primaryRed, width: 1.2),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    icon: const Icon(Iconsax.logout, size: 18),
-                    label: const Text(
-                      'Logout dari Akun',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    onPressed: _isLoggingOut ? null : _handleLogout,
-                  ),
-
-                  const SizedBox(height: 36),
-
-                  // Skyline Vector Footer + Slogan
-                  const SkylineFooter(),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow({
-    required IconData icon,
-    required String label,
-    required String value,
-    Color? valueColor,
-  }) {
-    return Row(
-      children: [
-        Icon(icon, size: 18, color: PotColors.primaryRed),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: PotColors.textMuted,
-                  fontWeight: FontWeight.w500,
+          // Role Conditional Bottom Navigation Bar:
+          // Hidden when unassigned, visible when assigned.
+          bottomNavigationBar: isUnassigned
+              ? null
+              : AppBottomNavBar(
+                  currentIndex: _viewModel.currentTabIndex,
+                  onTap: (index) {
+                    if (index == 0) {
+                      _viewModel.setTabIndex(0);
+                    } else if (index == 1) {
+                      _viewModel.setTabIndex(1);
+                      AppToast.show(
+                        context,
+                        message: 'Halaman Riwayat sedang dalam pengembangan.',
+                        isSuccess: true,
+                      );
+                    } else if (index == 2) {
+                      // _viewModel.setTabIndex(2);
+                      // AppToast.show(
+                      //   context,
+                      //   message: 'Halaman Profil sedang dalam pengembangan.',
+                      //   isSuccess: true,
+                      // );
+                      // Temporary: Profile navigation button functions as logout
+                      _handleLogout();
+                    }
+                  },
                 ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: valueColor ?? PotColors.textDark,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

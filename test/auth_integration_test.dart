@@ -10,6 +10,7 @@ import 'package:pot_apps/core/models/user_model.dart';
 import 'package:pot_apps/screens/auth/repositories/auth_repository_impl.dart';
 import 'package:pot_apps/screens/auth/viewmodels/login_view_model.dart';
 import 'package:pot_apps/screens/auth/viewmodels/register_view_model.dart';
+import 'package:pot_apps/screens/home/viewmodels/home_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -276,6 +277,47 @@ void main() {
         ),
         isTrue,
       );
+    });
+
+    test('HomeViewModel computes role conditions, badge labels, and handles tab switching', () {
+      const unassignedUser = UserModel(
+        id: 'u1',
+        nama: 'Budi Santoso',
+        username: 'budisantoso',
+        email: 'budi@pot.com',
+        role: 'unassigned',
+        noHp: '',
+        status: 'active',
+        authProvider: 'password',
+      );
+      final unassignedVm = HomeViewModel(user: unassignedUser);
+
+      expect(unassignedVm.isUnassigned, isTrue);
+      expect(unassignedVm.roleBadgeLabel, 'Belum Ditugaskan');
+      expect(unassignedVm.greetingName, 'Budi Santoso');
+      expect(unassignedVm.formattedDate, isNotEmpty);
+      expect(unassignedVm.currentTabIndex, 0);
+
+      unassignedVm.setTabIndex(1);
+      expect(unassignedVm.currentTabIndex, 1);
+
+      const assignedUser = UserModel(
+        id: 'u2',
+        nama: 'Siti Rahma',
+        username: 'sitirahma',
+        email: 'siti@pot.com',
+        role: 'spg',
+        lapakId: '2',
+        noHp: '0812345678',
+        status: 'active',
+        authProvider: 'password',
+      );
+      final assignedVm = HomeViewModel(user: assignedUser);
+
+      expect(assignedVm.isUnassigned, isFalse);
+      expect(assignedVm.roleBadgeLabel, 'SPG');
+      expect(assignedVm.lapakDisplayInfo, 'Lapak 2');
+      expect(assignedVm.greetingName, 'Siti Rahma');
     });
   });
 }

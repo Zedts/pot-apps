@@ -28,7 +28,7 @@ void main() {
     expect(find.text('Daftar dengan Google'), findsOneWidget);
   });
 
-  testWidgets('HomeScreen smoke test displays halo nama and logout', (WidgetTester tester) async {
+  testWidgets('HomeScreen smoke test for UNASSIGNED role shows waiting notice and hides cards & bottom nav', (WidgetTester tester) async {
     const testUser = UserModel(
       id: 'test_uid_123',
       nama: 'Budi Santoso',
@@ -46,9 +46,69 @@ void main() {
       ),
     );
 
-    // Verify halo $nama text
-    expect(find.text('halo Budi Santoso'), findsOneWidget);
-    expect(find.text('Informasi Akun'), findsOneWidget);
-    expect(find.text('Logout dari Akun'), findsOneWidget);
+    // Verify User Banner displays greeting and unassigned badge & lapak
+    expect(find.text('Halo, Budi Santoso 👋'), findsOneWidget);
+    expect(find.text('Belum Ditugaskan'), findsNWidgets(2)); // Role badge and Lapak info row
+    expect(find.text('Belum Ditugaskan (UNASSIGNED)'), findsOneWidget); // Status in info card
+
+    // Verify unassigned notice & account info
+    expect(find.text('Menunggu Penugasan'), findsOneWidget);
+    expect(find.text('Informasi Akun Anda'), findsOneWidget);
+    expect(find.text('Periksa Status Penugasan'), findsOneWidget);
+    expect(find.text('Keluar dari Akun'), findsOneWidget);
+
+    // Verify 6 cards are HIDDEN
+    expect(find.text('Absen\nMasuk'), findsNothing);
+    expect(find.text('Terima\nBarang'), findsNothing);
+    expect(find.text('Stok &\nPenjualan'), findsNothing);
+    expect(find.text('Nota\nPengeluaran'), findsNothing);
+    expect(find.text('Closing\nHarian'), findsNothing);
+    expect(find.text('Slip\nGaji'), findsNothing);
+
+    // Verify bottom nav is HIDDEN
+    expect(find.text('Beranda'), findsNothing);
+    expect(find.text('Riwayat'), findsNothing);
+    expect(find.text('Profil'), findsNothing);
+  });
+
+  testWidgets('HomeScreen smoke test for ASSIGNED role shows all 6 cards and bottom nav', (WidgetTester tester) async {
+    const testUser = UserModel(
+      id: 'test_spg_456',
+      nama: 'Siti Rahma',
+      username: 'sitirahma',
+      email: 'siti@pot.com',
+      role: 'spg',
+      lapakId: '2',
+      noHp: '08129876543',
+      status: 'active',
+      authProvider: 'password',
+    );
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: HomeScreen(user: testUser),
+      ),
+    );
+
+    // Verify User Banner displays greeting, role badge, and Lapak
+    expect(find.text('Halo, Siti Rahma 👋'), findsOneWidget);
+    expect(find.text('SPG'), findsOneWidget);
+    expect(find.text('Lapak 2'), findsOneWidget);
+
+    // Verify all 6 operational cards are DISPLAYED
+    expect(find.text('Absen\nMasuk'), findsOneWidget);
+    expect(find.text('Terima\nBarang'), findsOneWidget);
+    expect(find.text('Stok &\nPenjualan'), findsOneWidget);
+    expect(find.text('Nota\nPengeluaran'), findsOneWidget);
+    expect(find.text('Closing\nHarian'), findsOneWidget);
+    expect(find.text('Slip\nGaji'), findsOneWidget);
+
+    // Verify bottom navigation bar is DISPLAYED
+    expect(find.text('Beranda'), findsOneWidget);
+    expect(find.text('Riwayat'), findsOneWidget);
+    expect(find.text('Profil'), findsOneWidget);
+
+    // Verify unassigned notice is HIDDEN
+    expect(find.text('Menunggu Penugasan'), findsNothing);
   });
 }
