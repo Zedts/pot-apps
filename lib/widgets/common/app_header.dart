@@ -4,25 +4,115 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_images.dart';
 import 'info_modal.dart';
 
-/// Reusable application header bar with real logo, brand typography,
-/// notification bell, and support / contact action.
+/// Reusable application header bar supporting both the main brand header
+/// and sub-page navigation headers with title, back button, and custom actions.
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onNotificationTap;
   final VoidCallback? onSupportTap;
   final Widget? trailing;
+  final bool showBackButton;
+  final VoidCallback? onBackTap;
+  final String? title;
+  final String? subtitle;
 
   const AppHeader({
     super.key,
     this.onNotificationTap,
     this.onSupportTap,
     this.trailing,
+    this.showBackButton = false,
+    this.onBackTap,
+    this.title,
+    this.subtitle,
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => Size.fromHeight(subtitle != null ? 72 : 60);
 
   @override
   Widget build(BuildContext context) {
+    // If customized for a sub-screen with title or back button
+    if (showBackButton || title != null) {
+      return Container(
+        color: PotColors.bgCream,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        child: SafeArea(
+          bottom: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Left: Back button or placeholder
+              if (showBackButton)
+                GestureDetector(
+                  onTap: onBackTap ?? () => Navigator.of(context).maybePop(),
+                  child: Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      color: PotColors.cardCream,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: PotColors.warmBorder),
+                      boxShadow: [
+                        BoxShadow(
+                          color: PotColors.primaryRed.withValues(alpha: 0.04),
+                          blurRadius: 4,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 16,
+                      color: PotColors.primaryRed,
+                    ),
+                  ),
+                )
+              else
+                const SizedBox(width: 34),
+
+              // Center: Screen title & subtitle
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (title != null)
+                      Text(
+                        title!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: PotColors.textDark,
+                          letterSpacing: -0.2,
+                        ),
+                      ),
+                    if (subtitle != null) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: PotColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+
+              // Right: Trailing action or placeholder
+              trailing ?? const SizedBox(width: 34),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Default Brand Home Header
     return Container(
       color: PotColors.bgCream,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),

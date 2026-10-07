@@ -15,11 +15,26 @@ class PotColors {
   static const Color textMuted = Color(0xFF6B7280);
   static const Color textLight = Color(0xFF9CA3AF);
 
-  // Status Colors
-  static const Color successGreen = Color(0xFF2E7D32);   // Status Selesai / Masuk
-  static const Color warningOrange = Color(0xFFD97706);  // Status Proses / Warning
-  static const Color infoBlue = Color(0xFF2563EB);       // Status Info / Transfer
-  static const Color purpleAccent = Color(0xFF7C3AED);   // Pengeluaran Icon
+  // Semantic Status Tokens (Background, Border, Text/Icon)
+  static const Color statusSuccessBg = Color(0xFFD1FAE5);
+  static const Color statusSuccessBorder = Color(0xFFA7F3D0);
+  static const Color statusSuccessText = Color(0xFF047857);
+
+  static const Color statusWarningBg = Color(0xFFFEF3C7);
+  static const Color statusWarningBorder = Color(0xFFFDE68A);
+  static const Color statusWarningText = Color(0xFFB45309);
+
+  static const Color statusInfoBg = Color(0xFFE0F2FE);
+  static const Color statusInfoBorder = Color(0xFFBAE6FD);
+  static const Color statusInfoText = Color(0xFF0369A1);
+
+  static const Color statusErrorBg = Color(0xFFFEF2F2);
+  static const Color statusErrorBorder = Color(0xFFFCA5A5);
+  static const Color statusErrorText = Color(0xFFB91C1C);
+
+  static const Color statusNeutralBg = Color(0xFFF3F4F6);
+  static const Color statusNeutralBorder = Color(0xFFE5E7EB);
+  static const Color statusNeutralText = Color(0xFF6B7280);
 
   // Turkish & Brand Accents
   static const Color goldAccent = Color(0xFFD4AF37);     // Gold trim

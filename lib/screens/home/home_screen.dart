@@ -4,14 +4,17 @@ import '../../core/constants/app_colors.dart';
 import '../../core/models/user_model.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/google_auth_service.dart';
+import '../../core/services/location_service.dart';
 import '../../widgets/auth/login/skyline_footer.dart';
 import '../../widgets/common/app_bottom_nav_bar.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
+import '../../widgets/common/confirmation_dialog.dart';
 import '../../widgets/common/info_modal.dart';
 import '../../widgets/home/home_menu_grid.dart';
 import '../../widgets/home/home_unassigned_view.dart';
 import '../../widgets/home/home_user_banner.dart';
+import '../attendance/attendance_screen.dart';
 import '../auth/login_screen.dart';
 import 'repositories/home_repository.dart';
 import 'repositories/home_repository_impl.dart';
@@ -54,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 googleAuthService: widget.googleAuthService,
               ),
         );
+    // Proactively request location permissions on home screen load
+    LocationService().checkAndRequestPermission();
   }
 
   @override
@@ -66,60 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Prompts confirmation dialog and executes the logout flow via ViewModel.
   Future<void> _handleLogout() async {
-    final shouldLogout = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: PotColors.pureWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
-          children: [
-            Icon(Iconsax.logout, color: PotColors.primaryRed, size: 22),
-            SizedBox(width: 8),
-            Text(
-              'Konfirmasi Logout',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: PotColors.textDark,
-              ),
-            ),
-          ],
-        ),
-        content: const Text(
-          'Apakah Anda yakin ingin keluar dari akun POT?',
-          style: TextStyle(
-            fontSize: 13,
-            color: PotColors.textMuted,
-            height: 1.4,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text(
-              'Batal',
-              style: TextStyle(
-                color: PotColors.textMuted,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: PotColors.primaryRed,
-              foregroundColor: PotColors.pureWhite,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text(
-              'Keluar',
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
-          ),
-        ],
-      ),
+    final shouldLogout = await ConfirmationDialog.show(
+      context,
+      icon: const Icon(Iconsax.logout, color: PotColors.primaryRed, size: 22),
+      title: 'Konfirmasi Logout',
+      content: 'Apakah Anda yakin ingin keluar dari akun POT?',
+      confirmLabel: 'Keluar',
+      cancelLabel: 'Batal',
     );
 
     if (shouldLogout != true) return;
@@ -248,6 +206,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           // When role is assigned: Show 6 operational menu cards
                           HomeMenuGrid(
                             onCardTap: (menuId, menuTitle) {
+                              if (menuId == 'absen') {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => AttendanceScreen(
+                                      currentUser: _viewModel.user,
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
                               AppToast.show(
                                 context,
                                 message: 'Menu $menuTitle sedang dalam tahap pengembangan.',

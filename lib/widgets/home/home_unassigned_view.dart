@@ -28,12 +28,12 @@ class HomeUnassignedView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: const Color(0xFFFFFBEB), // Amber soft tint
+            color: PotColors.statusWarningBg.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: const Color(0xFFFDE68A)),
+            border: Border.all(color: PotColors.statusWarningBorder),
             boxShadow: [
               BoxShadow(
-                color: Colors.amber.withValues(alpha: 0.08),
+                color: PotColors.statusWarningText.withValues(alpha: 0.08),
                 blurRadius: 10,
                 offset: const Offset(0, 3),
               ),
@@ -48,13 +48,13 @@ class HomeUnassignedView extends StatelessWidget {
                     width: 38,
                     height: 38,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFEF3C7),
+                      color: PotColors.statusWarningBg,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     alignment: Alignment.center,
                     child: const Icon(
                       Iconsax.timer_1,
-                      color: Color(0xFFD97706),
+                      color: PotColors.statusWarningText,
                       size: 20,
                     ),
                   ),
@@ -68,7 +68,7 @@ class HomeUnassignedView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF92400E),
+                            color: PotColors.statusWarningText,
                             letterSpacing: -0.2,
                           ),
                         ),
@@ -78,7 +78,7 @@ class HomeUnassignedView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFB45309),
+                            color: PotColors.statusWarningText,
                           ),
                         ),
                       ],
@@ -91,7 +91,7 @@ class HomeUnassignedView extends StatelessWidget {
                 'Akun Anda telah aktif di sistem Presensi Oleh² Turki, namun peran (Role) dan penempatan kerja belum ditentukan. Silakan menunggu Admin atau Owner memberikan penugasan peran kepada Anda.',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF78350F),
+                  color: PotColors.textDark,
                   height: 1.45,
                 ),
               ),
@@ -154,7 +154,7 @@ class HomeUnassignedView extends StatelessWidget {
                 icon: Iconsax.shield_security,
                 label: 'Status Peran',
                 value: 'Belum Ditugaskan (UNASSIGNED)',
-                valueColor: const Color(0xFFD97706),
+                valueColor: PotColors.statusWarningText,
               ),
             ],
           ),

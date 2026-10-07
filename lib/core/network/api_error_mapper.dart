@@ -25,12 +25,28 @@ class ApiErrorMapper {
             return 'Password harus diisi minimal 6 karakter.';
           } else if (first.contains('no_hp') || first.contains('phone')) {
             return 'Nomor handphone harus berupa 8-15 digit angka.';
+          } else if (first.contains('foto') || first.contains('image')) {
+            return 'Format file foto tidak valid. Gunakan JPEG, PNG, atau WebP.';
+          } else if (first.contains('lapak') || first.contains('koordinat')) {
+            return 'Lokasi lapak belum ditentukan oleh Admin.';
           }
+        }
+        if (lowerRaw.contains('foto') || lowerRaw.contains('image')) {
+          return 'Format file foto tidak valid. Gunakan JPEG, PNG, atau WebP.';
+        }
+        if (lowerRaw.contains('lapak') || lowerRaw.contains('koordinat')) {
+          return 'Lokasi lapak belum ditentukan oleh Admin.';
         }
         if (lowerRaw.contains('malformed json')) {
           return 'Permintaan data tidak valid.';
         }
-        return 'Format email atau data yang dimasukkan belum benar.';
+        if (rawMessage != null &&
+            rawMessage.isNotEmpty &&
+            !rawMessage.contains('{') &&
+            !rawMessage.contains('Error:')) {
+          return rawMessage;
+        }
+        return 'Format data yang dimasukkan belum benar.';
 
       case 401:
         if (lowerRaw.contains('inactive')) {

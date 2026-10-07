@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import '../storage/token_storage.dart';
 import '../utils/env_config.dart';
 import 'api_error_mapper.dart';
@@ -34,10 +35,17 @@ class ApiClient {
   }
 
   /// Resolves full URL from an endpoint path.
-  Uri _resolveUri(String endpoint) {
+  Uri _resolveUri(String endpoint, [Map<String, dynamic>? queryParameters]) {
     final base = EnvConfig.apiBaseUrl;
     final cleanEndpoint = endpoint.startsWith('/') ? endpoint : '/$endpoint';
-    return Uri.parse('$base$cleanEndpoint');
+    var uri = Uri.parse('$base$cleanEndpoint');
+    if (queryParameters != null && queryParameters.isNotEmpty) {
+      final stringParams = queryParameters
+          .where((key, value) => value != null)
+          .map((key, value) => MapEntry(key, value.toString()));
+      uri = uri.replace(queryParameters: stringParams);
+    }
+    return uri;
   }
 
   /// Sends a POST request.
@@ -84,12 +92,57 @@ class ApiClient {
     }
   }
 
-  /// Sends a GET request.
-  Future<Map<String, dynamic>> get(
+  /// Sends a PATCH request.
+  Future<Map<String, dynamic>> patch(
     String endpoint, {
+    Map<String, dynamic>? body,
     bool requiresAuth = true,
   }) async {
     final uri = _resolveUri(endpoint);
+    try {
+      final headers = await _buildHeaders(requiresAuth: requiresAuth);
+      final response = await _client
+          .patch(
+            uri,
+            headers: headers,
+            body: body != null ? jsonEncode(body) : null,
+          )
+          .timeout(_timeout);
+
+      return _handleResponse(response);
+    } on SocketException catch (e) {
+      debugPrint('[ApiClient] SocketException on $uri: $e');
+      throw const ApiException(
+        statusCode: 0,
+        rawMessage: 'SocketException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on TimeoutException catch (e) {
+      debugPrint('[ApiClient] TimeoutException on $uri: $e');
+      throw const ApiException(
+        statusCode: 408,
+        rawMessage: 'TimeoutException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on ApiException {
+      rethrow;
+    } catch (e) {
+      debugPrint('[ApiClient] Unexpected error on $uri: $e');
+      throw const ApiException(
+        statusCode: 500,
+        rawMessage: 'Unexpected Client Error',
+        userMessage: ApiErrorMapper.defaultErrorMessage,
+      );
+    }
+  }
+
+  /// Sends a GET request.
+  Future<Map<String, dynamic>> get(
+    String endpoint, {
+    Map<String, dynamic>? queryParameters,
+    bool requiresAuth = true,
+  }) async {
+    final uri = _resolveUri(endpoint, queryParameters);
     try {
       final headers = await _buildHeaders(requiresAuth: requiresAuth);
       final response = await _client.get(uri, headers: headers).timeout(_timeout);
@@ -110,6 +163,66 @@ class ApiClient {
     } on ApiException {
       rethrow;
     } catch (e) {
+      throw const ApiException(
+        statusCode: 500,
+        rawMessage: 'Unexpected Client Error',
+        userMessage: ApiErrorMapper.defaultErrorMessage,
+      );
+    }
+  }
+
+  /// Sends a multipart POST request (e.g. for photo uploads).
+  Future<Map<String, dynamic>> postMultipart(
+    String endpoint, {
+    Map<String, String>? fields,
+    required String fileField,
+    required File file,
+    bool requiresAuth = true,
+  }) async {
+    final uri = _resolveUri(endpoint);
+    try {
+      final request = http.MultipartRequest('POST', uri);
+      if (requiresAuth) {
+        final token = await TokenStorage.getToken();
+        if (token != null && token.isNotEmpty) {
+          request.headers['Authorization'] = 'Bearer $token';
+        }
+      }
+      if (fields != null) {
+        request.fields.addAll(fields);
+      }
+      final ext = file.path.split('.').last.toLowerCase();
+      final mimeSubtype = ext == 'png' ? 'png' : (ext == 'webp' ? 'webp' : 'jpeg');
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          fileField,
+          file.path,
+          contentType: MediaType('image', mimeSubtype),
+        ),
+      );
+
+      final streamedResponse = await _client.send(request).timeout(_timeout);
+      final response = await http.Response.fromStream(streamedResponse);
+
+      return _handleResponse(response);
+    } on SocketException catch (e) {
+      debugPrint('[ApiClient] SocketException on $uri: $e');
+      throw const ApiException(
+        statusCode: 0,
+        rawMessage: 'SocketException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on TimeoutException catch (e) {
+      debugPrint('[ApiClient] TimeoutException on $uri: $e');
+      throw const ApiException(
+        statusCode: 408,
+        rawMessage: 'TimeoutException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on ApiException {
+      rethrow;
+    } catch (e) {
+      debugPrint('[ApiClient] Unexpected error on $uri: $e');
       throw const ApiException(
         statusCode: 500,
         rawMessage: 'Unexpected Client Error',
@@ -153,5 +266,17 @@ class ApiClient {
       error: rawError,
       details: rawDetails,
     );
+  }
+}
+
+extension _MapFilterExtension<K, V> on Map<K, V> {
+  Map<K, V> where(bool Function(K key, V value) test) {
+    final result = <K, V>{};
+    forEach((key, value) {
+      if (test(key, value)) {
+        result[key] = value;
+      }
+    });
+    return result;
   }
 }

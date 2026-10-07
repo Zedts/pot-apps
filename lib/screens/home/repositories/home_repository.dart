@@ -1,3 +1,4 @@
+import '../../../core/models/lapak_model.dart';
 import '../../../core/models/user_model.dart';
 
 /// Abstract repository contract for Home operations.
@@ -12,6 +13,9 @@ abstract class HomeRepository {
 
   /// Retrieves the lapak entity name by its ID.
   Future<String?> getLapakName(String lapakId);
+
+  /// Retrieves the full lapak domain model by its ID.
+  Future<LapakModel?> getLapak(String lapakId);
 
   /// Executes logout, clearing local credentials and third-party sessions.
   Future<void> logout();

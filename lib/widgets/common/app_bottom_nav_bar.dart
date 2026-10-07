@@ -29,44 +29,29 @@ class AppBottomNavBar extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: SafeArea(
         top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavItem(
-                  index: 0,
-                  label: 'Beranda',
-                  icon: Iconsax.home_2,
-                  activeIcon: Iconsax.home_2,
-                ),
-                _buildNavItem(
-                  index: 1,
-                  label: 'Riwayat',
-                  icon: Iconsax.receipt_item,
-                  activeIcon: Iconsax.receipt_item,
-                ),
-                _buildNavItem(
-                  index: 2,
-                  label: 'Profil',
-                  icon: Iconsax.user,
-                  activeIcon: Iconsax.user,
-                ),
-              ],
+            _buildNavItem(
+              index: 0,
+              label: 'Beranda',
+              icon: Iconsax.home_2,
+              activeIcon: Iconsax.home_2,
             ),
-            const SizedBox(height: 6),
-            // Bottom home indicator bar
-            Container(
-              width: 110,
-              height: 3.5,
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(10),
-              ),
+            _buildNavItem(
+              index: 1,
+              label: 'Riwayat',
+              icon: Iconsax.receipt_item,
+              activeIcon: Iconsax.receipt_item,
+            ),
+            _buildNavItem(
+              index: 2,
+              label: 'Profil',
+              icon: Iconsax.user,
+              activeIcon: Iconsax.user,
             ),
           ],
         ),

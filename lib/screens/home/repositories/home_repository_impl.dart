@@ -1,4 +1,5 @@
 import '../../../core/constants/api_endpoints.dart';
+import '../../../core/models/lapak_model.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_client.dart';
 import '../../../core/services/auth_service.dart';
@@ -33,14 +34,20 @@ class HomeRepositoryImpl implements HomeRepository {
 
   @override
   Future<String?> getLapakName(String lapakId) async {
+    final lapak = await getLapak(lapakId);
+    return lapak?.nama;
+  }
+
+  @override
+  Future<LapakModel?> getLapak(String lapakId) async {
     try {
       final response = await _apiClient.get(
         ApiEndpoints.lapakById(lapakId),
         requiresAuth: true,
       );
       final data = response['data'] as Map<String, dynamic>?;
-      if (data != null && data['nama'] != null) {
-        return data['nama'] as String;
+      if (data != null) {
+        return LapakModel.fromJson(data);
       }
     } catch (_) {
       // Gracefully handle 403 or network exceptions without crashing
