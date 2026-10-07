@@ -10,12 +10,13 @@ import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
 import '../../../core/services/location_service.dart';
 import '../../../core/storage/token_storage.dart';
+import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/absensi_repository.dart';
 import '../repositories/absensi_repository_impl.dart';
 
 /// ViewModel managing state, timers, GPS tracking, camera capture,
 /// and attendance operations (Absen Masuk, Absen Pulang, History).
-class AttendanceViewModel extends ChangeNotifier {
+class AttendanceViewModel extends BaseViewModel {
   final AbsensiRepository _repository;
   final LocationService _locationService;
   final CameraService _cameraService;

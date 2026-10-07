@@ -15,6 +15,7 @@ import '../../widgets/home/home_menu_grid.dart';
 import '../../widgets/home/home_unassigned_view.dart';
 import '../../widgets/home/home_user_banner.dart';
 import '../attendance/attendance_screen.dart';
+import '../penerimaan/penerimaan_screen.dart';
 import '../auth/login_screen.dart';
 import 'repositories/home_repository.dart';
 import 'repositories/home_repository_impl.dart';
@@ -210,6 +211,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctx) => AttendanceScreen(
+                                      currentUser: _viewModel.user,
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+                              if (menuId == 'terima_barang') {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => PenerimaanScreen(
                                       currentUser: _viewModel.user,
                                     ),
                                   ),

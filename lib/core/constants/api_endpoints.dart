@@ -21,4 +21,14 @@ class ApiEndpoints {
   static String absensiById(String id) => '/absensi/$id';
   static String absensiPulang(String id) => '/absensi/$id/pulang';
   static String absensiFoto(String id) => '/absensi/$id/foto';
+
+  // Pengiriman
+  static const String pengiriman = '/pengiriman';
+  static String pengirimanById(String id) => '/pengiriman/$id';
+  static String pengirimanStatus(String id) => '/pengiriman/$id/status';
+
+  // Penerimaan
+  static const String penerimaan = '/penerimaan';
+  static String penerimaanById(String id) => '/penerimaan/$id';
+  static String penerimaanNota(String id) => '/penerimaan/$id/nota';
 }

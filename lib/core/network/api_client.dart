@@ -15,6 +15,10 @@ class ApiClient {
   final http.Client _client;
   static const Duration _timeout = Duration(seconds: 30);
 
+  /// Global callback triggered on any HTTP 401 Unauthorized response
+  /// to enable automated session termination and redirection to login.
+  static void Function()? onUnauthorized;
+
   ApiClient({http.Client? client}) : _client = client ?? http.Client();
 
   /// Builds request headers including JSON content type and Authorization token.
@@ -136,6 +140,50 @@ class ApiClient {
     }
   }
 
+  /// Sends a PUT request.
+  Future<Map<String, dynamic>> put(
+    String endpoint, {
+    Map<String, dynamic>? body,
+    bool requiresAuth = true,
+  }) async {
+    final uri = _resolveUri(endpoint);
+    try {
+      final headers = await _buildHeaders(requiresAuth: requiresAuth);
+      final response = await _client
+          .put(
+            uri,
+            headers: headers,
+            body: body != null ? jsonEncode(body) : null,
+          )
+          .timeout(_timeout);
+
+      return _handleResponse(response);
+    } on SocketException catch (e) {
+      debugPrint('[ApiClient] SocketException on $uri: $e');
+      throw const ApiException(
+        statusCode: 0,
+        rawMessage: 'SocketException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on TimeoutException catch (e) {
+      debugPrint('[ApiClient] TimeoutException on $uri: $e');
+      throw const ApiException(
+        statusCode: 408,
+        rawMessage: 'TimeoutException',
+        userMessage: ApiErrorMapper.networkErrorMessage,
+      );
+    } on ApiException {
+      rethrow;
+    } catch (e) {
+      debugPrint('[ApiClient] Unexpected error on $uri: $e');
+      throw const ApiException(
+        statusCode: 500,
+        rawMessage: 'Unexpected Client Error',
+        userMessage: ApiErrorMapper.defaultErrorMessage,
+      );
+    }
+  }
+
   /// Sends a GET request.
   Future<Map<String, dynamic>> get(
     String endpoint, {
@@ -171,12 +219,13 @@ class ApiClient {
     }
   }
 
-  /// Sends a multipart POST request (e.g. for photo uploads).
+  /// Sends a multipart POST request (e.g. for photo or PDF document uploads).
   Future<Map<String, dynamic>> postMultipart(
     String endpoint, {
     Map<String, String>? fields,
     required String fileField,
     required File file,
+    MediaType? contentType,
     bool requiresAuth = true,
   }) async {
     final uri = _resolveUri(endpoint);
@@ -192,12 +241,21 @@ class ApiClient {
         request.fields.addAll(fields);
       }
       final ext = file.path.split('.').last.toLowerCase();
-      final mimeSubtype = ext == 'png' ? 'png' : (ext == 'webp' ? 'webp' : 'jpeg');
+      final MediaType resolvedType;
+      if (contentType != null) {
+        resolvedType = contentType;
+      } else if (ext == 'pdf') {
+        resolvedType = MediaType('application', 'pdf');
+      } else {
+        final mimeSubtype = ext == 'png' ? 'png' : (ext == 'webp' ? 'webp' : 'jpeg');
+        resolvedType = MediaType('image', mimeSubtype);
+      }
+
       request.files.add(
         await http.MultipartFile.fromPath(
           fileField,
           file.path,
-          contentType: MediaType('image', mimeSubtype),
+          contentType: resolvedType,
         ),
       );
 
@@ -258,6 +316,10 @@ class ApiClient {
       rawMessage: rawMessage,
       details: rawDetails,
     );
+
+    if (response.statusCode == 401) {
+      onUnauthorized?.call();
+    }
 
     throw ApiException(
       statusCode: response.statusCode,

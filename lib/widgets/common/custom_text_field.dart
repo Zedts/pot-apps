@@ -5,24 +5,30 @@ import '../../core/constants/app_colors.dart';
 /// Includes warm border, soft shadow, focus highlight ring, prefix icon, and inline error.
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
-  final String placeholder;
-  final IconData prefixIcon;
+  final String? placeholder;
+  final String? hintText;
+  final String? label;
+  final IconData? prefixIcon;
   final bool isPassword;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final String? errorText;
+  final int maxLines;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onSubmitted;
 
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.placeholder,
-    required this.prefixIcon,
+    this.placeholder,
+    this.hintText,
+    this.label,
+    this.prefixIcon,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.errorText,
+    this.maxLines = 1,
     this.onChanged,
     this.onSubmitted,
   });
@@ -68,6 +74,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        if (widget.label != null && widget.label!.isNotEmpty) ...[
+          Text(
+            widget.label!,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: PotColors.textDark,
+            ),
+          ),
+          const SizedBox(height: 6),
+        ],
         AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
@@ -102,13 +119,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
           child: Row(
             children: [
-              // Prefix Icon
-              Icon(
-                widget.prefixIcon,
-                size: 20,
-                color: _isFocused ? PotColors.primaryRed : PotColors.textLight,
-              ),
-              const SizedBox(width: 12),
+              // Optional Prefix Icon
+              if (widget.prefixIcon != null) ...[
+                Icon(
+                  widget.prefixIcon,
+                  size: 20,
+                  color: _isFocused ? PotColors.primaryRed : PotColors.textLight,
+                ),
+                const SizedBox(width: 12),
+              ],
 
               // Input Field
               Expanded(
@@ -117,6 +136,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   focusNode: _focusNode,
                   keyboardType: widget.keyboardType,
                   textInputAction: widget.textInputAction,
+                  maxLines: widget.isPassword ? 1 : widget.maxLines,
                   obscureText: widget.isPassword ? _obscureText : false,
                   style: const TextStyle(
                     fontSize: 14,
@@ -124,7 +144,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     color: PotColors.textDark,
                   ),
                   decoration: InputDecoration(
-                    hintText: widget.placeholder,
+                    hintText: widget.placeholder ?? widget.hintText,
                     hintStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,

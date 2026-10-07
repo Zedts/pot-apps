@@ -1,12 +1,12 @@
-import 'package:flutter/foundation.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/home_repository.dart';
 import '../repositories/home_repository_impl.dart';
 
 /// ViewModel managing state and operations for HomeScreen.
 /// Implements MVVM pattern to decouple UI presentation from business logic and network calls.
-class HomeViewModel extends ChangeNotifier {
+class HomeViewModel extends BaseViewModel {
   final HomeRepository _homeRepository;
 
   UserModel user;

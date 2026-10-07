@@ -30,4 +30,27 @@ class CameraService {
       return null;
     }
   }
+
+  /// Launches camera or gallery to capture a receipt/document photo.
+  /// Defaults to rear camera with high-clarity dimensions.
+  Future<File?> takeDocumentPhoto({ImageSource source = ImageSource.camera}) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        preferredCameraDevice: CameraDevice.rear,
+        imageQuality: 85,
+        maxWidth: 1920,
+        maxHeight: 1920,
+      );
+
+      if (pickedFile == null) {
+        return null;
+      }
+
+      return File(pickedFile.path);
+    } catch (e) {
+      debugPrint('[CameraService] Error capturing document photo: $e');
+      return null;
+    }
+  }
 }

@@ -36,10 +36,37 @@ class AttendanceStatusBadge extends StatelessWidget {
       bg = PotColors.statusSuccessBg;
       fg = PotColors.statusSuccessText;
       label = 'Tepat Waktu';
+    } else if (s == AppConstants.deliveryDraft) {
+      bg = PotColors.statusNeutralBg;
+      fg = PotColors.statusNeutralText;
+      label = 'Draft';
+    } else if (s == AppConstants.deliveryDikirimViar || s == 'dikirim') {
+      bg = PotColors.statusInfoBg;
+      fg = PotColors.statusInfoText;
+      label = 'Di Jalan';
+    } else if (s == AppConstants.deliveryDiterimaSPG || s == 'diterima') {
+      bg = PotColors.statusWarningBg;
+      fg = PotColors.statusWarningText;
+      label = 'Diterima SPG';
+    } else if (s == AppConstants.deliverySelesai) {
+      bg = PotColors.statusSuccessBg;
+      fg = PotColors.statusSuccessText;
+      label = 'Selesai';
+    } else if (s == AppConstants.receiveSesuai) {
+      bg = PotColors.statusSuccessBg;
+      fg = PotColors.statusSuccessText;
+      label = 'Sesuai';
+    } else if (s == AppConstants.receiveSelisih) {
+      bg = PotColors.statusWarningBg;
+      fg = PotColors.statusWarningText;
+      label = 'Selisih';
     } else {
       bg = PotColors.statusNeutralBg;
       fg = PotColors.statusNeutralText;
-      label = status;
+      label = status.replaceAll('_', ' ').trim();
+      if (label.isNotEmpty) {
+        label = label[0].toUpperCase() + label.substring(1);
+      }
     }
 
     return Container(

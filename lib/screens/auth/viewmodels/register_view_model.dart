@@ -1,13 +1,13 @@
-import 'package:flutter/foundation.dart';
 import '../../../core/models/auth_response.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/utils/validators.dart';
+import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/auth_repository.dart';
 import '../repositories/auth_repository_impl.dart';
 
 /// ViewModel managing state and business operations for RegisterScreen.
 /// Encapsulates field validations, registration requests, Google auth, and errors.
-class RegisterViewModel extends ChangeNotifier {
+class RegisterViewModel extends BaseViewModel {
   final AuthRepository _authRepository;
 
   bool _isLoading = false;
