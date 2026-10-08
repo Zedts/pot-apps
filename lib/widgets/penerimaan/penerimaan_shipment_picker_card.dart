@@ -114,7 +114,6 @@ class PenerimaanShipmentPickerCard extends StatelessWidget {
               ),
               itemBuilder: (ctx, index) {
                 final item = shipments[index];
-                final creatorName = item.creator?['nama'] ?? 'Ekspedisi Pusat';
 
                 return InkWell(
                   onTap: () => onShipmentTap(item),
@@ -158,7 +157,7 @@ class PenerimaanShipmentPickerCard extends StatelessWidget {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Pusat • $creatorName (${item.formattedJam})',
+                                item.formattedCreatedDateTime,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(

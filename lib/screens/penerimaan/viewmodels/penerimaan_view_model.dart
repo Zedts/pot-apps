@@ -45,11 +45,21 @@ class PenerimaanViewModel extends BaseViewModel {
   UserModel? get user => _user;
   LapakModel? get stall => _stall;
 
-  List<PengirimanModel> get allShipments => _allShipments;
+  /// All shipments sorted by status priority:
+  /// 1. "Di Jalan", 2. "Diterima SPG", 3. "Draft", 4. "Selesai"
+  List<PengirimanModel> get allShipments {
+    final list = List<PengirimanModel>.from(_allShipments);
+    list.sort(PengirimanModel.compareByPriority);
+    return list;
+  }
 
-  /// Top 5 available shipments for the stall matching absensi history limitation
-  List<PengirimanModel> get quickPickShipments =>
-      _allShipments.where((s) => !s.isSelesai).take(5).toList();
+  /// Top 3 prioritized shipments for the "Pilih Barang Pengiriman" table:
+  /// 1. "Di Jalan", 2. "Diterima SPG", 3. "Draft", 4. "Selesai"
+  List<PengirimanModel> get quickPickShipments {
+    final list = List<PengirimanModel>.from(_allShipments);
+    list.sort(PengirimanModel.compareByPriority);
+    return list.take(3).toList();
+  }
 
   PengirimanModel? get selectedShipment => _selectedShipment;
   List<ReceivedItemVerification> get verifiedItems => _verifiedItems;
@@ -132,9 +142,11 @@ class PenerimaanViewModel extends BaseViewModel {
     if (_user == null || _user!.lapakId == null || _user!.lapakId!.isEmpty) return;
 
     try {
-      _allShipments = await _repository.getAvailableShipments(
+      final fetched = await _repository.getAvailableShipments(
         lapakId: _user!.lapakId!,
       );
+      fetched.sort(PengirimanModel.compareByPriority);
+      _allShipments = fetched;
       notifyListeners();
     } catch (e) {
       debugPrint('[PenerimaanViewModel] Failed to refresh shipments: $e');

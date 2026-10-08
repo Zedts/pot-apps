@@ -232,7 +232,7 @@ void main() {
       );
     });
 
-    test('Initializes state and filters top 5 non-selesai shipments', () async {
+    test('Initializes state and limits quickPickShipments to top 3 while allShipments is unlimited', () async {
       mockRepo.shipmentsToReturn = List.generate(
         7,
         (i) => PengirimanModel(
@@ -260,10 +260,39 @@ void main() {
       await viewModel.init(currentUser: testUser);
 
       expect(viewModel.allShipments.length, 7);
-      // Quick pick excludes 'selesai' and takes at most 5 items
-      expect(viewModel.quickPickShipments.length, 5);
+      // Quick pick takes top 3 items
+      expect(viewModel.quickPickShipments.length, 3);
       expect(viewModel.quickPickShipments.any((s) => s.isSelesai), isFalse);
       expect(viewModel.canSubmit, isFalse);
+    });
+
+    test('Prioritizes shipments: 1. Di Jalan, 2. Diterima SPG, 3. Draft, 4. Selesai (limit 3 on quick pick, unlimited on allShipments)', () async {
+      mockRepo.shipmentsToReturn = [
+        PengirimanModel(id: 's_selesai', uniqueId: '#PG-4', lapakId: 'lapak_01', status: 'selesai', qtyKirim: 10),
+        PengirimanModel(id: 's_draft', uniqueId: '#PG-3', lapakId: 'lapak_01', status: 'draft', qtyKirim: 10),
+        PengirimanModel(id: 's_diterima', uniqueId: '#PG-2', lapakId: 'lapak_01', status: 'diterima_spg', qtyKirim: 10),
+        PengirimanModel(id: 's_dijalan', uniqueId: '#PG-1', lapakId: 'lapak_01', status: 'dikirim_viar', qtyKirim: 10),
+      ];
+
+      final testUser = UserModel(
+        id: 'spg_01',
+        email: 'spg@pot.com',
+        username: 'siti_spg',
+        nama: 'Siti SPG',
+        role: 'spg',
+        lapakId: 'lapak_01',
+        noHp: '081234567890',
+        status: 'active',
+        authProvider: 'local',
+      );
+
+      await viewModel.init(currentUser: testUser);
+
+      final priorities = viewModel.quickPickShipments.map((s) => s.id).toList();
+      // quickPickShipments limited to top 3
+      expect(priorities, ['s_dijalan', 's_diterima', 's_draft']);
+      // allShipments shows all 4 shipments in priority order
+      expect(viewModel.allShipments.map((s) => s.id).toList(), ['s_dijalan', 's_diterima', 's_draft', 's_selesai']);
     });
 
     test('Selects shipment and computes received item verifications and discrepancy hints', () {

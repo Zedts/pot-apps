@@ -157,8 +157,6 @@ class _PengirimanListScreenState extends State<PengirimanListScreen> {
   }
 
   Widget _buildShipmentItem(PengirimanModel item) {
-    final creatorName = item.creator?['nama'] ?? 'Ekspedisi Pusat';
-
     return InkWell(
       onTap: () => _openInspectionSheet(item),
       borderRadius: BorderRadius.circular(20),
@@ -201,7 +199,7 @@ class _PengirimanListScreenState extends State<PengirimanListScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Pusat • $creatorName (${item.formattedJam})',
+                    item.formattedCreatedDateTime,
                     style: const TextStyle(
                       fontSize: 11,
                       color: PotColors.textMuted,

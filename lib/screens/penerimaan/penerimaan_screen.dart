@@ -142,7 +142,7 @@ class _PenerimaanScreenState extends State<PenerimaanScreen> {
                   ),
                   const SizedBox(height: 14),
 
-                  // 3. Dynamic Card: Picker (Top 5) vs Received Items Checklist
+                  // 3. Dynamic Card: Picker (Top 3) vs Received Items Checklist
                   if (_viewModel.selectedShipment == null)
                     PenerimaanShipmentPickerCard(
                       shipments: _viewModel.quickPickShipments,
@@ -197,34 +197,7 @@ class _PenerimaanScreenState extends State<PenerimaanScreen> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Button 1: Lihat Pengiriman (Truck Icon)
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => PengirimanListScreen(viewModel: _viewModel),
-              ),
-            );
-          },
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: PotColors.cardCream,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: PotColors.warmBorder),
-            ),
-            child: const Icon(
-              Iconsax.truck_fast,
-              size: 18,
-              color: PotColors.primaryRed,
-            ),
-          ),
-        ),
-        const SizedBox(width: 8),
-
-        // Button 2: Riwayat Penerimaan (Document Icon)
+        // Button: Riwayat Penerimaan (Document Icon)
         InkWell(
           onTap: () {
             Navigator.of(context).push(

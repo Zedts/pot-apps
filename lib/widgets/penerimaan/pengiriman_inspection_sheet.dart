@@ -126,7 +126,7 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
                       ),
                     ),
                     Text(
-                      _shipment.formattedTanggal,
+                      _shipment.formattedCreatedDateTime,
                       style: const TextStyle(
                         fontSize: 11,
                         color: PotColors.textMuted,
@@ -179,7 +179,7 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
                                         const Text('Pengirim',
                                             style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
                                         Text(
-                                          _shipment.creator?['nama'] ?? 'Ekspedisi Pusat',
+                                          _shipment.creator?['nama'] ?? 'Petugas Pengiriman',
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w700,

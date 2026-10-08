@@ -113,10 +113,40 @@ class PengirimanModel {
     this.updatedAt,
   });
 
-  bool get isDraft => status.toLowerCase() == AppConstants.deliveryDraft;
-  bool get isDikirimViar => status.toLowerCase() == AppConstants.deliveryDikirimViar;
-  bool get isDiterimaSpg => status.toLowerCase() == AppConstants.deliveryDiterimaSPG;
-  bool get isSelesai => status.toLowerCase() == AppConstants.deliverySelesai;
+  bool get isDraft => status.toLowerCase().trim() == AppConstants.deliveryDraft;
+  bool get isDikirimViar {
+    final s = status.toLowerCase().trim();
+    return s == AppConstants.deliveryDikirimViar || s == 'dikirim' || s == 'di jalan';
+  }
+  bool get isDiterimaSpg {
+    final s = status.toLowerCase().trim();
+    return s == AppConstants.deliveryDiterimaSPG || s == 'diterima' || s == 'diterima spg';
+  }
+  bool get isSelesai => status.toLowerCase().trim() == AppConstants.deliverySelesai;
+
+  /// Priority ranking for status display:
+  /// 1. "Di Jalan" (dikirim_viar / dikirim)
+  /// 2. "Diterima SPG" (diterima_spg / diterima)
+  /// 3. "Draft" (draft)
+  /// 4. "Selesai" (selesai)
+  /// 5. Other / unknown
+  int get statusPriority {
+    if (isDikirimViar) return 1;
+    if (isDiterimaSpg) return 2;
+    if (isDraft) return 3;
+    if (isSelesai) return 4;
+    return 5;
+  }
+
+  /// Compares two shipments by status priority first (Di Jalan -> Diterima SPG -> Draft -> Selesai),
+  /// then by newest creation timestamp descending.
+  static int compareByPriority(PengirimanModel a, PengirimanModel b) {
+    final pDiff = a.statusPriority.compareTo(b.statusPriority);
+    if (pDiff != 0) return pDiff;
+    final dateA = a.createdAt ?? a.tanggal ?? DateTime.fromMillisecondsSinceEpoch(0);
+    final dateB = b.createdAt ?? b.tanggal ?? DateTime.fromMillisecondsSinceEpoch(0);
+    return dateB.compareTo(dateA);
+  }
 
   PengirimanModel copyWith({
     String? id,
@@ -154,16 +184,16 @@ class PengirimanModel {
 
   /// User-friendly formatted time
   String get formattedJam {
-    final d = tanggal ?? createdAt;
+    final d = (createdAt ?? tanggal)?.toLocal();
     if (d == null) return '--:-- WIB';
     final h = d.hour.toString().padLeft(2, '0');
     final m = d.minute.toString().padLeft(2, '0');
     return '$h:$m WIB';
   }
 
-  /// Formatted date string in Indonesian: e.g. "07 Okt 2026"
+  /// Formatted date string in Indonesian: e.g. "08 Okt 2026"
   String get formattedTanggal {
-    final d = tanggal ?? createdAt;
+    final d = (createdAt ?? tanggal)?.toLocal();
     if (d == null) return '-';
     const months = [
       'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
@@ -172,14 +202,40 @@ class PengirimanModel {
     return '${d.day.toString().padLeft(2, '0')} ${months[d.month - 1]} ${d.year}';
   }
 
-  /// Day name in Indonesian
+  /// Day name in Indonesian: e.g. "Kamis"
   String get dayNameIndo {
-    final d = tanggal ?? createdAt;
+    final d = (createdAt ?? tanggal)?.toLocal();
     if (d == null) return '';
     const days = [
       'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
     ];
     return days[d.weekday - 1];
+  }
+
+  /// Month name in Indonesian: e.g. "Oktober"
+  String get monthNameIndo {
+    final d = (createdAt ?? tanggal)?.toLocal();
+    if (d == null) return '';
+    const months = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+    return months[d.month - 1];
+  }
+
+  /// Formatted creation timestamp with Indonesian day, date, month, year, and time
+  /// Example: "Kamis, 08 Oktober 2026 • 14:30 WIB"
+  String get formattedCreatedDateTime {
+    final d = (createdAt ?? tanggal)?.toLocal();
+    if (d == null) return formattedJam;
+    final day = dayNameIndo;
+    final month = monthNameIndo;
+    final dateStr = '${d.day.toString().padLeft(2, '0')} $month ${d.year}';
+    final jam = formattedJam;
+    if (day.isNotEmpty) {
+      return '$day, $dateStr • $jam';
+    }
+    return '$dateStr • $jam';
   }
 
   factory PengirimanModel.fromJson(Map<String, dynamic> json) {
@@ -192,8 +248,12 @@ class PengirimanModel {
 
     DateTime? parseDate(dynamic val) {
       if (val == null) return null;
-      if (val is DateTime) return val;
-      return DateTime.tryParse(val.toString());
+      if (val is DateTime) return val.toLocal();
+      if (val is String && val.isNotEmpty) {
+        final parsed = DateTime.tryParse(val);
+        return parsed?.toLocal();
+      }
+      return null;
     }
 
     LapakModel? parseLapak(dynamic val) {
@@ -228,8 +288,8 @@ class PengirimanModel {
           ? json['creator'] as Map<String, dynamic>
           : null,
       items: parseItems(json['items']),
-      createdAt: parseDate(json['createdAt']),
-      updatedAt: parseDate(json['updatedAt']),
+      createdAt: parseDate(json['createdAt'] ?? json['created_at']),
+      updatedAt: parseDate(json['updatedAt'] ?? json['updated_at']),
     );
   }
 
