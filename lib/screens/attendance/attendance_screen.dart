@@ -7,9 +7,9 @@ import '../../widgets/attendance/attendance_clock_card.dart';
 import '../../widgets/attendance/attendance_history_table.dart';
 import '../../widgets/attendance/attendance_izin_dialog.dart';
 import '../../widgets/attendance/attendance_map_card.dart';
-import '../../widgets/attendance/attendance_photo_preview.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
+import '../../widgets/common/proof_photo_upload_card.dart';
 import 'attendance_history_screen.dart';
 import 'viewmodels/attendance_view_model.dart';
 
@@ -93,8 +93,20 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         AttendanceMapCard(viewModel: _viewModel),
                         const SizedBox(height: 16),
 
-                        // 3. Photo Selfie Capture / Cloudinary Preview
-                        AttendancePhotoPreview(viewModel: _viewModel),
+                        // 3. Photo Selfie Capture / Cloudinary Preview (Reusable Component)
+                        ProofPhotoUploadCard(
+                          photoFile: _viewModel.capturedPhoto,
+                          networkImageUrl: _viewModel.serverPhotoUrl,
+                          isReadOnly: _viewModel.isClockedInToday,
+                          title: _viewModel.isClockedInToday ? 'Foto Presensi' : 'Ambil Foto Masuk (Selfie)',
+                          subtitle: _viewModel.isClockedInToday ? 'Foto presensi tersimpan' : 'Wajib swafoto di lokasi lapak bertugas',
+                          sheetTitle: 'Ambil Foto Masuk',
+                          sheetSubtitle: 'Ambil swafoto selfie di lokasi lapak bertugas',
+                          statusText: 'Foto Presensi Tersimpan',
+                          onCameraTap: _viewModel.capturePhoto,
+                          onRemoveTap: _viewModel.clearCapturedPhoto,
+                          onDirectTap: _viewModel.capturePhoto,
+                        ),
                         const SizedBox(height: 16),
 
                         // 4. Action Buttons (Absen Masuk / Absen Pulang)

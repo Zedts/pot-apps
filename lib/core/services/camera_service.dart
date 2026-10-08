@@ -53,4 +53,7 @@ class CameraService {
       return null;
     }
   }
+
+  /// Convenience method allowing explicit image source selection
+  Future<File?> pickImage(ImageSource source) => takeDocumentPhoto(source: source);
 }

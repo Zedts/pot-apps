@@ -6,8 +6,10 @@ import '../../../core/models/lapak_model.dart';
 import '../../../core/models/penerimaan_model.dart';
 import '../../../core/models/pengiriman_model.dart';
 import '../../../core/models/user_model.dart';
+import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
 import '../../../core/storage/token_storage.dart';
+import '../../../core/utils/date_formatter.dart';
 import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/penerimaan_repository.dart';
 import '../repositories/penerimaan_repository_impl.dart';
@@ -94,19 +96,7 @@ class PenerimaanViewModel extends BaseViewModel {
   bool get canSubmit => _selectedShipment != null && !_isSubmitting;
 
   /// Formatted date in Indonesian
-  String get formattedCurrentDate {
-    final now = DateTime.now();
-    const days = [
-      'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-    ];
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    ];
-    final dayName = days[now.weekday - 1];
-    final monthName = months[now.month - 1];
-    return '$dayName, ${now.day} $monthName ${now.year}';
-  }
+  String get formattedCurrentDate => DateFormatter.formatCurrentDate();
 
   /// Initializes user session, stall metadata, and shipment list
   Future<void> init({UserModel? currentUser}) async {
@@ -128,6 +118,8 @@ class PenerimaanViewModel extends BaseViewModel {
       }
 
       await refreshShipments();
+    } on ApiException catch (e) {
+      _errorMessage = e.userMessage;
     } catch (e) {
       _errorMessage = 'Gagal memuat data awal: $e';
     } finally {
@@ -334,6 +326,9 @@ class PenerimaanViewModel extends BaseViewModel {
 
       await refreshShipments();
       return result;
+    } on ApiException catch (e) {
+      _errorMessage = e.userMessage;
+      return null;
     } catch (e) {
       _errorMessage = 'Gagal menyimpan penerimaan: $e';
       return null;

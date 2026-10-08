@@ -7,9 +7,9 @@ import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
 import '../../widgets/common/confirmation_dialog.dart';
 import '../../widgets/common/custom_button.dart';
+import '../../widgets/common/proof_photo_upload_card.dart';
 import '../../widgets/penerimaan/penerimaan_catatan_card.dart';
 import '../../widgets/penerimaan/penerimaan_location_card.dart';
-import '../../widgets/penerimaan/penerimaan_nota_upload_card.dart';
 import '../../widgets/penerimaan/penerimaan_received_items_card.dart';
 import '../../widgets/penerimaan/penerimaan_shipment_picker_card.dart';
 import '../../widgets/penerimaan/pengiriman_inspection_sheet.dart';
@@ -133,9 +133,14 @@ class _PenerimaanScreenState extends State<PenerimaanScreen> {
                   PenerimaanLocationCard(stall: _viewModel.stall),
                   const SizedBox(height: 14),
 
-                  // 2. Upload Foto Nota Card
-                  PenerimaanNotaUploadCard(
+                  // 2. Upload Foto Nota Card (Reusable Component)
+                  ProofPhotoUploadCard(
                     photoFile: _viewModel.capturedFotoNota,
+                    title: 'Unggah Foto Nota',
+                    subtitle: 'Ambil foto nota fisik pengiriman barang',
+                    sheetTitle: 'Unggah Foto Nota',
+                    sheetSubtitle: 'Pilih sumber pengambilan foto nota fisik pengiriman',
+                    statusText: 'Foto Nota Terlampir',
                     onCameraTap: () => _viewModel.captureFotoNota(source: ImageSource.camera),
                     onGalleryTap: () => _viewModel.captureFotoNota(source: ImageSource.gallery),
                     onRemoveTap: _viewModel.clearFotoNota,

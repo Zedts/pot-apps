@@ -8,6 +8,16 @@ class AppToast {
 
   static OverlayEntry? _activeEntry;
 
+  /// Convenience shortcut for success toast
+  static void showSuccess(BuildContext context, String message, {Duration duration = const Duration(milliseconds: 3200)}) {
+    show(context, message: message, isSuccess: true, duration: duration);
+  }
+
+  /// Convenience shortcut for error toast
+  static void showError(BuildContext context, String message, {Duration duration = const Duration(milliseconds: 3200)}) {
+    show(context, message: message, isSuccess: false, duration: duration);
+  }
+
   /// Displays a floating pill toast notification on rootOverlay.
   static void show(
     BuildContext context, {
@@ -15,7 +25,9 @@ class AppToast {
     bool isSuccess = true,
     Duration duration = const Duration(milliseconds: 3200),
   }) {
-    _activeEntry?.remove();
+    if (_activeEntry?.mounted ?? false) {
+      _activeEntry?.remove();
+    }
     _activeEntry = null;
 
     final overlay = Overlay.maybeOf(context, rootOverlay: true);
@@ -33,7 +45,9 @@ class AppToast {
 
       Future.delayed(duration, () {
         if (_activeEntry == entry) {
-          entry.remove();
+          if (entry.mounted) {
+            entry.remove();
+          }
           _activeEntry = null;
         }
       });

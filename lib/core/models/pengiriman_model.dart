@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 
 /// Single item line in a shipment manifest
@@ -24,27 +25,13 @@ class PengirimanItemModel {
   });
 
   factory PengirimanItemModel.fromJson(Map<String, dynamic> json) {
-    int parseInt(dynamic val) {
-      if (val is int) return val;
-      if (val is num) return val.toInt();
-      if (val is String) return int.tryParse(val) ?? 0;
-      return 0;
-    }
-
-    double parseDouble(dynamic val) {
-      if (val is double) return val;
-      if (val is num) return val.toDouble();
-      if (val is String) return double.tryParse(val) ?? 0.0;
-      return 0.0;
-    }
-
     return PengirimanItemModel(
       id: json['id'] as String? ?? '',
       pengirimanId: json['pengiriman_id'] as String? ?? '',
       produkId: json['produk_id'] as String? ?? '',
       namaProduk: json['nama_produk'] as String? ?? '',
-      qty: parseInt(json['qty']),
-      hargaProduk: parseDouble(json['harga_produk']),
+      qty: ParserUtils.parseInt(json['qty']),
+      hargaProduk: ParserUtils.parseDouble(json['harga_produk']),
       jenisSatuan: json['jenis_satuan'] as String? ?? 'pcs',
       namaKategori: json['nama_kategori'] as String?,
     );
@@ -239,23 +226,6 @@ class PengirimanModel {
   }
 
   factory PengirimanModel.fromJson(Map<String, dynamic> json) {
-    int parseInt(dynamic val) {
-      if (val is int) return val;
-      if (val is num) return val.toInt();
-      if (val is String) return int.tryParse(val) ?? 0;
-      return 0;
-    }
-
-    DateTime? parseDate(dynamic val) {
-      if (val == null) return null;
-      if (val is DateTime) return val.toLocal();
-      if (val is String && val.isNotEmpty) {
-        final parsed = DateTime.tryParse(val);
-        return parsed?.toLocal();
-      }
-      return null;
-    }
-
     LapakModel? parseLapak(dynamic val) {
       if (val is Map<String, dynamic>) {
         return LapakModel.fromJson(val);
@@ -277,19 +247,19 @@ class PengirimanModel {
       id: json['id'] as String? ?? '',
       uniqueId: json['unique_id'] as String? ?? '',
       countersId: json['counters_id'] as String?,
-      tanggal: parseDate(json['tanggal']),
+      tanggal: ParserUtils.parseLocalDate(json['tanggal']),
       lapakId: json['lapak_id'] as String? ?? '',
       createdBy: json['created_by'] as String? ?? '',
       status: json['status'] as String? ?? AppConstants.deliveryDraft,
-      totalItems: parseInt(json['total_items']),
-      qtyKirim: parseInt(json['qty_kirim']),
+      totalItems: ParserUtils.parseInt(json['total_items']),
+      qtyKirim: ParserUtils.parseInt(json['qty_kirim']),
       lapak: parseLapak(json['lapak']),
       creator: json['creator'] is Map<String, dynamic>
           ? json['creator'] as Map<String, dynamic>
           : null,
       items: parseItems(json['items']),
-      createdAt: parseDate(json['createdAt'] ?? json['created_at']),
-      updatedAt: parseDate(json['updatedAt'] ?? json['updated_at']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt'] ?? json['created_at']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt'] ?? json['updated_at']),
     );
   }
 

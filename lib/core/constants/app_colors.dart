@@ -38,6 +38,7 @@ class PotColors {
 
   // Turkish & Brand Accents
   static const Color goldAccent = Color(0xFFD4AF37);     // Gold trim
+  static const Color locationGreen = Color(0xFF0D9488); // Teal/Green accent matching ref
 
   // Home Menu Pastel Palettes (matching reference home.html)
   static const Color menuGreen = Color(0xFFEAF8EE);

@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 import 'user_model.dart';
 
@@ -112,16 +113,6 @@ class AbsensiModel {
   }
 
   factory AbsensiModel.fromJson(Map<String, dynamic> json) {
-    DateTime? parseDate(dynamic v) {
-      if (v == null) return null;
-      if (v is DateTime) return v.toLocal();
-      if (v is String && v.isNotEmpty) {
-        final parsed = DateTime.tryParse(v);
-        return parsed?.toLocal();
-      }
-      return null;
-    }
-
     GeolocationPoint? parseLocation(dynamic v) {
       if (v is Map<String, dynamic>) {
         return GeolocationPoint.fromJson(v);
@@ -146,16 +137,16 @@ class AbsensiModel {
     return AbsensiModel(
       id: json['id'] as String? ?? '',
       tanggal: json['tanggal'] as String? ?? '',
-      jamMasuk: parseDate(json['jam_masuk']),
-      jamPulang: parseDate(json['jam_pulang']),
+      jamMasuk: ParserUtils.parseLocalDate(json['jam_masuk']),
+      jamPulang: ParserUtils.parseLocalDate(json['jam_pulang']),
       lokasiMasuk: parseLocation(json['lokasi_masuk']),
       fotoMasukUrl: json['foto_masuk_url'] as String?,
       status: json['status'] as String? ?? AppConstants.absenHadir,
       keterangan: json['keterangan'] as String? ?? '',
       user: parseUser(json['user']),
       lapak: parseLapak(json['lapak']),
-      createdAt: parseDate(json['createdAt']),
-      updatedAt: parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt']),
     );
   }
 

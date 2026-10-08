@@ -64,7 +64,34 @@ class ApiErrorMapper {
         return 'Anda tidak memiliki hak akses untuk akun ini.';
 
       case 404:
-        return 'Akun pengguna tidak ditemukan di sistem.';
+        if (lowerRaw.contains('lapak') || lowerRaw.contains('stall')) {
+          return 'Data lapak tidak ditemukan.';
+        }
+        if (lowerRaw.contains('pengiriman') || lowerRaw.contains('shipment')) {
+          return 'Data pengiriman barang tidak ditemukan.';
+        }
+        if (lowerRaw.contains('produk') || lowerRaw.contains('product')) {
+          return 'Data produk tidak ditemukan.';
+        }
+        if (lowerRaw.contains('stok') || lowerRaw.contains('stock')) {
+          return 'Data stok produk tidak ditemukan.';
+        }
+        if (lowerRaw.contains('penjualan') || lowerRaw.contains('sale')) {
+          return 'Data transaksi penjualan tidak ditemukan.';
+        }
+        if (lowerRaw.contains('absensi') || lowerRaw.contains('attendance')) {
+          return 'Data absensi tidak ditemukan.';
+        }
+        if (lowerRaw.contains('user') || lowerRaw.contains('pengguna') || lowerRaw.contains('akun')) {
+          return 'Akun pengguna tidak ditemukan di sistem.';
+        }
+        if (rawMessage != null &&
+            rawMessage.isNotEmpty &&
+            !rawMessage.contains('{') &&
+            !rawMessage.contains('Error:')) {
+          return rawMessage;
+        }
+        return 'Data yang dicari tidak ditemukan di sistem.';
 
       case 409:
         if (lowerRaw.contains('username')) {

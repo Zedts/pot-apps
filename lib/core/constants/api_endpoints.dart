@@ -31,4 +31,18 @@ class ApiEndpoints {
   static const String penerimaan = '/penerimaan';
   static String penerimaanById(String id) => '/penerimaan/$id';
   static String penerimaanNota(String id) => '/penerimaan/$id/nota';
+
+  // Produk
+  static const String produk = '/produk';
+  static String produkById(String id) => '/produk/$id';
+
+  // Stok Lapak
+  static const String stokLapak = '/stok-lapak';
+  static String stokLapakById(String id) => '/stok-lapak/$id';
+
+  // Penjualan
+  static const String penjualan = '/penjualan';
+  static String penjualanById(String id) => '/penjualan/$id';
+  static String penjualanBuktiBayar(String id) => '/penjualan/$id/bukti-bayar';
+  static String penjualanBuktiQris(String id) => '/penjualan/$id/bukti-bayar';
 }

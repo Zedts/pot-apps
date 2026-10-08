@@ -10,6 +10,7 @@ import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
 import '../../../core/services/location_service.dart';
 import '../../../core/storage/token_storage.dart';
+import '../../../core/utils/date_formatter.dart';
 import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/absensi_repository.dart';
 import '../repositories/absensi_repository_impl.dart';
@@ -86,18 +87,7 @@ class AttendanceViewModel extends BaseViewModel {
   }
 
   /// Formatted current date string: "Kamis, 10 September 2026"
-  String get formattedCurrentDate {
-    const days = [
-      'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-    ];
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    ];
-    final dayName = days[_currentTime.weekday - 1];
-    final monthName = months[_currentTime.month - 1];
-    return '$dayName, ${_currentTime.day} $monthName ${_currentTime.year}';
-  }
+  String get formattedCurrentDate => DateFormatter.formatFullDate(_currentTime);
 
   /// Initializes clock ticker, user profile, stall coordinates, and today's status.
   Future<void> init({UserModel? currentUser}) async {

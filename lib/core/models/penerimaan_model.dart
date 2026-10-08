@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 import 'pengiriman_model.dart';
 import 'user_model.dart';
@@ -64,27 +65,14 @@ class PenerimaanModel {
   }
 
   factory PenerimaanModel.fromJson(Map<String, dynamic> json) {
-    int parseInt(dynamic val) {
-      if (val is int) return val;
-      if (val is num) return val.toInt();
-      if (val is String) return int.tryParse(val) ?? 0;
-      return 0;
-    }
-
-    DateTime? parseDate(dynamic val) {
-      if (val == null) return null;
-      if (val is DateTime) return val;
-      return DateTime.tryParse(val.toString());
-    }
-
     return PenerimaanModel(
       id: json['id'] as String? ?? '',
       pengirimanId: json['pengiriman_id'] as String? ?? '',
       uniqueId: json['unique_id'] as String?,
       countersId: json['counters_id'] as String?,
       spgId: json['spg_id'] as String?,
-      tanggal: parseDate(json['tanggal']),
-      qtyTerima: parseInt(json['qty_terima']),
+      tanggal: ParserUtils.parseDate(json['tanggal']),
+      qtyTerima: ParserUtils.parseInt(json['qty_terima']),
       notaUrl: json['nota_url'] as String?,
       catatan: json['catatan'] as String? ?? '',
       status: json['status'] as String? ?? AppConstants.receiveSesuai,
@@ -97,8 +85,8 @@ class PenerimaanModel {
       lapak: json['lapak'] is Map<String, dynamic>
           ? LapakModel.fromJson(json['lapak'] as Map<String, dynamic>)
           : null,
-      createdAt: parseDate(json['createdAt']),
-      updatedAt: parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseDate(json['createdAt']),
+      updatedAt: ParserUtils.parseDate(json['updatedAt']),
     );
   }
 
