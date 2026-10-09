@@ -1,4 +1,5 @@
 import '../../../core/constants/app_constants.dart';
+import '../../../core/models/activity_history_model.dart';
 import '../../../core/models/closing_model.dart';
 import '../../../core/models/lapak_model.dart';
 import '../../../core/models/penerimaan_model.dart';
@@ -7,6 +8,7 @@ import '../../../core/models/stok_lapak_model.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/storage/token_storage.dart';
+import '../../../core/services/activity_history_service.dart';
 import '../../../core/utils/currency_formatter.dart';
 import '../../../core/utils/date_formatter.dart';
 import '../../../core/viewmodels/base_view_model.dart';
@@ -17,6 +19,7 @@ import '../repositories/closingan_repository_impl.dart';
 /// and submission for the Daily Closing ("Closing Harian") screen.
 class ClosinganViewModel extends BaseViewModel {
   final ClosinganRepository _repository;
+  final ActivityHistoryService _activityHistoryService;
 
   UserModel? _user;
   LapakModel? _stall;
@@ -38,8 +41,10 @@ class ClosinganViewModel extends BaseViewModel {
   ClosinganViewModel({
     UserModel? currentUser,
     ClosinganRepository? repository,
+    ActivityHistoryService? activityHistoryService,
   })  : _user = currentUser,
-        _repository = repository ?? ClosinganRepositoryImpl();
+        _repository = repository ?? ClosinganRepositoryImpl(),
+        _activityHistoryService = activityHistoryService ?? ActivityHistoryService();
 
   // Getters
   UserModel? get user => _user;
@@ -252,6 +257,17 @@ class ClosinganViewModel extends BaseViewModel {
 
       final result = await _repository.createClosing(payload);
       _todayClosing = result;
+      await _activityHistoryService.record(
+        ActivityHistoryModel(
+          userId: _user?.id ?? result.spgId,
+          lapakId: result.lapakId,
+          activityType: AppConstants.activityDailyClosing,
+          title: 'Closing Harian',
+          description: 'Omzet ${CurrencyFormatter.formatRupiah(result.totalOmset)} (${result.statusLabel})',
+          occurredAt: result.createdAt ?? DateTime.now(),
+          referenceId: result.id,
+        ),
+      );
       _successMessage = 'Laporan closing berhasil dicatat (${result.statusLabel}).';
       return result;
     } on ApiException catch (e) {

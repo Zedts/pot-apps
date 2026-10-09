@@ -1,14 +1,18 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../core/models/activity_history_model.dart';
 import '../../../core/models/lapak_model.dart';
 import '../../../core/models/penjualan_model.dart';
 import '../../../core/models/stok_lapak_model.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
+import '../../../core/services/activity_history_service.dart';
 import '../../../core/storage/token_storage.dart';
 import '../../../core/utils/date_formatter.dart';
+import '../../../core/utils/currency_formatter.dart';
 import '../../../core/viewmodels/base_view_model.dart';
 import '../repositories/penjualan_stok_repository.dart';
 import '../repositories/penjualan_stok_repository_impl.dart';
@@ -18,6 +22,7 @@ import '../repositories/penjualan_stok_repository_impl.dart';
 class PenjualanStokViewModel extends BaseViewModel {
   final PenjualanStokRepository _repository;
   final CameraService _cameraService;
+  final ActivityHistoryService _activityHistoryService;
 
   UserModel? _user;
   LapakModel? _stall;
@@ -47,9 +52,11 @@ class PenjualanStokViewModel extends BaseViewModel {
     UserModel? currentUser,
     PenjualanStokRepository? repository,
     CameraService? cameraService,
+    ActivityHistoryService? activityHistoryService,
   })  : _user = currentUser,
         _repository = repository ?? PenjualanStokRepositoryImpl(),
-        _cameraService = cameraService ?? CameraService();
+        _cameraService = cameraService ?? CameraService(),
+        _activityHistoryService = activityHistoryService ?? ActivityHistoryService();
 
   // Getters
   UserModel? get user => _user;
@@ -357,12 +364,24 @@ class PenjualanStokViewModel extends BaseViewModel {
         }
       }
 
-      await _repository.createPenjualan(
+      final result = await _repository.createPenjualan(
         lapakId: lapakId,
         metodePembayaran: _selectedPaymentMethod,
         items: items,
         catatan: _catatan,
         buktiFile: _buktiBayarFile,
+      );
+
+      await _activityHistoryService.record(
+        ActivityHistoryModel(
+          userId: _user?.id ?? '',
+          lapakId: lapakId,
+          activityType: AppConstants.activityProcessSale,
+          title: 'Penjualan Diproses',
+          description: '${result.totalQty} barang • ${CurrencyFormatter.formatRupiah(result.totalHarga)}',
+          occurredAt: result.tanggal ?? result.createdAt ?? DateTime.now(),
+          referenceId: result.id,
+        ),
       );
 
       _successMessage = 'Transaksi penjualan berhasil dicatat!';

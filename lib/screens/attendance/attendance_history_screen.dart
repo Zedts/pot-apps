@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/models/absensi_model.dart';
 import '../../widgets/attendance/attendance_detail_modal.dart';
 import '../../widgets/attendance/attendance_status_badge.dart';
@@ -237,6 +238,8 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                         },
                       ),
                     ),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
                 ],
               ),
             ),

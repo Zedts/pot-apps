@@ -3,6 +3,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/stok_lapak_model.dart';
 import '../../core/models/user_model.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/utils/currency_formatter.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
@@ -167,7 +168,9 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
                   else
                     StokSaatIniListView(viewModel: _viewModel),
 
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

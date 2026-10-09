@@ -3,6 +3,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/closing_model.dart';
 import '../../core/models/user_model.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/utils/currency_formatter.dart';
 import '../../widgets/attendance/attendance_status_badge.dart';
 import '../../widgets/closingan/closing_detail_sheet.dart';
@@ -255,6 +256,8 @@ class _ClosinganScreenState extends State<ClosinganScreen> {
                       isLoading: _viewModel.isSubmitting,
                       onPressed: _handleSubmit,
                     ),
+                    const SizedBox(height: 24),
+                    const SkylineFooter(),
                   ],
                 ),
               ),

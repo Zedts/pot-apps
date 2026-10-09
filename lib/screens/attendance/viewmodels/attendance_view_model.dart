@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/models/activity_history_model.dart';
 import '../../../core/models/absensi_model.dart';
 import '../../../core/models/lapak_model.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
+import '../../../core/services/activity_history_service.dart';
 import '../../../core/services/location_service.dart';
 import '../../../core/storage/token_storage.dart';
 import '../../../core/utils/date_formatter.dart';
@@ -21,6 +23,7 @@ class AttendanceViewModel extends BaseViewModel {
   final AbsensiRepository _repository;
   final LocationService _locationService;
   final CameraService _cameraService;
+  final ActivityHistoryService _activityHistoryService;
 
   UserModel? _user;
   LapakModel? _stall;
@@ -47,9 +50,11 @@ class AttendanceViewModel extends BaseViewModel {
     AbsensiRepository? repository,
     LocationService? locationService,
     CameraService? cameraService,
+    ActivityHistoryService? activityHistoryService,
   })  : _repository = repository ?? AbsensiRepositoryImpl(),
         _locationService = locationService ?? LocationService(),
-        _cameraService = cameraService ?? CameraService();
+        _cameraService = cameraService ?? CameraService(),
+        _activityHistoryService = activityHistoryService ?? ActivityHistoryService();
 
   // Getters
   UserModel? get user => _user;
@@ -259,6 +264,17 @@ class AttendanceViewModel extends BaseViewModel {
       );
 
       _todayRecord = record;
+      await _activityHistoryService.record(
+        ActivityHistoryModel(
+          userId: _user!.id,
+          lapakId: _stall!.id,
+          activityType: AppConstants.activityClockIn,
+          title: 'Presensi Masuk',
+          description: 'Status ${record.statusDisplay}',
+          occurredAt: record.jamMasuk ?? DateTime.now(),
+          referenceId: record.id,
+        ),
+      );
       _capturedPhoto = null;
       _successMessage = 'Presensi masuk berhasil dicatat.';
       await refreshAttendanceData();
@@ -298,6 +314,17 @@ class AttendanceViewModel extends BaseViewModel {
     try {
       final updated = await _repository.clockOut(_todayRecord!.id);
       _todayRecord = updated;
+      await _activityHistoryService.record(
+        ActivityHistoryModel(
+          userId: _user!.id,
+          lapakId: _stall?.id,
+          activityType: AppConstants.activityClockOut,
+          title: 'Presensi Pulang',
+          description: 'Presensi pulang berhasil dicatat',
+          occurredAt: updated.jamPulang ?? DateTime.now(),
+          referenceId: updated.id,
+        ),
+      );
       _successMessage = 'Presensi pulang berhasil dicatat. Terima kasih atas kerja keras Anda!';
       await refreshAttendanceData();
       return true;

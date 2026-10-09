@@ -3,6 +3,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/user_model.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
 import '../../widgets/common/confirmation_dialog.dart';
@@ -188,6 +189,8 @@ class _PenerimaanScreenState extends State<PenerimaanScreen> {
                     isLoading: _viewModel.isSubmitting,
                     onPressed: _handleSimpanPenerimaan,
                   ),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
                 ],
               ),
             ),

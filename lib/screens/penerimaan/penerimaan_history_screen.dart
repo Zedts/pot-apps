@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/models/penerimaan_model.dart';
 import '../../widgets/attendance/attendance_status_badge.dart';
 import '../../widgets/common/app_header.dart';
@@ -194,6 +195,8 @@ class _PenerimaanHistoryScreenState extends State<PenerimaanHistoryScreen> {
                     ],
                   ),
                 ),
+              const SizedBox(height: 24),
+              const SkylineFooter(),
             ],
           ),
         ),

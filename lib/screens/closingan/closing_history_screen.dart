@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/models/closing_model.dart';
 import '../../core/models/lapak_model.dart';
 import '../../core/models/user_model.dart';
@@ -150,6 +151,8 @@ class _ClosingHistoryScreenState extends State<ClosingHistoryScreen> {
                         return _buildClosingCard(list[index]);
                       },
                     ),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
                 ],
               ),
             ),

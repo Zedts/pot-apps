@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../core/utils/currency_formatter.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
@@ -122,6 +123,8 @@ class SlipGajiHistoryScreen extends StatelessWidget {
                         payroll: item,
                       ),
                     ),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/user_model.dart';
+import '../../widgets/auth/login/skyline_footer.dart';
 import '../../widgets/attendance/attendance_action_buttons.dart';
 import '../../widgets/attendance/attendance_clock_card.dart';
 import '../../widgets/attendance/attendance_history_table.dart';
@@ -135,6 +136,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                       );
                     },
                   ),
+                  const SizedBox(height: 24),
+                  const SkylineFooter(),
                 ],
               ),
             ),

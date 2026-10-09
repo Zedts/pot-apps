@@ -11,6 +11,7 @@ class ApiEndpoints {
 
   // Users
   static const String users = '/users';
+  static String userById(String id) => '/users/$id';
 
   // Lapak
   static const String lapak = '/lapak';

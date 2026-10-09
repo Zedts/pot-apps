@@ -2,12 +2,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/models/activity_history_model.dart';
 import '../../../core/models/lapak_model.dart';
 import '../../../core/models/penerimaan_model.dart';
 import '../../../core/models/pengiriman_model.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/services/camera_service.dart';
+import '../../../core/services/activity_history_service.dart';
 import '../../../core/storage/token_storage.dart';
 import '../../../core/utils/date_formatter.dart';
 import '../../../core/viewmodels/base_view_model.dart';
@@ -18,6 +20,7 @@ import '../repositories/penerimaan_repository_impl.dart';
 class PenerimaanViewModel extends BaseViewModel {
   final PenerimaanRepository _repository;
   final CameraService _cameraService;
+  final ActivityHistoryService _activityHistoryService;
 
   UserModel? _user;
   LapakModel? _stall;
@@ -40,8 +43,10 @@ class PenerimaanViewModel extends BaseViewModel {
   PenerimaanViewModel({
     PenerimaanRepository? repository,
     CameraService? cameraService,
+    ActivityHistoryService? activityHistoryService,
   })  : _repository = repository ?? PenerimaanRepositoryImpl(),
-        _cameraService = cameraService ?? CameraService();
+        _cameraService = cameraService ?? CameraService(),
+        _activityHistoryService = activityHistoryService ?? ActivityHistoryService();
 
   // Getters
   UserModel? get user => _user;
@@ -314,6 +319,18 @@ class PenerimaanViewModel extends BaseViewModel {
         qtyTerima: totalTerima,
         catatan: _catatan,
         photoFile: _capturedFotoNota,
+      );
+
+      await _activityHistoryService.record(
+        ActivityHistoryModel(
+          userId: _user?.id ?? result.spgId ?? '',
+          lapakId: _user?.lapakId,
+          activityType: AppConstants.activityReceiveGoods,
+          title: 'Penerimaan Barang',
+          description: '${result.qtyTerima} barang diterima (${result.status.toUpperCase()})',
+          occurredAt: result.tanggal ?? result.createdAt ?? DateTime.now(),
+          referenceId: result.id,
+        ),
       );
 
       _successMessage = 'Penerimaan barang berhasil disimpan.';

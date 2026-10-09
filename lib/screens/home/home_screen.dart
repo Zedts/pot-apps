@@ -18,6 +18,8 @@ import '../attendance/attendance_screen.dart';
 import '../closingan/closingan_screen.dart';
 import '../penerimaan/penerimaan_screen.dart';
 import '../penjualan_stok/penjualan_stok_screen.dart';
+import '../profile/profile_screen.dart';
+import '../riwayat/riwayat_screen.dart';
 import '../slip_gaji/slip_gaji_screen.dart';
 import '../auth/login_screen.dart';
 import 'repositories/home_repository.dart';
@@ -32,6 +34,7 @@ class HomeScreen extends StatefulWidget {
   final HomeRepository? homeRepository;
   final AuthService? authService;
   final GoogleAuthService? googleAuthService;
+  final bool embedded;
 
   const HomeScreen({
     super.key,
@@ -40,6 +43,7 @@ class HomeScreen extends StatefulWidget {
     this.homeRepository,
     this.authService,
     this.googleAuthService,
+    this.embedded = false,
   });
 
   @override
@@ -130,12 +134,74 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _handleMenuTap(String menuId, String menuTitle) {
+    final user = _viewModel.user;
+    if (menuId == 'absen') {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceScreen(currentUser: user)));
+      return;
+    }
+    if (menuId == 'terima_barang') {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => PenerimaanScreen(currentUser: user)));
+      return;
+    }
+    if (menuId == 'stok_penjualan') {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => PenjualanStokScreen(currentUser: user)));
+      return;
+    }
+    if (menuId == 'closing_harian') {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => ClosinganScreen(currentUser: user)));
+      return;
+    }
+    if (menuId == 'slip_gaji') {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => SlipGajiScreen(currentUser: user)));
+      return;
+    }
+    AppToast.show(context, message: 'Menu $menuTitle sedang dalam tahap pengembangan.', isSuccess: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: _viewModel,
       builder: (context, _) {
         final isUnassigned = _viewModel.isUnassigned;
+
+        final body = SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 440),
+              child: RefreshIndicator(
+                color: PotColors.primaryRed,
+                onRefresh: _handleRefresh,
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      HomeUserBanner(
+                        user: _viewModel.user,
+                        formattedDate: _viewModel.formattedDate,
+                        roleBadgeLabel: _viewModel.roleBadgeLabel,
+                        lapakDisplayInfo: _viewModel.lapakDisplayInfo,
+                      ),
+                      const SizedBox(height: 18),
+                      if (isUnassigned) ...[
+                        HomeUnassignedView(user: _viewModel.user, isLoading: _viewModel.isLoading, onRefresh: _handleRefresh, onLogout: _handleLogout),
+                      ] else ...[
+                        HomeMenuGrid(onCardTap: _handleMenuTap),
+                        const SizedBox(height: 24),
+                        const SkylineFooter(),
+                      ],
+                      if (!isUnassigned) const SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        if (widget.embedded) return body;
 
         return Scaffold(
           backgroundColor: PotColors.bgCream,
@@ -171,118 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 : null,
           ),
-          body: SafeArea(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 440),
-                child: RefreshIndicator(
-                  color: PotColors.primaryRed,
-                  onRefresh: _handleRefresh,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 14,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // User Information Banner Card (matching ref/home.html)
-                        HomeUserBanner(
-                          user: _viewModel.user,
-                          formattedDate: _viewModel.formattedDate,
-                          roleBadgeLabel: _viewModel.roleBadgeLabel,
-                          lapakDisplayInfo: _viewModel.lapakDisplayInfo,
-                        ),
-
-                        const SizedBox(height: 18),
-
-                        // Role Conditional Rendering
-                        if (isUnassigned) ...[
-                          // When role == 'unassigned': Hide 6 cards & show waiting notice
-                          HomeUnassignedView(
-                            user: _viewModel.user,
-                            isLoading: _viewModel.isLoading,
-                            onRefresh: _handleRefresh,
-                            onLogout: _handleLogout,
-                          ),
-                        ] else ...[
-                          // When role is assigned: Show 6 operational menu cards
-                          HomeMenuGrid(
-                            onCardTap: (menuId, menuTitle) {
-                              if (menuId == 'absen') {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => AttendanceScreen(
-                                      currentUser: _viewModel.user,
-                                    ),
-                                  ),
-                                );
-                                return;
-                              }
-                              if (menuId == 'terima_barang') {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => PenerimaanScreen(
-                                      currentUser: _viewModel.user,
-                                    ),
-                                  ),
-                                );
-                                return;
-                              }
-                              if (menuId == 'stok_penjualan') {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => PenjualanStokScreen(
-                                      currentUser: _viewModel.user,
-                                    ),
-                                  ),
-                                );
-                                return;
-                              }
-                              if (menuId == 'closing_harian') {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => ClosinganScreen(
-                                      currentUser: _viewModel.user,
-                                    ),
-                                  ),
-                                );
-                                return;
-                              }
-                              if (menuId == 'slip_gaji') {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => SlipGajiScreen(
-                                      currentUser: _viewModel.user,
-                                    ),
-                                  ),
-                                );
-                                return;
-                              }
-                              AppToast.show(
-                                context,
-                                message: 'Menu $menuTitle sedang dalam tahap pengembangan.',
-                                isSuccess: true,
-                              );
-                            },
-                          ),
-
-                          const SizedBox(height: 24),
-
-                          // Skyline Vector Footer + Slogan
-                          const SkylineFooter(),
-                        ],
-
-                        // Extra bottom padding to avoid overlapping the bottom nav bar
-                        if (!isUnassigned) const SizedBox(height: 16),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          body: body,
           // Role Conditional Bottom Navigation Bar:
           // Hidden when unassigned, visible when assigned.
           bottomNavigationBar: isUnassigned
@@ -293,21 +248,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (index == 0) {
                       _viewModel.setTabIndex(0);
                     } else if (index == 1) {
-                      _viewModel.setTabIndex(1);
-                      AppToast.show(
-                        context,
-                        message: 'Halaman Riwayat sedang dalam pengembangan.',
-                        isSuccess: true,
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => RiwayatScreen(user: _viewModel.user),
+                        ),
                       );
                     } else if (index == 2) {
-                      // _viewModel.setTabIndex(2);
-                      // AppToast.show(
-                      //   context,
-                      //   message: 'Halaman Profil sedang dalam pengembangan.',
-                      //   isSuccess: true,
-                      // );
-                      // Temporary: Profile navigation button functions as logout
-                      _handleLogout();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ProfileScreen(user: _viewModel.user),
+                        ),
+                      );
                     }
                   },
                 ),

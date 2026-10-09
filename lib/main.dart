@@ -7,6 +7,7 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/env_config.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/home/app_navigation_shell.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,9 +43,11 @@ class PotApp extends StatelessWidget {
       title: 'POT - Presensi Oleh² Turki',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: initialUser != null
-          ? HomeScreen(user: initialUser!)
-          : const LoginScreen(),
+      home: initialUser == null
+          ? const LoginScreen()
+          : initialUser!.role.toLowerCase() == 'unassigned'
+              ? HomeScreen(user: initialUser!)
+              : AppNavigationShell(user: initialUser!),
     );
   }
 }

@@ -9,6 +9,7 @@ import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
 import '../../widgets/common/info_modal.dart';
 import '../home/home_screen.dart';
+import '../home/app_navigation_shell.dart';
 import 'register_screen.dart';
 import 'repositories/auth_repository.dart';
 import 'viewmodels/login_view_model.dart';
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen(user: authResponse.user)),
+        MaterialPageRoute(builder: (_) => authResponse.user.role.toLowerCase() == 'unassigned' ? HomeScreen(user: authResponse.user) : AppNavigationShell(user: authResponse.user)),
         (route) => false,
       );
     } else if (_viewModel.errorMessage != null) {
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen(user: authResponse.user)),
+        MaterialPageRoute(builder: (_) => authResponse.user.role.toLowerCase() == 'unassigned' ? HomeScreen(user: authResponse.user) : AppNavigationShell(user: authResponse.user)),
         (route) => false,
       );
     } else if (_viewModel.errorMessage != null) {

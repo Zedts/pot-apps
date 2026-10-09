@@ -39,4 +39,12 @@ class AppConstants {
   // User/Produk Status
   static const String statusActive = "active";
   static const String statusInActive = "inactive";
+
+  // Local activity history types
+  static const String activityClockIn = 'clock_in';
+  static const String activityClockOut = 'clock_out';
+  static const String activityReceiveGoods = 'receive_goods';
+  static const String activityProcessSale = 'process_sale';
+  static const String activityDailyClosing = 'daily_closing';
+  static const String activityProfileUpdated = 'profile_updated';
 }

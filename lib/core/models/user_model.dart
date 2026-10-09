@@ -36,6 +36,17 @@ class UserModel {
     return 'Pengguna';
   }
 
+  /// Initials used by the profile identity card when no profile photo is shown.
+  String get initials {
+    final parts = displayName.split(RegExp(r'\s+')).where((part) => part.isNotEmpty).toList();
+    if (parts.isEmpty) return 'P';
+    if (parts.length == 1) {
+      final name = parts.first;
+      return name.length == 1 ? name.toUpperCase() : name.substring(0, 2).toUpperCase();
+    }
+    return '${parts.first.substring(0, 1)}${parts.last.substring(0, 1)}'.toUpperCase();
+  }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'] as String? ?? '',
