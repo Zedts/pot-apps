@@ -99,4 +99,33 @@ class DateFormatter {
     final localB = b.toLocal();
     return localA.year == localB.year && localA.month == localB.month && localA.day == localB.day;
   }
+
+  /// Formats a period string in "YYYY-MM" format to Indonesian long month format.
+  ///
+  /// Example: `"2026-09"` → `"September 2026"`.
+  /// Falls back to the raw input string when it does not match the expected format.
+  static String formatPeriode(String periode) {
+    final trimmed = periode.trim();
+    final parts = trimmed.split('-');
+    if (parts.length != 2) return trimmed;
+    final year = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    if (year == null || month == null) return trimmed;
+    if (month < 1 || month > 12) return trimmed;
+    return '${indonesianMonths[month - 1]} $year';
+  }
+
+  /// Parses a "YYYY-MM" period string into a [DateTime] at the first day of the month.
+  ///
+  /// Returns `null` if the string cannot be parsed.
+  static DateTime? tryParsePeriode(String periode) {
+    final trimmed = periode.trim();
+    final parts = trimmed.split('-');
+    if (parts.length != 2) return null;
+    final year = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    if (year == null || month == null) return null;
+    if (month < 1 || month > 12) return null;
+    return DateTime(year, month, 1);
+  }
 }

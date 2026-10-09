@@ -48,4 +48,10 @@ class ApiEndpoints {
   // Closing
   static const String closing = '/closing';
   static String closingById(String id) => '/closing/$id';
+
+  // Payroll
+  static const String payroll = '/payroll';
+
+  // Slip Gaji
+  static const String slipGaji = '/slip-gaji';
 }

@@ -18,6 +18,7 @@ import '../attendance/attendance_screen.dart';
 import '../closingan/closingan_screen.dart';
 import '../penerimaan/penerimaan_screen.dart';
 import '../penjualan_stok/penjualan_stok_screen.dart';
+import '../slip_gaji/slip_gaji_screen.dart';
 import '../auth/login_screen.dart';
 import 'repositories/home_repository.dart';
 import 'repositories/home_repository_impl.dart';
@@ -243,6 +244,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctx) => ClosinganScreen(
+                                      currentUser: _viewModel.user,
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+                              if (menuId == 'slip_gaji') {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => SlipGajiScreen(
                                       currentUser: _viewModel.user,
                                     ),
                                   ),
