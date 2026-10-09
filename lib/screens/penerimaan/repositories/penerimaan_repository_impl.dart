@@ -118,6 +118,7 @@ class PenerimaanRepositoryImpl implements PenerimaanRepository {
   }) async {
     final queryParams = <String, dynamic>{};
     if (spgId != null && spgId.isNotEmpty) queryParams['spg_id'] = spgId.trim();
+    if (lapakId != null && lapakId.isNotEmpty) queryParams['lapak_id'] = lapakId.trim();
     if (status != null && status.isNotEmpty) queryParams['status'] = status.trim();
 
     final response = await _apiClient.get(

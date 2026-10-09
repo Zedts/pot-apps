@@ -1,5 +1,7 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pot_apps/core/network/api_error_mapper.dart';
+import 'package:pot_apps/core/utils/currency_formatter.dart';
 import 'package:pot_apps/core/utils/date_formatter.dart';
 import 'package:pot_apps/core/utils/parser_utils.dart';
 
@@ -116,6 +118,37 @@ void main() {
         rawMessage: '',
       );
       expect(msg, 'Data yang dicari tidak ditemukan di sistem.');
+    });
+  });
+
+  group('CurrencyFormatter and CurrencyInputFormatter Unit Tests', () {
+    test('formats numbers into Indonesian Rupiah text with and without prefix', () {
+      expect(CurrencyFormatter.formatRupiah(190000), 'Rp 190.000');
+      expect(CurrencyFormatter.formatRupiah(190000, withPrefix: false), '190.000');
+      expect(CurrencyFormatter.formatRupiah(0), 'Rp 0');
+      expect(CurrencyFormatter.formatRupiah(null), 'Rp 0');
+    });
+
+    test('CurrencyInputFormatter formats user typing with thousand separators', () {
+      final formatter = CurrencyFormatter.inputFormatter;
+
+      // Type 190000
+      const oldVal = TextEditingValue.empty;
+      const newVal = TextEditingValue(text: '190000', selection: TextSelection.collapsed(offset: 6));
+      final updated = formatter.formatEditUpdate(oldVal, newVal);
+
+      expect(updated.text, '190.000');
+      expect(updated.selection.baseOffset, 7);
+
+      // Backspace from 190.000 to 190.00
+      const editedVal = TextEditingValue(text: '190.00', selection: TextSelection.collapsed(offset: 6));
+      final backspaced = formatter.formatEditUpdate(newVal, editedVal);
+      expect(backspaced.text, '19.000');
+
+      // Clear all
+      const clearedVal = TextEditingValue(text: '', selection: TextSelection.collapsed(offset: 0));
+      final cleared = formatter.formatEditUpdate(newVal, clearedVal);
+      expect(cleared.text, '');
     });
   });
 }

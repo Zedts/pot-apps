@@ -9,6 +9,7 @@ import '../../widgets/attendance/attendance_izin_dialog.dart';
 import '../../widgets/attendance/attendance_map_card.dart';
 import '../../widgets/common/app_header.dart';
 import '../../widgets/common/app_toast.dart';
+import '../../widgets/common/lapak_info_card.dart';
 import '../../widgets/common/proof_photo_upload_card.dart';
 import 'attendance_history_screen.dart';
 import 'viewmodels/attendance_view_model.dart';
@@ -67,6 +68,10 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 32),
               child: Column(
                 children: [
+                  // Stall Location Metadata Card
+                  LapakInfoCard(stall: _viewModel.stall),
+                  const SizedBox(height: 14),
+
                   // White Attendance Card Container
                   Container(
                     width: double.infinity,

@@ -30,7 +30,7 @@ class AbsensiRepositoryImpl implements AbsensiRepository {
       },
     };
     if (status != AppConstants.absenIzin) {
-      body['jam_masuk'] = DateTime.now().toIso8601String();
+      body['jam_masuk'] = DateTime.now().toUtc().toIso8601String();
     }
     if (keterangan != null && keterangan.trim().isNotEmpty) {
       body['keterangan'] = keterangan.trim();
@@ -71,7 +71,7 @@ class AbsensiRepositoryImpl implements AbsensiRepository {
   Future<AbsensiModel> clockOut(String absensiId) async {
     final response = await _apiClient.patch(
       ApiEndpoints.absensiPulang(absensiId),
-      body: {'jam_pulang': DateTime.now().toIso8601String()},
+      body: {'jam_pulang': DateTime.now().toUtc().toIso8601String()},
       requiresAuth: true,
     );
     final data = response['data'] as Map<String, dynamic>;

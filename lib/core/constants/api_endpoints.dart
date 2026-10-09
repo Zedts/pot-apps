@@ -44,5 +44,8 @@ class ApiEndpoints {
   static const String penjualan = '/penjualan';
   static String penjualanById(String id) => '/penjualan/$id';
   static String penjualanBuktiBayar(String id) => '/penjualan/$id/bukti-bayar';
-  static String penjualanBuktiQris(String id) => '/penjualan/$id/bukti-bayar';
+
+  // Closing
+  static const String closing = '/closing';
+  static String closingById(String id) => '/closing/$id';
 }

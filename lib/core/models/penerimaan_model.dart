@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/date_formatter.dart';
 import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 import 'pengiriman_model.dart';
@@ -47,21 +48,14 @@ class PenerimaanModel {
   String get formattedTanggal {
     final d = tanggal ?? createdAt;
     if (d == null) return '-';
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-      'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ];
-    return '${d.day.toString().padLeft(2, '0')} ${months[d.month - 1]} ${d.year}';
+    return DateFormatter.formatShortDate(d);
   }
 
   /// Day name in Indonesian
   String get dayNameIndo {
     final d = tanggal ?? createdAt;
     if (d == null) return '';
-    const days = [
-      'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-    ];
-    return days[d.weekday - 1];
+    return DateFormatter.formatDayName(d);
   }
 
   factory PenerimaanModel.fromJson(Map<String, dynamic> json) {
@@ -71,7 +65,7 @@ class PenerimaanModel {
       uniqueId: json['unique_id'] as String?,
       countersId: json['counters_id'] as String?,
       spgId: json['spg_id'] as String?,
-      tanggal: ParserUtils.parseDate(json['tanggal']),
+      tanggal: ParserUtils.parseLocalDate(json['tanggal']),
       qtyTerima: ParserUtils.parseInt(json['qty_terima']),
       notaUrl: json['nota_url'] as String?,
       catatan: json['catatan'] as String? ?? '',
@@ -85,8 +79,8 @@ class PenerimaanModel {
       lapak: json['lapak'] is Map<String, dynamic>
           ? LapakModel.fromJson(json['lapak'] as Map<String, dynamic>)
           : null,
-      createdAt: ParserUtils.parseDate(json['createdAt']),
-      updatedAt: ParserUtils.parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt']),
     );
   }
 
@@ -96,7 +90,7 @@ class PenerimaanModel {
         'unique_id': uniqueId,
         'counters_id': countersId,
         'spg_id': spgId,
-        'tanggal': tanggal?.toIso8601String(),
+        'tanggal': tanggal?.toUtc().toIso8601String(),
         'qty_terima': qtyTerima,
         'nota_url': notaUrl,
         'catatan': catatan,
@@ -104,7 +98,7 @@ class PenerimaanModel {
         'spg': spg?.toJson(),
         'pengiriman': pengiriman?.toJson(),
         'lapak': lapak?.toJson(),
-        'createdAt': createdAt?.toIso8601String(),
-        'updatedAt': updatedAt?.toIso8601String(),
+        'createdAt': createdAt?.toUtc().toIso8601String(),
+        'updatedAt': updatedAt?.toUtc().toIso8601String(),
       };
 }

@@ -69,8 +69,8 @@ class StokLapakModel {
       stokAkhir: sAkhir,
       lapak: lapakModel,
       produk: produkModel,
-      createdAt: ParserUtils.parseDate(json['createdAt']),
-      updatedAt: ParserUtils.parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt']),
     );
   }
 

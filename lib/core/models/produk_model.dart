@@ -48,8 +48,8 @@ class ProdukModel {
       status: json['status']?.toString() ?? 'aktif',
       kategoriNama: katNama,
       satuanNama: satNama,
-      createdAt: ParserUtils.parseDate(json['createdAt']),
-      updatedAt: ParserUtils.parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt']),
     );
   }
 

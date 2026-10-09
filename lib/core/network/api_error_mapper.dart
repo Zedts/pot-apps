@@ -82,6 +82,9 @@ class ApiErrorMapper {
         if (lowerRaw.contains('absensi') || lowerRaw.contains('attendance')) {
           return 'Data absensi tidak ditemukan.';
         }
+        if (lowerRaw.contains('closing')) {
+          return 'Data laporan closing tidak ditemukan.';
+        }
         if (lowerRaw.contains('user') || lowerRaw.contains('pengguna') || lowerRaw.contains('akun')) {
           return 'Akun pengguna tidak ditemukan di sistem.';
         }

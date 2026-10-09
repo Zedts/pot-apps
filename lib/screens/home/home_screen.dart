@@ -15,6 +15,7 @@ import '../../widgets/home/home_menu_grid.dart';
 import '../../widgets/home/home_unassigned_view.dart';
 import '../../widgets/home/home_user_banner.dart';
 import '../attendance/attendance_screen.dart';
+import '../closingan/closingan_screen.dart';
 import '../penerimaan/penerimaan_screen.dart';
 import '../penjualan_stok/penjualan_stok_screen.dart';
 import '../auth/login_screen.dart';
@@ -232,6 +233,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctx) => PenjualanStokScreen(
+                                      currentUser: _viewModel.user,
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+                              if (menuId == 'closing_harian') {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => ClosinganScreen(
                                       currentUser: _viewModel.user,
                                     ),
                                   ),

@@ -1,9 +1,5 @@
 class AppConstants {
   AppConstants._();
-  static const String appName = "POT - Presensi Oleh² Turki";
-  static const String appTagline = "Stok Aman, Kerja Nyaman, Gaji Tepat";
-  static const String appSubTagline = "Satu Data, Semua Terhubung: Produksi • Pengiriman • Penjualan • Absensi • Payroll";
-
   // Roles
   static const String roleSpg = "spg";
   static const String roleProduksi = "produksi";
@@ -22,7 +18,7 @@ class AppConstants {
   static const String absenIzin = "izin";
 
   // Closing Status
-  static const String clsoingPending = "pending";
+  static const String closingPending = "pending";
   static const String closingTerverifikasi = "terverifikasi";
   static const String closingRevisi = "perlu_revisi";
 

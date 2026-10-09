@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../core/constants/app_colors.dart';
 
 /// Styled input field widget matching ref/login.html specifications.
@@ -9,6 +10,9 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
   final String? label;
   final IconData? prefixIcon;
+  final String? prefixText;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool readOnly;
   final bool isPassword;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
@@ -24,6 +28,9 @@ class CustomTextField extends StatefulWidget {
     this.hintText,
     this.label,
     this.prefixIcon,
+    this.prefixText,
+    this.inputFormatters,
+    this.readOnly = false,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
@@ -134,6 +141,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 child: TextField(
                   controller: widget.controller,
                   focusNode: _focusNode,
+                  readOnly: widget.readOnly,
+                  inputFormatters: widget.inputFormatters,
                   keyboardType: widget.keyboardType,
                   textInputAction: widget.textInputAction,
                   maxLines: widget.isPassword ? 1 : widget.maxLines,
@@ -144,6 +153,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     color: PotColors.textDark,
                   ),
                   decoration: InputDecoration(
+                    prefixText: widget.prefixText,
+                    prefixStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: PotColors.textDark,
+                    ),
                     hintText: widget.placeholder ?? widget.hintText,
                     hintStyle: const TextStyle(
                       fontSize: 14,

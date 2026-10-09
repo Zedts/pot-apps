@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/date_formatter.dart';
 import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 import 'user_model.dart';
@@ -67,40 +68,25 @@ class AbsensiModel {
   /// Returns 2-digit formatted clock-in time: "08:55"
   String get formattedJamMasuk {
     if (jamMasuk == null) return '--:--';
-    final local = jamMasuk!.toLocal();
-    final h = local.hour.toString().padLeft(2, '0');
-    final m = local.minute.toString().padLeft(2, '0');
-    return '$h:$m';
+    return DateFormatter.formatTime(jamMasuk!);
   }
 
   /// Returns 2-digit formatted clock-out time: "17:00" or "-"
   String get formattedJamPulang {
     if (jamPulang == null) return '-';
-    final local = jamPulang!.toLocal();
-    final h = local.hour.toString().padLeft(2, '0');
-    final m = local.minute.toString().padLeft(2, '0');
-    return '$h:$m';
+    return DateFormatter.formatTime(jamPulang!);
   }
 
   /// Formatted date string, e.g. "10 Sep 2026"
   String get formattedTanggal {
     final raw = jamMasuk ?? (DateTime.tryParse(tanggal) ?? DateTime.now());
-    final dt = raw.toLocal();
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-      'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ];
-    return '${dt.day} ${months[dt.month - 1]} ${dt.year}';
+    return DateFormatter.formatShortDate(raw);
   }
 
   /// Indonesian day name, e.g. "Kamis"
   String get dayNameIndo {
     final raw = jamMasuk ?? (DateTime.tryParse(tanggal) ?? DateTime.now());
-    final dt = raw.toLocal();
-    const days = [
-      'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-    ];
-    return days[dt.weekday - 1];
+    return DateFormatter.formatDayName(raw);
   }
 
   /// Human-readable status label in Indonesian
@@ -154,8 +140,8 @@ class AbsensiModel {
     return {
       'id': id,
       'tanggal': tanggal,
-      if (jamMasuk != null) 'jam_masuk': jamMasuk!.toIso8601String(),
-      if (jamPulang != null) 'jam_pulang': jamPulang!.toIso8601String(),
+      if (jamMasuk != null) 'jam_masuk': jamMasuk!.toUtc().toIso8601String(),
+      if (jamPulang != null) 'jam_pulang': jamPulang!.toUtc().toIso8601String(),
       if (lokasiMasuk != null) 'lokasi_masuk': lokasiMasuk!.toJson(),
       if (fotoMasukUrl != null) 'foto_masuk_url': fotoMasukUrl,
       'status': status,

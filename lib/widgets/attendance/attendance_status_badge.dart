@@ -60,6 +60,18 @@ class AttendanceStatusBadge extends StatelessWidget {
       bg = PotColors.statusWarningBg;
       fg = PotColors.statusWarningText;
       label = 'Selisih';
+    } else if (s == AppConstants.closingTerverifikasi || s == 'terverifikasi') {
+      bg = PotColors.statusSuccessBg;
+      fg = PotColors.statusSuccessText;
+      label = 'Terverifikasi';
+    } else if (s == AppConstants.closingPending || s == 'pending') {
+      bg = PotColors.statusWarningBg;
+      fg = PotColors.statusWarningText;
+      label = 'Pending';
+    } else if (s == AppConstants.closingRevisi || s == 'perlu_revisi' || s == 'revisi') {
+      bg = PotColors.statusErrorBg;
+      fg = PotColors.statusErrorText;
+      label = 'Perlu Revisi';
     } else {
       bg = PotColors.statusNeutralBg;
       fg = PotColors.statusNeutralText;

@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 /// Utility for consistent Indonesian Rupiah (IDR) currency formatting across the app.
 class CurrencyFormatter {
   CurrencyFormatter._();
@@ -28,5 +30,36 @@ class CurrencyFormatter {
       return '$sign' 'Rp $formattedNumber';
     }
     return '$sign$formattedNumber';
+  }
+
+  /// Reusable input formatter for text fields
+  static TextInputFormatter get inputFormatter => CurrencyInputFormatter();
+}
+
+/// Dynamic TextInputFormatter formatting raw digit inputs into IDR thousand separators (e.g., 190000 -> "190.000")
+class CurrencyInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (newValue.text.isEmpty) {
+      return newValue.copyWith(text: '');
+    }
+
+    final digitsOnly = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digitsOnly.isEmpty) {
+      return newValue.copyWith(text: '');
+    }
+
+    final amount = int.tryParse(digitsOnly);
+    if (amount == null) return oldValue;
+
+    final formatted = CurrencyFormatter.formatRupiah(amount, withPrefix: false);
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
   }
 }

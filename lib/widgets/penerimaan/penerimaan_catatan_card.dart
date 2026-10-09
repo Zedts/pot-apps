@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../common/confirmation_dialog.dart';
 import '../common/custom_text_field.dart';
+import '../common/dynamic_field_hint.dart';
 
 /// Catatan input card with dynamic discrepancy hint text & ConfirmationDialog auto-fill
 class PenerimaanCatatanCard extends StatefulWidget {
@@ -125,36 +126,11 @@ class _PenerimaanCatatanCardState extends State<PenerimaanCatatanCard> {
           ),
           const SizedBox(height: 8),
 
-          // Dynamic hint text formatted per requirement
-          InkWell(
-            onTap: () => _handleHintTap(context),
-            borderRadius: BorderRadius.circular(6),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Row(
-                children: [
-                  Icon(
-                    widget.hasDiscrepancy ? Icons.lightbulb_outline : Icons.check_circle_outline,
-                    size: 13,
-                    color: widget.hasDiscrepancy ? PotColors.iconOrange : PotColors.statusSuccessText,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      widget.hintText,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: widget.hasDiscrepancy
-                            ? PotColors.statusWarningText
-                            : PotColors.statusSuccessText,
-                        decoration: widget.hasDiscrepancy ? TextDecoration.underline : null,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          // Dynamic hint text using reusable component
+          DynamicFieldHint(
+            hintText: widget.hintText,
+            isWarning: widget.hasDiscrepancy,
+            onTap: widget.hasDiscrepancy ? () => _handleHintTap(context) : null,
           ),
         ],
       ),

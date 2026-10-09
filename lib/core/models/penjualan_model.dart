@@ -1,3 +1,4 @@
+import '../utils/date_formatter.dart';
 import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 import 'user_model.dart';
@@ -91,13 +92,7 @@ class PenjualanModel {
   String get formattedDateTime {
     final d = tanggal ?? createdAt;
     if (d == null) return '-';
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-      'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ];
-    final dateStr = '${d.day.toString().padLeft(2, '0')} ${months[d.month - 1]} ${d.year}';
-    final timeStr = '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
-    return '$dateStr, $timeStr';
+    return DateFormatter.formatDateTime(d);
   }
 
   factory PenjualanModel.fromJson(Map<String, dynamic> json) {
@@ -117,7 +112,7 @@ class PenjualanModel {
 
     return PenjualanModel(
       id: json['id']?.toString() ?? '',
-      tanggal: ParserUtils.parseDate(json['tanggal']),
+      tanggal: ParserUtils.parseLocalDate(json['tanggal']),
       totalHarga: ParserUtils.parseInt(json['total_harga']),
       metodePembayaran: json['metode_pembayaran']?.toString() ?? 'tunai',
       buktiBayarUrl: proof,
@@ -126,15 +121,15 @@ class PenjualanModel {
       spg: json['spg'] is Map ? UserModel.fromJson(Map<String, dynamic>.from(json['spg'])) : null,
       lapak: json['lapak'] is Map ? LapakModel.fromJson(Map<String, dynamic>.from(json['lapak'])) : null,
       items: parsedItems,
-      createdAt: ParserUtils.parseDate(json['createdAt']),
-      updatedAt: ParserUtils.parseDate(json['updatedAt']),
+      createdAt: ParserUtils.parseLocalDate(json['createdAt']),
+      updatedAt: ParserUtils.parseLocalDate(json['updatedAt']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'tanggal': tanggal?.toIso8601String(),
+      'tanggal': tanggal?.toUtc().toIso8601String(),
       'total_harga': totalHarga,
       'metode_pembayaran': metodePembayaran,
       'bukti_bayar_url': buktiBayarUrl,

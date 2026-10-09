@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import '../utils/date_formatter.dart';
 import '../utils/parser_utils.dart';
 import 'lapak_model.dart';
 
@@ -180,49 +181,33 @@ class PengirimanModel {
 
   /// Formatted date string in Indonesian: e.g. "08 Okt 2026"
   String get formattedTanggal {
-    final d = (createdAt ?? tanggal)?.toLocal();
+    final d = createdAt ?? tanggal;
     if (d == null) return '-';
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-      'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ];
-    return '${d.day.toString().padLeft(2, '0')} ${months[d.month - 1]} ${d.year}';
+    return DateFormatter.formatShortDate(d);
   }
 
   /// Day name in Indonesian: e.g. "Kamis"
   String get dayNameIndo {
-    final d = (createdAt ?? tanggal)?.toLocal();
+    final d = createdAt ?? tanggal;
     if (d == null) return '';
-    const days = [
-      'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-    ];
-    return days[d.weekday - 1];
+    return DateFormatter.formatDayName(d);
   }
 
   /// Month name in Indonesian: e.g. "Oktober"
   String get monthNameIndo {
-    final d = (createdAt ?? tanggal)?.toLocal();
+    final d = createdAt ?? tanggal;
     if (d == null) return '';
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    ];
-    return months[d.month - 1];
+    return DateFormatter.indonesianMonths[d.toLocal().month - 1];
   }
 
   /// Formatted creation timestamp with Indonesian day, date, month, year, and time
-  /// Example: "Kamis, 08 Oktober 2026 • 14:30 WIB"
+  /// Example: "Kamis, 8 Oktober 2026 • 14:30 WIB"
   String get formattedCreatedDateTime {
-    final d = (createdAt ?? tanggal)?.toLocal();
+    final d = createdAt ?? tanggal;
     if (d == null) return formattedJam;
-    final day = dayNameIndo;
-    final month = monthNameIndo;
-    final dateStr = '${d.day.toString().padLeft(2, '0')} $month ${d.year}';
+    final fullDate = DateFormatter.formatFullDate(d);
     final jam = formattedJam;
-    if (day.isNotEmpty) {
-      return '$day, $dateStr • $jam';
-    }
-    return '$dateStr • $jam';
+    return '$fullDate • $jam';
   }
 
   factory PengirimanModel.fromJson(Map<String, dynamic> json) {

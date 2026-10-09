@@ -48,6 +48,7 @@ class PenjualanStokRepositoryImpl implements PenjualanStokRepository {
       final fields = <String, String>{
         'lapak_id': lapakId.trim(),
         'metode_pembayaran': normalizedMetode,
+        'tanggal': DateTime.now().toUtc().toIso8601String(),
         'items': jsonEncode(items),
       };
       if (catatan != null && catatan.trim().isNotEmpty) {
@@ -70,6 +71,7 @@ class PenjualanStokRepositoryImpl implements PenjualanStokRepository {
     final body = <String, dynamic>{
       'lapak_id': lapakId.trim(),
       'metode_pembayaran': normalizedMetode,
+      'tanggal': DateTime.now().toUtc().toIso8601String(),
       'items': items,
     };
     if (catatan != null && catatan.trim().isNotEmpty) {
