@@ -191,12 +191,27 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                                             color: PotColors.textDark,
                                           ),
                                         ),
-                                        Text(
-                                          item.dayNameIndo,
-                                          style: const TextStyle(
-                                            fontSize: 11,
-                                            color: PotColors.textMuted,
+                                        Text.rich(
+                                          TextSpan(
+                                            text: item.dayNameIndo,
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                              color: PotColors.textMuted,
+                                            ),
+                                            children: [
+                                              if (item.shiftSpg != null)
+                                                TextSpan(
+                                                  text: ' • ${item.shiftDisplay}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    color: PotColors.brandGreen,
+                                                  ),
+                                                ),
+                                            ],
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
                                     ),

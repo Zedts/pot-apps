@@ -37,6 +37,7 @@ class PotColors {
   static const Color statusNeutralText = Color(0xFF6B7280);
 
   // Turkish & Brand Accents
+  static const Color brandGreen = Color(0xFF047857);     // Brand green for badges & shift tags
   static const Color goldAccent = Color(0xFFD4AF37);     // Gold trim
   static const Color locationGreen = Color(0xFF0D9488); // Teal/Green accent matching ref
 

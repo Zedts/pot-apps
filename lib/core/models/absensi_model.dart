@@ -33,6 +33,41 @@ class GeolocationPoint {
       };
 }
 
+/// Lapak shift configuration stamped in attendance API responses.
+class ShiftLapakModel {
+  final String lapakId;
+  final List<String> shiftPagi;
+  final List<String> shiftSiang;
+
+  const ShiftLapakModel({
+    required this.lapakId,
+    this.shiftPagi = const [AppConstants.defaultShiftPagiStart, AppConstants.defaultShiftPagiEnd],
+    this.shiftSiang = const [AppConstants.defaultShiftSiangStart, AppConstants.defaultShiftSiangEnd],
+  });
+
+  factory ShiftLapakModel.fromJson(Map<String, dynamic> json) {
+    List<String> parseShift(dynamic v, List<String> fallback) {
+      if (v is List) {
+        final list = v.map((e) => e.toString().trim()).where((e) => e.isNotEmpty).toList();
+        if (list.length >= 2) return [list[0], list[1]];
+      }
+      return fallback;
+    }
+
+    return ShiftLapakModel(
+      lapakId: json['lapak_id'] as String? ?? '',
+      shiftPagi: parseShift(json['shift_pagi'], const [AppConstants.defaultShiftPagiStart, AppConstants.defaultShiftPagiEnd]),
+      shiftSiang: parseShift(json['shift_siang'], const [AppConstants.defaultShiftSiangStart, AppConstants.defaultShiftSiangEnd]),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'lapak_id': lapakId,
+        'shift_pagi': shiftPagi,
+        'shift_siang': shiftSiang,
+      };
+}
+
 /// Domain model representing an Attendance (Absensi) record.
 class AbsensiModel {
   final String id;
@@ -43,6 +78,8 @@ class AbsensiModel {
   final String? fotoMasukUrl;
   final String status;
   final String keterangan;
+  final String? shiftSpg;
+  final ShiftLapakModel? shiftLapak;
   final UserModel? user;
   final LapakModel? lapak;
   final DateTime? createdAt;
@@ -57,6 +94,8 @@ class AbsensiModel {
     this.fotoMasukUrl,
     required this.status,
     this.keterangan = '',
+    this.shiftSpg,
+    this.shiftLapak,
     this.user,
     this.lapak,
     this.createdAt,
@@ -64,6 +103,16 @@ class AbsensiModel {
   });
 
   bool get isClockedOut => jamPulang != null;
+
+  bool get isShiftPagi => shiftSpg == AppConstants.shiftPagi;
+  bool get isShiftSiang => shiftSpg == AppConstants.shiftSiang;
+
+  /// Human-readable shift name: "Pagi", "Siang", or "-"
+  String get shiftDisplay {
+    if (shiftSpg == AppConstants.shiftPagi) return 'Pagi';
+    if (shiftSpg == AppConstants.shiftSiang) return 'Siang';
+    return '-';
+  }
 
   /// Returns 2-digit formatted clock-in time: "08:55"
   String get formattedJamMasuk {
@@ -120,6 +169,13 @@ class AbsensiModel {
       return null;
     }
 
+    ShiftLapakModel? parseShiftLapak(dynamic v) {
+      if (v is Map<String, dynamic>) {
+        return ShiftLapakModel.fromJson(v);
+      }
+      return null;
+    }
+
     return AbsensiModel(
       id: json['id'] as String? ?? '',
       tanggal: json['tanggal'] as String? ?? '',
@@ -129,6 +185,8 @@ class AbsensiModel {
       fotoMasukUrl: json['foto_masuk_url'] as String?,
       status: json['status'] as String? ?? AppConstants.absenHadir,
       keterangan: json['keterangan'] as String? ?? '',
+      shiftSpg: json['shift_spg'] as String?,
+      shiftLapak: parseShiftLapak(json['shift_lapak']),
       user: parseUser(json['user']),
       lapak: parseLapak(json['lapak']),
       createdAt: ParserUtils.parseLocalDate(json['createdAt']),
@@ -146,10 +204,46 @@ class AbsensiModel {
       if (fotoMasukUrl != null) 'foto_masuk_url': fotoMasukUrl,
       'status': status,
       'keterangan': keterangan,
+      if (shiftSpg != null) 'shift_spg': shiftSpg,
+      if (shiftLapak != null) 'shift_lapak': shiftLapak!.toJson(),
       if (user != null) 'user': user!.toJson(),
       if (lapak != null) 'lapak': lapak!.toJson(),
       if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
       if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),
     };
+  }
+
+  AbsensiModel copyWith({
+    String? id,
+    String? tanggal,
+    DateTime? jamMasuk,
+    DateTime? jamPulang,
+    GeolocationPoint? lokasiMasuk,
+    String? fotoMasukUrl,
+    String? status,
+    String? keterangan,
+    String? shiftSpg,
+    ShiftLapakModel? shiftLapak,
+    UserModel? user,
+    LapakModel? lapak,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return AbsensiModel(
+      id: id ?? this.id,
+      tanggal: tanggal ?? this.tanggal,
+      jamMasuk: jamMasuk ?? this.jamMasuk,
+      jamPulang: jamPulang ?? this.jamPulang,
+      lokasiMasuk: lokasiMasuk ?? this.lokasiMasuk,
+      fotoMasukUrl: fotoMasukUrl ?? this.fotoMasukUrl,
+      status: status ?? this.status,
+      keterangan: keterangan ?? this.keterangan,
+      shiftSpg: shiftSpg ?? this.shiftSpg,
+      shiftLapak: shiftLapak ?? this.shiftLapak,
+      user: user ?? this.user,
+      lapak: lapak ?? this.lapak,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
   }
 }

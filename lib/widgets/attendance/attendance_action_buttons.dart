@@ -18,14 +18,46 @@ class AttendanceActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final isClockedIn = viewModel.isClockedInToday;
     final isClockedOut = viewModel.isClockedOutToday;
+    final isIzin = viewModel.isIzinToday;
     final isSubmitting = viewModel.isSubmitting;
-
     final hasStallLocation = viewModel.hasStallLocation;
+    final isExpired = viewModel.isClockInExpired;
 
     return Column(
       children: [
+        // Notice if shift clock-in window has ended
+        if (!isClockedIn && isExpired) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: PotColors.statusNeutralBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: PotColors.statusNeutralBorder),
+            ),
+            child: Row(
+              children: [
+                const Icon(Iconsax.clock, size: 18, color: PotColors.statusNeutralText),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Jadwal shift ${viewModel.userShiftLabel.toLowerCase()} telah berakhir (${viewModel.scheduledClockOutTime}). Presensi masuk ditutup.',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: PotColors.statusNeutralText,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+
         // Notice if lapak coordinates are not set by Admin
-        if (!isClockedIn && !hasStallLocation) ...[
+        if (!isClockedIn && !isExpired && !hasStallLocation) ...[
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -55,13 +87,13 @@ class AttendanceActionButtons extends StatelessWidget {
           const SizedBox(height: 10),
         ],
 
-        // 1. Absen Masuk Button
+        // 1. Absen Masuk / Izin Status
         if (!isClockedIn)
           SizedBox(
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: (!hasStallLocation || isSubmitting)
+              onPressed: (!hasStallLocation || isSubmitting || isExpired)
                   ? null
                   : () async {
                       final success = await viewModel.clockIn();
@@ -89,7 +121,7 @@ class AttendanceActionButtons extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                elevation: hasStallLocation ? 2 : 0,
+                elevation: (hasStallLocation && !isExpired) ? 2 : 0,
                 shadowColor: PotColors.primaryRed.withValues(alpha: 0.3),
               ),
               child: isSubmitting
@@ -101,14 +133,14 @@ class AttendanceActionButtons extends StatelessWidget {
                         color: Colors.white,
                       ),
                     )
-                  : const Row(
+                  : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.login, size: 18),
-                        SizedBox(width: 8),
+                        const Icon(Iconsax.login, size: 18),
+                        const SizedBox(width: 8),
                         Text(
-                          'Absen Masuk',
-                          style: TextStyle(
+                          isExpired ? 'Presensi Masuk Berakhir' : 'Absen Masuk',
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
                             letterSpacing: -0.1,
@@ -116,6 +148,37 @@ class AttendanceActionButtons extends StatelessWidget {
                         ),
                       ],
                     ),
+            ),
+          )
+        else if (isIzin)
+          // Izin Recorded Pill (Clock-out is disabled for izin)
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: PotColors.statusWarningBg,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: PotColors.statusWarningBorder),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.info_outline_rounded, size: 16, color: PotColors.statusWarningText),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    viewModel.todayRecord?.keterangan.isNotEmpty == true
+                        ? 'Izin Tercatat (${viewModel.todayRecord!.keterangan})'
+                        : 'Izin Tercatat',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: PotColors.statusWarningText,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
           )
         else
@@ -146,78 +209,79 @@ class AttendanceActionButtons extends StatelessWidget {
             ),
           ),
 
-        const SizedBox(height: 10),
-
-        // 2. Absen Pulang Button
-        if (isClockedIn && !isClockedOut)
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: OutlinedButton(
-              onPressed: isSubmitting
-                  ? null
-                  : () => _confirmClockOut(context),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: PotColors.primaryRed,
-                side: const BorderSide(color: PotColors.primaryRed, width: 1.5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                backgroundColor: PotColors.cardCream.withValues(alpha: 0.6),
-              ),
-              child: isSubmitting
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: PotColors.primaryRed,
-                      ),
-                    )
-                  : const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Iconsax.logout, size: 18, color: PotColors.primaryRed),
-                        SizedBox(width: 8),
-                        Text(
-                          'Absen Pulang',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                            color: PotColors.primaryRed,
-                            letterSpacing: -0.1,
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
-          )
-        else if (isClockedOut)
-          Container(
-            width: double.infinity,
-            height: 44,
-            decoration: BoxDecoration(
-              color: PotColors.statusNeutralBg,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: PotColors.statusNeutralBorder),
-            ),
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.task_alt_rounded, size: 16, color: PotColors.statusNeutralText),
-                const SizedBox(width: 6),
-                Text(
-                  'Absen Pulang Selesai (${viewModel.todayRecord?.formattedJamPulang ?? ''})',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                    color: PotColors.statusNeutralText,
+        // 2. Absen Pulang Section (Only applicable for actual attendance, never for Izin)
+        if (!isIzin) ...[
+          const SizedBox(height: 10),
+          if (isClockedIn && !isClockedOut)
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: OutlinedButton(
+                onPressed: isSubmitting
+                    ? null
+                    : () => _confirmClockOut(context),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: PotColors.primaryRed,
+                  side: const BorderSide(color: PotColors.primaryRed, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
+                  backgroundColor: PotColors.cardCream.withValues(alpha: 0.6),
                 ),
-              ],
+                child: isSubmitting
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: PotColors.primaryRed,
+                        ),
+                      )
+                    : const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Iconsax.logout, size: 18, color: PotColors.primaryRed),
+                          SizedBox(width: 8),
+                          Text(
+                            'Absen Pulang',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: PotColors.primaryRed,
+                              letterSpacing: -0.1,
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
+            )
+          else if (isClockedOut)
+            Container(
+              width: double.infinity,
+              height: 44,
+              decoration: BoxDecoration(
+                color: PotColors.statusNeutralBg,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: PotColors.statusNeutralBorder),
+              ),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.task_alt_rounded, size: 16, color: PotColors.statusNeutralText),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Absen Pulang Selesai (${viewModel.todayRecord?.formattedJamPulang ?? ''})',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: PotColors.statusNeutralText,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+        ],
       ],
     );
   }

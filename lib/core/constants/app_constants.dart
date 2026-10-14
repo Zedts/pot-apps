@@ -17,6 +17,22 @@ class AppConstants {
   static const String absenTerlambat = "terlambat";
   static const String absenIzin = "izin";
 
+  // Shifts
+  static const String shiftPagi = "pagi";
+  static const String shiftSiang = "siang";
+  static const String defaultShiftPagiStart = "08:00";
+  static const String defaultShiftPagiEnd = "16:00";
+  static const String defaultShiftSiangStart = "13:00";
+  static const String defaultShiftSiangEnd = "21:00";
+
+  /// Returns fallback [start, end] shift hours for [shift]
+  static List<String> defaultShiftHours(String shift) {
+    if (shift == shiftSiang) {
+      return const [defaultShiftSiangStart, defaultShiftSiangEnd];
+    }
+    return const [defaultShiftPagiStart, defaultShiftPagiEnd];
+  }
+
   // Closing Status
   static const String closingPending = "pending";
   static const String closingTerverifikasi = "terverifikasi";

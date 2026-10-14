@@ -15,12 +15,16 @@ class AttendanceClockCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusText = _resolveStatusText();
     final isDone = viewModel.isClockedOutToday;
+    final isIzin = viewModel.isIzinToday;
     final isClockedIn = viewModel.isClockedInToday;
 
     Color badgeColor = PotColors.textMuted;
     Color badgeBg = PotColors.cardCream;
 
-    if (isDone) {
+    if (isIzin) {
+      badgeColor = PotColors.statusWarningText;
+      badgeBg = PotColors.statusWarningBg;
+    } else if (isDone) {
       badgeColor = PotColors.statusSuccessText;
       badgeBg = PotColors.statusSuccessBg;
     } else if (isClockedIn) {
@@ -43,7 +47,26 @@ class AttendanceClockCard extends StatelessWidget {
             fontFeatures: [],
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 2),
+
+        // Shift Schedule Badge
+        Container(
+          margin: const EdgeInsets.only(bottom: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          decoration: BoxDecoration(
+            color: PotColors.brandGreen.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            'Shift ${viewModel.userShiftLabel} • ${viewModel.shiftScheduleDisplay}',
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: PotColors.brandGreen,
+              letterSpacing: -0.1,
+            ),
+          ),
+        ),
 
         // Status Badge Pill
         Container(
@@ -71,6 +94,10 @@ class AttendanceClockCard extends StatelessWidget {
   }
 
   String _resolveStatusText() {
+    if (viewModel.isIzinToday) {
+      final ket = viewModel.todayRecord?.keterangan.trim() ?? '';
+      return ket.isNotEmpty ? 'Izin Tercatat ($ket)' : 'Izin Tercatat';
+    }
     if (viewModel.isClockedOutToday) {
       return 'Presensi Selesai (${viewModel.todayRecord?.formattedJamPulang ?? ''})';
     }

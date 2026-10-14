@@ -55,7 +55,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             showBackButton: true,
             title: 'Absensi',
             subtitle: _viewModel.formattedCurrentDate,
-            trailing: _buildIzinButton(context),
+            trailing: _viewModel.todayRecord == null ? _buildIzinButton(context) : null,
           ),
           body: RefreshIndicator(
             color: PotColors.primaryRed,
@@ -70,7 +70,15 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               child: Column(
                 children: [
                   // Stall Location Metadata Card
-                  LapakInfoCard(stall: _viewModel.stall),
+                  LapakInfoCard(
+                    stall: _viewModel.stall,
+                    isVerified: _viewModel.stall != null && _viewModel.stall!.hasCoordinates,
+                    statusText: _viewModel.stall == null
+                        ? 'Lapak Belum Ditugaskan'
+                        : (_viewModel.stall!.hasCoordinates
+                            ? 'Shift ${_viewModel.userShiftLabel} (${_viewModel.shiftScheduleDisplay}) • Lokasi Terverifikasi'
+                            : 'Koordinat Lapak Belum Diatur'),
+                  ),
                   const SizedBox(height: 14),
 
                   // White Attendance Card Container

@@ -181,6 +181,74 @@ void main() {
       expect(model.latitude, -7.782849);
       expect(model.longitude, 110.367842);
     });
+
+    test('Default shifts are 08:00-16:00 (pagi) and 13:00-21:00 (siang) when omitted', () {
+      final json = {
+        'id': 'lapak-01',
+        'nama': 'Lapak Malioboro',
+        'lokasi': 'Jl. Malioboro No. 45',
+      };
+      final model = LapakModel.fromJson(json);
+
+      expect(model.shiftPagi, ['08:00', '16:00']);
+      expect(model.shiftSiang, ['13:00', '21:00']);
+      expect(model.getShiftHours('pagi'), ['08:00', '16:00']);
+      expect(model.getShiftHours('siang'), ['13:00', '21:00']);
+      expect(model.formatShiftHours('pagi'), '08:00 - 16:00');
+      expect(model.formatShiftHours('siang'), '13:00 - 21:00');
+    });
+
+    test('Custom shift hours are parsed properly', () {
+      final json = {
+        'id': 'lapak-03',
+        'nama': 'Lapak Stasiun',
+        'lokasi': 'Stasiun Tugu',
+        'shift_pagi': ['07:30', '15:30'],
+        'shift_siang': ['14:00', '22:00'],
+      };
+      final model = LapakModel.fromJson(json);
+
+      expect(model.shiftPagi, ['07:30', '15:30']);
+      expect(model.shiftSiang, ['14:00', '22:00']);
+      expect(model.getShiftHours('pagi'), ['07:30', '15:30']);
+      expect(model.getShiftHours('siang'), ['14:00', '22:00']);
+    });
+  });
+
+  group('UserModel Shift Unit Tests', () {
+    test('Default shift is pagi when null or omitted', () {
+      final json = {
+        'id': 'user-01',
+        'nama': 'Siti SPG',
+        'username': 'siti',
+        'email': 'siti@pot.com',
+        'role': 'spg',
+      };
+      final model = UserModel.fromJson(json);
+      expect(model.shift, 'pagi');
+      expect(model.hasShift, true);
+      expect(model.isShiftPagi, true);
+      expect(model.isShiftSiang, false);
+      expect(model.shiftDisplay, 'Pagi');
+      expect(model.shiftFullDisplay, 'Shift Pagi');
+    });
+
+    test('Custom shift siang is parsed correctly', () {
+      final json = {
+        'id': 'user-02',
+        'nama': 'Budi SPG',
+        'username': 'budi',
+        'email': 'budi@pot.com',
+        'role': 'spg',
+        'shift': 'siang',
+      };
+      final model = UserModel.fromJson(json);
+      expect(model.shift, 'siang');
+      expect(model.isShiftPagi, false);
+      expect(model.isShiftSiang, true);
+      expect(model.shiftDisplay, 'Siang');
+      expect(model.shiftFullDisplay, 'Shift Siang');
+    });
   });
 
   group('AbsensiModel Unit Tests', () {
@@ -228,6 +296,29 @@ void main() {
       expect(model.fotoMasukUrl, isNotNull);
       expect(model.lokasiMasuk?.latitude, -7.7928);
       expect(model.lapak?.radiusMeter, 10);
+    });
+
+    test('Parses shift_spg and shift_lapak correctly', () {
+      final json = {
+        'id': 'absen-3',
+        'tanggal': '2026-10-14',
+        'jam_masuk': '2026-10-14T01:00:00.000Z',
+        'status': 'hadir',
+        'shift_spg': 'siang',
+        'shift_lapak': {
+          'lapak_id': 'lapak-01',
+          'shift_pagi': ['08:00', '16:00'],
+          'shift_siang': ['13:00', '21:00'],
+        },
+      };
+
+      final model = AbsensiModel.fromJson(json);
+      expect(model.shiftSpg, 'siang');
+      expect(model.isShiftSiang, true);
+      expect(model.isShiftPagi, false);
+      expect(model.shiftDisplay, 'Siang');
+      expect(model.shiftLapak?.lapakId, 'lapak-01');
+      expect(model.shiftLapak?.shiftSiang, ['13:00', '21:00']);
     });
   });
 
@@ -296,7 +387,34 @@ void main() {
 
       expect(vm.isClockedInToday, true);
       expect(vm.isClockedOutToday, false);
+      expect(vm.isIzinToday, false);
       expect(vm.todayRecord?.formattedJamMasuk, '08:45');
+
+      vm.dispose();
+    });
+
+    test('Correctly identifies isIzinToday when today record is izin', () async {
+      fakeRepo.mockTodayRecord = AbsensiModel(
+        id: 'absen-izin',
+        tanggal: '2026-10-07',
+        jamMasuk: null,
+        jamPulang: null,
+        status: 'izin',
+        keterangan: 'Sakit flu',
+        lapak: testStall,
+      );
+
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vm.init(currentUser: testUser);
+
+      expect(vm.isClockedInToday, true);
+      expect(vm.isClockedOutToday, false);
+      expect(vm.isIzinToday, true);
+      expect(vm.todayRecord?.keterangan, 'Sakit flu');
+      expect(vm.todayRecord?.formattedJamMasuk, '--:--');
 
       vm.dispose();
     });
@@ -307,6 +425,7 @@ void main() {
       final vm = AttendanceViewModel(
         repository: fakeRepo,
         locationService: fakeLocation,
+        currentTimeProvider: () => DateTime(2026, 10, 7, 9, 0),
       );
       await vm.init(currentUser: testUser);
 
@@ -405,6 +524,7 @@ void main() {
       final vm = AttendanceViewModel(
         repository: fakeRepo,
         locationService: fakeLocation,
+        currentTimeProvider: () => DateTime(2026, 10, 7, 9, 0),
       );
       await vm.init(currentUser: testUser);
 
@@ -468,6 +588,55 @@ void main() {
       expect(vm.todayRecord?.status, 'izin');
       expect(vm.todayRecord?.keterangan, 'Demam dan flu');
 
+      vm.dispose();
+    });
+
+    test('Correctly resolves shift information for Morning and Afternoon SPG', () async {
+      // Pagi user
+      final vmPagi = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vmPagi.init(currentUser: testUser.copyWith(shift: 'pagi'));
+
+      expect(vmPagi.userShift, 'pagi');
+      expect(vmPagi.userShiftLabel, 'Pagi');
+      expect(vmPagi.scheduledClockInTime, '08:00');
+      expect(vmPagi.scheduledClockOutTime, '16:00');
+      expect(vmPagi.shiftScheduleDisplay, '08:00 - 16:00');
+      vmPagi.dispose();
+
+      // Siang user
+      final vmSiang = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vmSiang.init(currentUser: testUser.copyWith(shift: 'siang'));
+
+      expect(vmSiang.userShift, 'siang');
+      expect(vmSiang.userShiftLabel, 'Siang');
+      expect(vmSiang.scheduledClockInTime, '13:00');
+      expect(vmSiang.scheduledClockOutTime, '21:00');
+      expect(vmSiang.shiftScheduleDisplay, '13:00 - 21:00');
+      vmSiang.dispose();
+    });
+
+    test('Stall with custom shift hours propagates to ViewModel', () async {
+      final customStall = testStall.copyWith(
+        shiftPagi: const ['07:00', '15:00'],
+        shiftSiang: const ['14:00', '22:00'],
+      );
+      fakeRepo.mockLapak = customStall;
+
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vm.init(currentUser: testUser.copyWith(shift: 'pagi'));
+
+      expect(vm.scheduledClockInTime, '07:00');
+      expect(vm.scheduledClockOutTime, '15:00');
+      expect(vm.shiftScheduleDisplay, '07:00 - 15:00');
       vm.dispose();
     });
   });

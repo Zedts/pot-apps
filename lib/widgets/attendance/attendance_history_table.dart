@@ -184,13 +184,27 @@ class AttendanceHistoryTable extends StatelessWidget {
                                       color: PotColors.textDark,
                                     ),
                                   ),
-                                  Text(
-                                    item.dayNameIndo,
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                      color: PotColors.textMuted,
+                                  Text.rich(
+                                    TextSpan(
+                                      text: item.dayNameIndo,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        color: PotColors.textMuted,
+                                      ),
+                                      children: [
+                                        if (item.shiftSpg != null)
+                                          TextSpan(
+                                            text: ' • ${item.shiftDisplay}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              color: PotColors.brandGreen,
+                                            ),
+                                          ),
+                                      ],
                                     ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
                               ),

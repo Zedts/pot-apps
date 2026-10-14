@@ -1,3 +1,5 @@
+import '../constants/app_constants.dart';
+
 /// User domain model representing user entity in the POT system.
 class UserModel {
   final String id;
@@ -6,6 +8,7 @@ class UserModel {
   final String email;
   final String role;
   final String? lapakId;
+  final String? shift;
   final String noHp;
   final String status;
   final String authProvider;
@@ -19,6 +22,7 @@ class UserModel {
     required this.email,
     required this.role,
     this.lapakId,
+    this.shift,
     required this.noHp,
     required this.status,
     required this.authProvider,
@@ -27,6 +31,11 @@ class UserModel {
   });
 
   bool get isActive => status.toLowerCase() == 'active';
+  bool get hasShift => shift != null && shift!.trim().isNotEmpty;
+  bool get isShiftPagi => (shift ?? '').toLowerCase() == AppConstants.shiftPagi || shift == null;
+  bool get isShiftSiang => (shift ?? '').toLowerCase() == AppConstants.shiftSiang;
+  String get shiftDisplay => (shift ?? '').toLowerCase() == AppConstants.shiftSiang ? 'Siang' : 'Pagi';
+  String get shiftFullDisplay => (shift ?? '').toLowerCase() == AppConstants.shiftSiang ? 'Shift Siang' : 'Shift Pagi';
 
   /// Convenient display name resolving to nama, email, or username.
   String get displayName {
@@ -55,6 +64,7 @@ class UserModel {
       email: json['email'] as String? ?? '',
       role: json['role'] as String? ?? 'unassigned',
       lapakId: json['lapak_id'] as String?,
+      shift: json['shift'] as String? ?? (json['role'] == AppConstants.roleSpg ? AppConstants.shiftPagi : null),
       noHp: json['no_hp'] as String? ?? '',
       status: json['status'] as String? ?? 'active',
       authProvider: json['authProvider'] as String? ?? 'password',
@@ -75,6 +85,7 @@ class UserModel {
       'email': email,
       'role': role,
       'lapak_id': lapakId,
+      'shift': shift,
       'no_hp': noHp,
       'status': status,
       'authProvider': authProvider,
@@ -90,6 +101,7 @@ class UserModel {
     String? email,
     String? role,
     String? lapakId,
+    String? shift,
     String? noHp,
     String? status,
     String? authProvider,
@@ -103,6 +115,7 @@ class UserModel {
       email: email ?? this.email,
       role: role ?? this.role,
       lapakId: lapakId ?? this.lapakId,
+      shift: shift ?? this.shift,
       noHp: noHp ?? this.noHp,
       status: status ?? this.status,
       authProvider: authProvider ?? this.authProvider,

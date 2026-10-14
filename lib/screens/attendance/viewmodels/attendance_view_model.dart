@@ -30,8 +30,9 @@ class AttendanceViewModel extends BaseViewModel {
   AbsensiModel? _todayRecord;
   List<AbsensiModel> _history = [];
 
-  DateTime _currentTime = DateTime.now();
+  DateTime _currentTime;
   Timer? _clockTimer;
+  final DateTime Function()? _currentTimeProvider;
 
   Position? _currentPosition;
   double? _distanceToStallMeters;
@@ -51,10 +52,13 @@ class AttendanceViewModel extends BaseViewModel {
     LocationService? locationService,
     CameraService? cameraService,
     ActivityHistoryService? activityHistoryService,
+    DateTime Function()? currentTimeProvider,
   })  : _repository = repository ?? AbsensiRepositoryImpl(),
         _locationService = locationService ?? LocationService(),
         _cameraService = cameraService ?? CameraService(),
-        _activityHistoryService = activityHistoryService ?? ActivityHistoryService();
+        _activityHistoryService = activityHistoryService ?? ActivityHistoryService(),
+        _currentTimeProvider = currentTimeProvider,
+        _currentTime = currentTimeProvider != null ? currentTimeProvider() : DateTime.now();
 
   // Getters
   UserModel? get user => _user;
@@ -80,9 +84,50 @@ class AttendanceViewModel extends BaseViewModel {
 
   bool get isClockedInToday => _todayRecord != null;
   bool get isClockedOutToday => _todayRecord != null && _todayRecord!.isClockedOut;
+  bool get isIzinToday => _todayRecord?.status.toLowerCase() == AppConstants.absenIzin;
 
   /// Photo URL from today's saved record, or null
   String? get serverPhotoUrl => _todayRecord?.fotoMasukUrl;
+
+  /// Effective shift assigned to user (defaults to 'pagi' if unassigned or empty)
+  String get userShift => _user?.shift ?? AppConstants.shiftPagi;
+
+  /// Human-readable shift name: "Pagi" or "Siang"
+  String get userShiftLabel =>
+      userShift == AppConstants.shiftSiang ? 'Siang' : 'Pagi';
+
+  /// Shift start and end hours [start, end], e.g. ["08:00", "16:00"]
+  List<String> get shiftHours {
+    if (_stall != null) {
+      return _stall!.getShiftHours(userShift);
+    }
+    return AppConstants.defaultShiftHours(userShift);
+  }
+
+  /// Shift schedule display string, e.g. "08:00 - 16:00"
+  String get shiftScheduleDisplay {
+    final hours = shiftHours;
+    return '${hours[0]} - ${hours[1]}';
+  }
+
+  /// Scheduled clock-in start time, e.g. "08:00"
+  String get scheduledClockInTime => shiftHours[0];
+
+  /// Scheduled clock-out end time, e.g. "16:00"
+  String get scheduledClockOutTime => shiftHours[1];
+
+  /// Checks if the clock-in window for the user's shift has expired.
+  /// (Clock-in button is disabled ONLY after the scheduled clock-out time has elapsed).
+  /// Morning shift (08:00 - 16:00): expired when current time > 16:00.
+  /// Afternoon shift (13:00 - 21:00): remains available through morning & afternoon, expired when current time > 21:00.
+  bool get isClockInExpired {
+    final endParts = scheduledClockOutTime.split(':');
+    final endHour = int.tryParse(endParts[0]) ?? 16;
+    final endMinute = endParts.length > 1 ? (int.tryParse(endParts[1]) ?? 0) : 0;
+    final currentMinutes = _currentTime.hour * 60 + _currentTime.minute;
+    final endMinutes = endHour * 60 + endMinute;
+    return currentMinutes > endMinutes;
+  }
 
   /// Formatted current time string: "08:55" (no seconds)
   String get formattedCurrentTime {
@@ -120,7 +165,7 @@ class AttendanceViewModel extends BaseViewModel {
   void _startClockTimer() {
     _clockTimer?.cancel();
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      _currentTime = DateTime.now();
+      _currentTime = _currentTimeProvider != null ? _currentTimeProvider() : DateTime.now();
       notifyListeners();
     });
   }
@@ -130,7 +175,7 @@ class AttendanceViewModel extends BaseViewModel {
     _user ??= await TokenStorage.getUser();
     if (_user == null) return;
     try {
-      final now = DateTime.now();
+      final now = _currentTimeProvider != null ? _currentTimeProvider() : DateTime.now();
       final todayStr =
           '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
@@ -237,6 +282,13 @@ class AttendanceViewModel extends BaseViewModel {
       return false;
     }
 
+    if (isClockInExpired) {
+      _errorMessage =
+          'Jadwal kerja untuk shift ${userShiftLabel.toLowerCase()} telah berakhir pada pukul $scheduledClockOutTime. Presensi masuk tidak dapat dicatat.';
+      notifyListeners();
+      return false;
+    }
+
     if (_currentPosition == null) {
       await refreshLocation();
       if (_currentPosition == null) {
@@ -250,8 +302,13 @@ class AttendanceViewModel extends BaseViewModel {
     notifyListeners();
 
     try {
-      // Determine punctual vs late status (08:00 cutoff)
-      final isLate = _currentTime.hour > 8 || (_currentTime.hour == 8 && _currentTime.minute > 0);
+      // Determine punctual vs late status (dynamic shift cutoff)
+      final startParts = scheduledClockInTime.split(':');
+      final startHour = int.tryParse(startParts[0]) ?? 8;
+      final startMinute = startParts.length > 1 ? (int.tryParse(startParts[1]) ?? 0) : 0;
+      final currentMinutes = _currentTime.hour * 60 + _currentTime.minute;
+      final startMinutes = startHour * 60 + startMinute;
+      final isLate = currentMinutes > startMinutes;
       final status = isLate ? AppConstants.absenTerlambat : AppConstants.absenHadir;
 
       final record = await _repository.clockIn(

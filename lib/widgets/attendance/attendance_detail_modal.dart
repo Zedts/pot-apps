@@ -191,6 +191,35 @@ class _AttendanceDetailModalState extends State<AttendanceDetailModal> {
                       ),
                       const SizedBox(height: 12),
 
+                      // Shift & Schedule Banner
+                      if (_record!.shiftSpg != null || _record!.shiftLapak != null) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: PotColors.brandGreen.withValues(alpha: 0.08),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: PotColors.brandGreen.withValues(alpha: 0.2)),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Iconsax.clock, size: 16, color: PotColors.brandGreen),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Shift ${_record!.shiftDisplay}${_record!.shiftLapak != null ? ' (${_record!.isShiftSiang ? _record!.shiftLapak!.shiftSiang.join(" - ") : _record!.shiftLapak!.shiftPagi.join(" - ")})' : ''}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: PotColors.brandGreen,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+
                       // Time Metrics
                       Row(
                         children: [
