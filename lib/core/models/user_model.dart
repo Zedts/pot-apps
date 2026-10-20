@@ -32,10 +32,26 @@ class UserModel {
 
   bool get isActive => status.toLowerCase() == 'active';
   bool get hasShift => shift != null && shift!.trim().isNotEmpty;
-  bool get isShiftPagi => (shift ?? '').toLowerCase() == AppConstants.shiftPagi || shift == null;
+  bool get isShiftPagi => (shift ?? '').toLowerCase() == AppConstants.shiftPagi;
   bool get isShiftSiang => (shift ?? '').toLowerCase() == AppConstants.shiftSiang;
-  String get shiftDisplay => (shift ?? '').toLowerCase() == AppConstants.shiftSiang ? 'Siang' : 'Pagi';
-  String get shiftFullDisplay => (shift ?? '').toLowerCase() == AppConstants.shiftSiang ? 'Shift Siang' : 'Shift Pagi';
+  bool get isShiftLong =>
+      (shift ?? '').toLowerCase() == AppConstants.shiftLong ||
+      (shift ?? '').toLowerCase() == 'long shift' ||
+      (shift ?? '').toLowerCase() == 'long';
+
+  String get shiftDisplay {
+    if (isShiftSiang) return 'Siang';
+    if (isShiftLong) return 'Long Shift';
+    if (isShiftPagi) return 'Pagi';
+    return '-';
+  }
+
+  String get shiftFullDisplay {
+    if (isShiftSiang) return 'Shift Siang';
+    if (isShiftLong) return 'Long Shift';
+    if (isShiftPagi) return 'Shift Pagi';
+    return 'Belum Ditentukan';
+  }
 
   /// Convenient display name resolving to nama, email, or username.
   String get displayName {
@@ -64,7 +80,7 @@ class UserModel {
       email: json['email'] as String? ?? '',
       role: json['role'] as String? ?? 'unassigned',
       lapakId: json['lapak_id'] as String?,
-      shift: json['shift'] as String? ?? (json['role'] == AppConstants.roleSpg ? AppConstants.shiftPagi : null),
+      shift: json['shift'] as String?,
       noHp: json['no_hp'] as String? ?? '',
       status: json['status'] as String? ?? 'active',
       authProvider: json['authProvider'] as String? ?? 'password',

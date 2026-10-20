@@ -58,7 +58,9 @@ class AttendanceClockCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            'Shift ${viewModel.userShiftLabel} • ${viewModel.shiftScheduleDisplay}',
+            viewModel.hasShift
+                ? 'Shift ${viewModel.userShiftLabel} • ${viewModel.shiftScheduleDisplay}'
+                : 'Shift Belum Ditentukan',
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,

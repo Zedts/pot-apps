@@ -12,6 +12,7 @@ class LapakModel {
   final String? spgId;
   final List<String> shiftPagi;
   final List<String> shiftSiang;
+  final List<String> shiftLong;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -26,6 +27,7 @@ class LapakModel {
     this.spgId,
     this.shiftPagi = const ['08:00', '16:00'],
     this.shiftSiang = const ['13:00', '21:00'],
+    this.shiftLong = const ['08:00', '20:00'],
     this.createdAt,
     this.updatedAt,
   });
@@ -35,8 +37,12 @@ class LapakModel {
 
   /// Resolves the shift hours array [clockIn, clockOut] for the user's assigned shift.
   List<String> getShiftHours(String? shift) {
-    if ((shift ?? '').toLowerCase() == AppConstants.shiftSiang) {
+    final s = (shift ?? '').toLowerCase().trim();
+    if (s == AppConstants.shiftSiang) {
       return shiftSiang;
+    }
+    if (s == AppConstants.shiftLong || s == 'long shift' || s == 'long') {
+      return shiftLong;
     }
     return shiftPagi;
   }
@@ -84,6 +90,7 @@ class LapakModel {
       spgId: json['spg_id'] as String?,
       shiftPagi: parseShift(json['shift_pagi'], const ['08:00', '16:00']),
       shiftSiang: parseShift(json['shift_siang'], const ['13:00', '21:00']),
+      shiftLong: parseShift(json['shift_long'], const ['08:00', '20:00']),
       createdAt: json['createdAt'] != null ? DateTime.tryParse(json['createdAt'].toString()) : null,
       updatedAt: json['updatedAt'] != null ? DateTime.tryParse(json['updatedAt'].toString()) : null,
     );
@@ -101,6 +108,7 @@ class LapakModel {
       if (spgId != null) 'spg_id': spgId,
       'shift_pagi': shiftPagi,
       'shift_siang': shiftSiang,
+      'shift_long': shiftLong,
       if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
       if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),
     };
@@ -117,6 +125,7 @@ class LapakModel {
     String? spgId,
     List<String>? shiftPagi,
     List<String>? shiftSiang,
+    List<String>? shiftLong,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -131,6 +140,7 @@ class LapakModel {
       spgId: spgId ?? this.spgId,
       shiftPagi: shiftPagi ?? this.shiftPagi,
       shiftSiang: shiftSiang ?? this.shiftSiang,
+      shiftLong: shiftLong ?? this.shiftLong,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

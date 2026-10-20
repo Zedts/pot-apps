@@ -40,6 +40,7 @@ class FakeAbsensiRepository implements AbsensiRepository {
   LapakModel? mockLapak;
   bool shouldThrow409OnClockIn = false;
   int uploadPhotoCallCount = 0;
+  int clockOutCallCount = 0;
 
   @override
   Future<AbsensiModel> clockIn({
@@ -97,6 +98,7 @@ class FakeAbsensiRepository implements AbsensiRepository {
 
   @override
   Future<AbsensiModel> clockOut(String absensiId) async {
+    clockOutCallCount++;
     final updated = AbsensiModel(
       id: absensiId,
       tanggal: '2026-10-07',
@@ -182,7 +184,7 @@ void main() {
       expect(model.longitude, 110.367842);
     });
 
-    test('Default shifts are 08:00-16:00 (pagi) and 13:00-21:00 (siang) when omitted', () {
+    test('Default shifts are 08:00-16:00 (pagi), 13:00-21:00 (siang), and 08:00-20:00 (long) when omitted', () {
       final json = {
         'id': 'lapak-01',
         'nama': 'Lapak Malioboro',
@@ -192,10 +194,13 @@ void main() {
 
       expect(model.shiftPagi, ['08:00', '16:00']);
       expect(model.shiftSiang, ['13:00', '21:00']);
+      expect(model.shiftLong, ['08:00', '20:00']);
       expect(model.getShiftHours('pagi'), ['08:00', '16:00']);
       expect(model.getShiftHours('siang'), ['13:00', '21:00']);
+      expect(model.getShiftHours('long_shift'), ['08:00', '20:00']);
       expect(model.formatShiftHours('pagi'), '08:00 - 16:00');
       expect(model.formatShiftHours('siang'), '13:00 - 21:00');
+      expect(model.formatShiftHours('long_shift'), '08:00 - 20:00');
     });
 
     test('Custom shift hours are parsed properly', () {
@@ -205,18 +210,21 @@ void main() {
         'lokasi': 'Stasiun Tugu',
         'shift_pagi': ['07:30', '15:30'],
         'shift_siang': ['14:00', '22:00'],
+        'shift_long': ['07:30', '19:30'],
       };
       final model = LapakModel.fromJson(json);
 
       expect(model.shiftPagi, ['07:30', '15:30']);
       expect(model.shiftSiang, ['14:00', '22:00']);
+      expect(model.shiftLong, ['07:30', '19:30']);
       expect(model.getShiftHours('pagi'), ['07:30', '15:30']);
       expect(model.getShiftHours('siang'), ['14:00', '22:00']);
+      expect(model.getShiftHours('long_shift'), ['07:30', '19:30']);
     });
   });
 
   group('UserModel Shift Unit Tests', () {
-    test('Default shift is pagi when null or omitted', () {
+    test('Shift is null when omitted from JSON', () {
       final json = {
         'id': 'user-01',
         'nama': 'Siti SPG',
@@ -225,12 +233,13 @@ void main() {
         'role': 'spg',
       };
       final model = UserModel.fromJson(json);
-      expect(model.shift, 'pagi');
-      expect(model.hasShift, true);
-      expect(model.isShiftPagi, true);
+      expect(model.shift, isNull);
+      expect(model.hasShift, false);
+      expect(model.isShiftPagi, false);
       expect(model.isShiftSiang, false);
-      expect(model.shiftDisplay, 'Pagi');
-      expect(model.shiftFullDisplay, 'Shift Pagi');
+      expect(model.isShiftLong, false);
+      expect(model.shiftDisplay, '-');
+      expect(model.shiftFullDisplay, 'Belum Ditentukan');
     });
 
     test('Custom shift siang is parsed correctly', () {
@@ -244,10 +253,31 @@ void main() {
       };
       final model = UserModel.fromJson(json);
       expect(model.shift, 'siang');
+      expect(model.hasShift, true);
       expect(model.isShiftPagi, false);
       expect(model.isShiftSiang, true);
+      expect(model.isShiftLong, false);
       expect(model.shiftDisplay, 'Siang');
       expect(model.shiftFullDisplay, 'Shift Siang');
+    });
+
+    test('Custom shift long_shift is parsed correctly', () {
+      final json = {
+        'id': 'user-03',
+        'nama': 'Citra SPG',
+        'username': 'citra',
+        'email': 'citra@pot.com',
+        'role': 'spg',
+        'shift': 'long_shift',
+      };
+      final model = UserModel.fromJson(json);
+      expect(model.shift, 'long_shift');
+      expect(model.hasShift, true);
+      expect(model.isShiftPagi, false);
+      expect(model.isShiftSiang, false);
+      expect(model.isShiftLong, true);
+      expect(model.shiftDisplay, 'Long Shift');
+      expect(model.shiftFullDisplay, 'Long Shift');
     });
   });
 
@@ -316,9 +346,36 @@ void main() {
       expect(model.shiftSpg, 'siang');
       expect(model.isShiftSiang, true);
       expect(model.isShiftPagi, false);
+      expect(model.isShiftLong, false);
       expect(model.shiftDisplay, 'Siang');
       expect(model.shiftLapak?.lapakId, 'lapak-01');
       expect(model.shiftLapak?.shiftSiang, ['13:00', '21:00']);
+      expect(model.resolvedShiftHours, ['13:00', '21:00']);
+    });
+
+    test('Parses shift_spg long_shift and resolves shiftLong from lapak', () {
+      final json = {
+        'id': 'absen-4',
+        'tanggal': '2026-10-15',
+        'jam_masuk': '2026-10-15T01:00:00.000Z',
+        'status': 'hadir',
+        'shift_spg': 'long_shift',
+        'shift_lapak': {
+          'lapak_id': 'lapak-01',
+          'shift_pagi': ['08:00', '16:00'],
+          'shift_siang': ['13:00', '21:00'],
+          'shift_long': ['08:00', '20:00'],
+        },
+      };
+
+      final model = AbsensiModel.fromJson(json);
+      expect(model.shiftSpg, 'long_shift');
+      expect(model.isShiftLong, true);
+      expect(model.isShiftPagi, false);
+      expect(model.isShiftSiang, false);
+      expect(model.shiftDisplay, 'Long Shift');
+      expect(model.shiftLapak?.shiftLong, ['08:00', '20:00']);
+      expect(model.resolvedShiftHours, ['08:00', '20:00']);
     });
   });
 
@@ -338,6 +395,7 @@ void main() {
         email: 'ahmad@pot.com',
         role: 'spg',
         lapakId: 'lapak-01',
+        shift: 'pagi',
         noHp: '081234567890',
         status: 'active',
         authProvider: 'local',
@@ -637,6 +695,117 @@ void main() {
       expect(vm.scheduledClockInTime, '07:00');
       expect(vm.scheduledClockOutTime, '15:00');
       expect(vm.shiftScheduleDisplay, '07:00 - 15:00');
+      vm.dispose();
+    });
+
+    test('Blocks clock-in when user has no assigned shift', () async {
+      const userWithoutShift = UserModel(
+        id: 'user-no-shift',
+        nama: 'Ahmad SPG',
+        username: 'ahmad_spg',
+        email: 'ahmad@pot.com',
+        role: 'spg',
+        lapakId: 'lapak-01',
+        noHp: '081234567890',
+        status: 'active',
+        authProvider: 'local',
+      );
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vm.init(currentUser: userWithoutShift);
+
+      expect(vm.hasShift, false);
+      expect(vm.userShiftLabel, 'Belum Ditentukan');
+      expect(vm.shiftScheduleDisplay, '--:-- - --:--');
+      final result = await vm.clockIn();
+      expect(result, false);
+      expect(vm.errorMessage, contains('belum memiliki jadwal shift'));
+      vm.dispose();
+    });
+
+    test('Rejects clock-in before early window opens (< T_start - 180m)', () async {
+      // Morning shift starts at 08:00. Window opens at 05:00.
+      // Current time is 04:55 -> Too early!
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+        currentTimeProvider: () => DateTime(2026, 10, 7, 4, 55),
+      );
+      await vm.init(currentUser: testUser);
+
+      expect(vm.isClockInTooEarly, true);
+      expect(vm.isClockInAvailable, false);
+      final result = await vm.clockIn();
+      expect(result, false);
+      expect(vm.errorMessage, contains('belum dibuka'));
+      vm.dispose();
+    });
+
+    test('Accepts clock-in within 3h early window as hadir', () async {
+      // Morning shift starts at 08:00. Window opens at 05:00.
+      // Current time is 06:30 -> Inside window!
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+        currentTimeProvider: () => DateTime(2026, 10, 7, 6, 30),
+      );
+      await vm.init(currentUser: testUser);
+
+      expect(vm.isClockInTooEarly, false);
+      expect(vm.isClockInExpired, false);
+      expect(vm.isClockInAvailable, true);
+      final result = await vm.clockIn();
+      expect(result, true);
+      expect(vm.todayRecord?.status, 'hadir');
+      vm.dispose();
+    });
+
+    test('Correctly resolves shift information for Long Shift SPG', () async {
+      final vmLong = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+      );
+      await vmLong.init(currentUser: testUser.copyWith(shift: 'long_shift'));
+
+      expect(vmLong.userShift, 'long_shift');
+      expect(vmLong.userShiftLabel, 'Long Shift');
+      expect(vmLong.scheduledClockInTime, '08:00');
+      expect(vmLong.scheduledClockOutTime, '20:00');
+      expect(vmLong.shiftScheduleDisplay, '08:00 - 20:00');
+      vmLong.dispose();
+    });
+
+    test('Detects unclosed previous session, blocks clock-in, and enables clock-out', () async {
+      final previousSession = AbsensiModel(
+        id: 'absen-yesterday',
+        tanggal: '2026-10-06',
+        jamMasuk: DateTime(2026, 10, 6, 8, 30),
+        jamPulang: null,
+        status: 'hadir',
+      );
+      fakeRepo.mockHistory = [previousSession];
+
+      final vm = AttendanceViewModel(
+        repository: fakeRepo,
+        locationService: fakeLocation,
+        currentTimeProvider: () => DateTime(2026, 10, 7, 8, 0),
+      );
+      await vm.init(currentUser: testUser);
+
+      expect(vm.hasUnclosedPreviousSession, true);
+      expect(vm.unclosedPreviousSession?.id, 'absen-yesterday');
+
+      // Clock-in must be rejected while an unclosed previous session exists
+      final clockInResult = await vm.clockIn();
+      expect(clockInResult, false);
+      expect(vm.errorMessage, contains('belum melakukan absen pulang'));
+
+      // Clock-out should resolve the previous session
+      final clockOutResult = await vm.clockOut();
+      expect(clockOutResult, true);
+      expect(fakeRepo.clockOutCallCount, 1);
       vm.dispose();
     });
   });

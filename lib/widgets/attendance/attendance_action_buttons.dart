@@ -21,12 +21,124 @@ class AttendanceActionButtons extends StatelessWidget {
     final isIzin = viewModel.isIzinToday;
     final isSubmitting = viewModel.isSubmitting;
     final hasStallLocation = viewModel.hasStallLocation;
+    final hasShift = viewModel.hasShift;
     final isExpired = viewModel.isClockInExpired;
+    final isTooEarly = viewModel.isClockInTooEarly;
+    final hasUnclosedPrevious = viewModel.hasUnclosedPreviousSession;
+
+    String clockInButtonText = 'Absen Masuk';
+    if (!hasShift) {
+      clockInButtonText = 'Shift Belum Ditentukan';
+    } else if (isTooEarly) {
+      clockInButtonText = 'Presensi Belum Dibuka';
+    } else if (isExpired) {
+      clockInButtonText = 'Presensi Masuk Berakhir';
+    }
+
+    final canClockIn = hasShift &&
+        hasStallLocation &&
+        !isSubmitting &&
+        !isExpired &&
+        !isTooEarly &&
+        !hasUnclosedPrevious;
 
     return Column(
       children: [
+        // Notice if user has an unclosed session from previous day
+        if (hasUnclosedPrevious) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: PotColors.statusWarningBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: PotColors.statusWarningBorder),
+            ),
+            child: const Row(
+              children: [
+                Icon(Iconsax.warning_2, size: 18, color: PotColors.statusWarningText),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Anda memiliki sesi presensi sebelumnya yang belum absen pulang. Harap selesaikan absen pulang terlebih dahulu.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: PotColors.statusWarningText,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+
+        // Notice if user does not have an assigned shift
+        if (!isClockedIn && !hasUnclosedPrevious && !hasShift) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: PotColors.statusWarningBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: PotColors.statusWarningBorder),
+            ),
+            child: const Row(
+              children: [
+                Icon(Iconsax.info_circle, size: 18, color: PotColors.statusWarningText),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Anda belum memiliki jadwal shift yang ditentukan. Silakan hubungi Admin.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: PotColors.statusWarningText,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+
+        // Notice if clock-in is too early (before 3h window)
+        if (!isClockedIn && !hasUnclosedPrevious && hasShift && isTooEarly) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: PotColors.statusInfoBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: PotColors.statusInfoBorder),
+            ),
+            child: Row(
+              children: [
+                const Icon(Iconsax.clock, size: 18, color: PotColors.statusInfoText),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Presensi masuk untuk shift ${viewModel.userShiftLabel} dibuka pukul ${viewModel.earlyWindowOpenTimeStr} WIB (3 jam sebelum jam operasional).',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: PotColors.statusInfoText,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+
         // Notice if shift clock-in window has ended
-        if (!isClockedIn && isExpired) ...[
+        if (!isClockedIn && !hasUnclosedPrevious && hasShift && isExpired) ...[
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -41,7 +153,7 @@ class AttendanceActionButtons extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Jadwal shift ${viewModel.userShiftLabel.toLowerCase()} telah berakhir (${viewModel.scheduledClockOutTime}). Presensi masuk ditutup.',
+                    'Jadwal shift ${viewModel.userShiftLabel} telah berakhir (${viewModel.scheduledClockOutTime}). Presensi masuk ditutup.',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -57,7 +169,7 @@ class AttendanceActionButtons extends StatelessWidget {
         ],
 
         // Notice if lapak coordinates are not set by Admin
-        if (!isClockedIn && !isExpired && !hasStallLocation) ...[
+        if (!isClockedIn && !hasUnclosedPrevious && hasShift && !isExpired && !isTooEarly && !hasStallLocation) ...[
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -87,15 +199,56 @@ class AttendanceActionButtons extends StatelessWidget {
           const SizedBox(height: 10),
         ],
 
-        // 1. Absen Masuk / Izin Status
-        if (!isClockedIn)
+        // 1. Absen Masuk / Unclosed Session Action / Izin Status
+        if (!isClockedIn && hasUnclosedPrevious)
           SizedBox(
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: (!hasStallLocation || isSubmitting || isExpired)
-                  ? null
-                  : () async {
+              onPressed: isSubmitting ? null : () => _confirmClockOut(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: PotColors.primaryRed,
+                disabledBackgroundColor: PotColors.primaryRed.withValues(alpha: 0.35),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 2,
+                shadowColor: PotColors.primaryRed.withValues(alpha: 0.3),
+              ),
+              child: isSubmitting
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Iconsax.logout, size: 18),
+                        SizedBox(width: 8),
+                        Text(
+                          'Absen Pulang (Sesi Sebelumnya)',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.1,
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          )
+        else if (!isClockedIn)
+          SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: ElevatedButton(
+              onPressed: canClockIn
+                  ? () async {
                       final success = await viewModel.clockIn();
                       if (context.mounted) {
                         if (success) {
@@ -112,7 +265,8 @@ class AttendanceActionButtons extends StatelessWidget {
                           );
                         }
                       }
-                    },
+                    }
+                  : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: PotColors.primaryRed,
                 disabledBackgroundColor: PotColors.primaryRed.withValues(alpha: 0.35),
@@ -121,7 +275,7 @@ class AttendanceActionButtons extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                elevation: (hasStallLocation && !isExpired) ? 2 : 0,
+                elevation: canClockIn ? 2 : 0,
                 shadowColor: PotColors.primaryRed.withValues(alpha: 0.3),
               ),
               child: isSubmitting
@@ -139,7 +293,7 @@ class AttendanceActionButtons extends StatelessWidget {
                         const Icon(Iconsax.login, size: 18),
                         const SizedBox(width: 8),
                         Text(
-                          isExpired ? 'Presensi Masuk Berakhir' : 'Absen Masuk',
+                          clockInButtonText,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,

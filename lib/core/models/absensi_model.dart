@@ -38,11 +38,13 @@ class ShiftLapakModel {
   final String lapakId;
   final List<String> shiftPagi;
   final List<String> shiftSiang;
+  final List<String> shiftLong;
 
   const ShiftLapakModel({
     required this.lapakId,
     this.shiftPagi = const [AppConstants.defaultShiftPagiStart, AppConstants.defaultShiftPagiEnd],
     this.shiftSiang = const [AppConstants.defaultShiftSiangStart, AppConstants.defaultShiftSiangEnd],
+    this.shiftLong = const [AppConstants.defaultShiftLongStart, AppConstants.defaultShiftLongEnd],
   });
 
   factory ShiftLapakModel.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class ShiftLapakModel {
       lapakId: json['lapak_id'] as String? ?? '',
       shiftPagi: parseShift(json['shift_pagi'], const [AppConstants.defaultShiftPagiStart, AppConstants.defaultShiftPagiEnd]),
       shiftSiang: parseShift(json['shift_siang'], const [AppConstants.defaultShiftSiangStart, AppConstants.defaultShiftSiangEnd]),
+      shiftLong: parseShift(json['shift_long'], const [AppConstants.defaultShiftLongStart, AppConstants.defaultShiftLongEnd]),
     );
   }
 
@@ -65,7 +68,20 @@ class ShiftLapakModel {
         'lapak_id': lapakId,
         'shift_pagi': shiftPagi,
         'shift_siang': shiftSiang,
+        'shift_long': shiftLong,
       };
+
+  /// Resolves the shift hours array [clockIn, clockOut] for the specified shift.
+  List<String> getShiftHours(String? shift) {
+    final s = (shift ?? '').toLowerCase().trim();
+    if (s == AppConstants.shiftLong || s == 'long shift' || s == 'long') {
+      return shiftLong;
+    }
+    if (s == AppConstants.shiftSiang || s == 'siang') {
+      return shiftSiang;
+    }
+    return shiftPagi;
+  }
 }
 
 /// Domain model representing an Attendance (Absensi) record.
@@ -104,14 +120,28 @@ class AbsensiModel {
 
   bool get isClockedOut => jamPulang != null;
 
-  bool get isShiftPagi => shiftSpg == AppConstants.shiftPagi;
-  bool get isShiftSiang => shiftSpg == AppConstants.shiftSiang;
+  bool get isShiftPagi => (shiftSpg ?? '').toLowerCase() == AppConstants.shiftPagi;
+  bool get isShiftSiang => (shiftSpg ?? '').toLowerCase() == AppConstants.shiftSiang;
+  bool get isShiftLong =>
+      (shiftSpg ?? '').toLowerCase() == AppConstants.shiftLong ||
+      (shiftSpg ?? '').toLowerCase() == 'long shift' ||
+      (shiftSpg ?? '').toLowerCase() == 'long';
 
-  /// Human-readable shift name: "Pagi", "Siang", or "-"
+  /// Human-readable shift name: "Pagi", "Siang", "Long Shift", or "-"
   String get shiftDisplay {
-    if (shiftSpg == AppConstants.shiftPagi) return 'Pagi';
-    if (shiftSpg == AppConstants.shiftSiang) return 'Siang';
+    final s = (shiftSpg ?? '').toLowerCase().trim();
+    if (s == AppConstants.shiftPagi) return 'Pagi';
+    if (s == AppConstants.shiftSiang) return 'Siang';
+    if (s == AppConstants.shiftLong || s == 'long shift' || s == 'long') return 'Long Shift';
     return '-';
+  }
+
+  /// Resolves the shift hours [clockIn, clockOut] from stamped shiftLapak, or null if not available
+  List<String>? get resolvedShiftHours {
+    if (shiftLapak != null) {
+      return shiftLapak!.getShiftHours(shiftSpg);
+    }
+    return null;
   }
 
   /// Returns 2-digit formatted clock-in time: "08:55"

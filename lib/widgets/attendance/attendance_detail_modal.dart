@@ -206,7 +206,7 @@ class _AttendanceDetailModalState extends State<AttendanceDetailModal> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Shift ${_record!.shiftDisplay}${_record!.shiftLapak != null ? ' (${_record!.isShiftSiang ? _record!.shiftLapak!.shiftSiang.join(" - ") : _record!.shiftLapak!.shiftPagi.join(" - ")})' : ''}',
+                                  'Shift ${_record!.shiftDisplay}${_record!.resolvedShiftHours != null ? ' (${_record!.resolvedShiftHours!.join(" - ")})' : ''}',
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,

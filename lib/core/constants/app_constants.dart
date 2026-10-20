@@ -20,15 +20,23 @@ class AppConstants {
   // Shifts
   static const String shiftPagi = "pagi";
   static const String shiftSiang = "siang";
+  static const String shiftLong = "long_shift";
   static const String defaultShiftPagiStart = "08:00";
   static const String defaultShiftPagiEnd = "16:00";
   static const String defaultShiftSiangStart = "13:00";
   static const String defaultShiftSiangEnd = "21:00";
+  static const String defaultShiftLongStart = "08:00";
+  static const String defaultShiftLongEnd = "20:00";
+  static const int earlyClockInWindowMinutes = 180;
 
   /// Returns fallback [start, end] shift hours for [shift]
-  static List<String> defaultShiftHours(String shift) {
-    if (shift == shiftSiang) {
+  static List<String> defaultShiftHours(String? shift) {
+    final s = (shift ?? '').toLowerCase().trim();
+    if (s == shiftSiang) {
       return const [defaultShiftSiangStart, defaultShiftSiangEnd];
+    }
+    if (s == shiftLong || s == 'long shift' || s == 'long') {
+      return const [defaultShiftLongStart, defaultShiftLongEnd];
     }
     return const [defaultShiftPagiStart, defaultShiftPagiEnd];
   }

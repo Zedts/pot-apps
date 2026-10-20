@@ -89,23 +89,33 @@ class AttendanceViewModel extends BaseViewModel {
   /// Photo URL from today's saved record, or null
   String? get serverPhotoUrl => _todayRecord?.fotoMasukUrl;
 
-  /// Effective shift assigned to user (defaults to 'pagi' if unassigned or empty)
-  String get userShift => _user?.shift ?? AppConstants.shiftPagi;
+  /// Effective shift assigned to user, or null if unassigned
+  String? get userShift => _user?.shift;
 
-  /// Human-readable shift name: "Pagi" or "Siang"
-  String get userShiftLabel =>
-      userShift == AppConstants.shiftSiang ? 'Siang' : 'Pagi';
+  /// Whether user has a designated shift assigned
+  bool get hasShift => _user?.hasShift ?? false;
+
+  /// Human-readable shift name: "Pagi", "Siang", "Long Shift", or "Belum Ditentukan"
+  String get userShiftLabel {
+    if (_user?.isShiftLong == true) return 'Long Shift';
+    if (_user?.isShiftSiang == true) return 'Siang';
+    if (_user?.isShiftPagi == true) return 'Pagi';
+    return 'Belum Ditentukan';
+  }
 
   /// Shift start and end hours [start, end], e.g. ["08:00", "16:00"]
   List<String> get shiftHours {
+    final shift = userShift;
+    if (shift == null) return AppConstants.defaultShiftHours(null);
     if (_stall != null) {
-      return _stall!.getShiftHours(userShift);
+      return _stall!.getShiftHours(shift);
     }
-    return AppConstants.defaultShiftHours(userShift);
+    return AppConstants.defaultShiftHours(shift);
   }
 
   /// Shift schedule display string, e.g. "08:00 - 16:00"
   String get shiftScheduleDisplay {
+    if (!hasShift) return '--:-- - --:--';
     final hours = shiftHours;
     return '${hours[0]} - ${hours[1]}';
   }
@@ -116,18 +126,63 @@ class AttendanceViewModel extends BaseViewModel {
   /// Scheduled clock-out end time, e.g. "16:00"
   String get scheduledClockOutTime => shiftHours[1];
 
-  /// Checks if the clock-in window for the user's shift has expired.
-  /// (Clock-in button is disabled ONLY after the scheduled clock-out time has elapsed).
-  /// Morning shift (08:00 - 16:00): expired when current time > 16:00.
-  /// Afternoon shift (13:00 - 21:00): remains available through morning & afternoon, expired when current time > 21:00.
-  bool get isClockInExpired {
-    final endParts = scheduledClockOutTime.split(':');
-    final endHour = int.tryParse(endParts[0]) ?? 16;
-    final endMinute = endParts.length > 1 ? (int.tryParse(endParts[1]) ?? 0) : 0;
-    final currentMinutes = _currentTime.hour * 60 + _currentTime.minute;
-    final endMinutes = endHour * 60 + endMinute;
-    return currentMinutes > endMinutes;
+  int get scheduledClockInMinutes {
+    final parts = scheduledClockInTime.split(':');
+    final h = int.tryParse(parts[0]) ?? 8;
+    final m = parts.length > 1 ? (int.tryParse(parts[1]) ?? 0) : 0;
+    return h * 60 + m;
   }
+
+  int get scheduledClockOutMinutes {
+    final parts = scheduledClockOutTime.split(':');
+    final h = int.tryParse(parts[0]) ?? 16;
+    final m = parts.length > 1 ? (int.tryParse(parts[1]) ?? 0) : 0;
+    return h * 60 + m;
+  }
+
+  int get currentMinutes => _currentTime.hour * 60 + _currentTime.minute;
+
+  int get earlyWindowOpenMinutes =>
+      scheduledClockInMinutes - AppConstants.earlyClockInWindowMinutes;
+
+  String get earlyWindowOpenTimeStr {
+    final open = earlyWindowOpenMinutes;
+    final normalized = (open % 1440 + 1440) % 1440;
+    final h = (normalized ~/ 60).toString().padLeft(2, '0');
+    final m = (normalized % 60).toString().padLeft(2, '0');
+    return '$h:$m';
+  }
+
+  /// Checks if clock-in is attempted before the 3-hour early window opens (< T_start - 180m)
+  bool get isClockInTooEarly {
+    if (!hasShift) return false;
+    return currentMinutes < earlyWindowOpenMinutes;
+  }
+
+  /// Checks if the clock-in window for the user's shift has expired (> scheduled end time)
+  bool get isClockInExpired {
+    if (!hasShift) return false;
+    return currentMinutes > scheduledClockOutMinutes;
+  }
+
+  /// Checks if clock-in is within the valid active window ([T_start - 180m, T_end])
+  bool get isClockInAvailable =>
+      hasShift && !isClockInTooEarly && !isClockInExpired;
+
+  /// Detects if there is an unclosed session from previous dates
+  AbsensiModel? get unclosedPreviousSession {
+    for (final rec in _history) {
+      if (rec.id != _todayRecord?.id &&
+          rec.jamMasuk != null &&
+          rec.jamPulang == null &&
+          rec.status.toLowerCase() != AppConstants.absenIzin) {
+        return rec;
+      }
+    }
+    return null;
+  }
+
+  bool get hasUnclosedPreviousSession => unclosedPreviousSession != null;
 
   /// Formatted current time string: "08:55" (no seconds)
   String get formattedCurrentTime {
@@ -270,6 +325,19 @@ class AttendanceViewModel extends BaseViewModel {
     _errorMessage = null;
     _successMessage = null;
 
+    if (!hasShift) {
+      _errorMessage = 'Anda belum memiliki jadwal shift yang ditentukan. Hubungi Admin.';
+      notifyListeners();
+      return false;
+    }
+
+    if (hasUnclosedPreviousSession) {
+      _errorMessage =
+          'Anda memiliki presensi sebelumnya yang belum melakukan absen pulang. Harap selesaikan absen pulang terlebih dahulu.';
+      notifyListeners();
+      return false;
+    }
+
     if (_stall == null) {
       _errorMessage = 'Anda belum ditugaskan ke lapak manapun.';
       notifyListeners();
@@ -282,9 +350,16 @@ class AttendanceViewModel extends BaseViewModel {
       return false;
     }
 
+    if (isClockInTooEarly) {
+      _errorMessage =
+          'Presensi masuk untuk shift $userShiftLabel belum dibuka. Presensi dibuka mulai pukul $earlyWindowOpenTimeStr WIB.';
+      notifyListeners();
+      return false;
+    }
+
     if (isClockInExpired) {
       _errorMessage =
-          'Jadwal kerja untuk shift ${userShiftLabel.toLowerCase()} telah berakhir pada pukul $scheduledClockOutTime. Presensi masuk tidak dapat dicatat.';
+          'Jadwal kerja untuk shift $userShiftLabel telah berakhir pada pukul $scheduledClockOutTime. Presensi masuk tidak dapat dicatat.';
       notifyListeners();
       return false;
     }
@@ -303,12 +378,9 @@ class AttendanceViewModel extends BaseViewModel {
 
     try {
       // Determine punctual vs late status (dynamic shift cutoff)
-      final startParts = scheduledClockInTime.split(':');
-      final startHour = int.tryParse(startParts[0]) ?? 8;
-      final startMinute = startParts.length > 1 ? (int.tryParse(startParts[1]) ?? 0) : 0;
-      final currentMinutes = _currentTime.hour * 60 + _currentTime.minute;
-      final startMinutes = startHour * 60 + startMinute;
-      final isLate = currentMinutes > startMinutes;
+      // Clocking in <= scheduledClockInMinutes (within 3h early window): Hadir
+      // Clocking in > scheduledClockInMinutes: Terlambat
+      final isLate = currentMinutes > scheduledClockInMinutes;
       final status = isLate ? AppConstants.absenTerlambat : AppConstants.absenHadir;
 
       final record = await _repository.clockIn(
@@ -357,8 +429,9 @@ class AttendanceViewModel extends BaseViewModel {
   /// Submits Clock-out (Absen Pulang).
   Future<bool> clockOut() async {
     if (_isSubmitting) return false;
-    if (_todayRecord == null) {
-      _errorMessage = 'Belum ada data presensi masuk hari ini.';
+    final targetRecord = _todayRecord ?? unclosedPreviousSession;
+    if (targetRecord == null) {
+      _errorMessage = 'Belum ada data presensi masuk yang perlu diselesaikan.';
       notifyListeners();
       return false;
     }
@@ -369,8 +442,10 @@ class AttendanceViewModel extends BaseViewModel {
     notifyListeners();
 
     try {
-      final updated = await _repository.clockOut(_todayRecord!.id);
-      _todayRecord = updated;
+      final updated = await _repository.clockOut(targetRecord.id);
+      if (_todayRecord?.id == targetRecord.id) {
+        _todayRecord = updated;
+      }
       await _activityHistoryService.record(
         ActivityHistoryModel(
           userId: _user!.id,
@@ -400,6 +475,13 @@ class AttendanceViewModel extends BaseViewModel {
   /// Submits Izin / Sakit request.
   Future<bool> submitIzin({required String keterangan}) async {
     if (_isSubmitting) return false;
+
+    if (!hasShift) {
+      _errorMessage = 'Anda belum memiliki jadwal shift yang ditentukan. Hubungi Admin.';
+      notifyListeners();
+      return false;
+    }
+
     if (_stall == null) {
       _errorMessage = 'Anda belum ditugaskan ke lapak manapun.';
       notifyListeners();
