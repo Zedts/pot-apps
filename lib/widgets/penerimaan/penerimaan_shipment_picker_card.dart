@@ -168,7 +168,9 @@ class PenerimaanShipmentPickerCard extends StatelessWidget {
                               ),
                               const SizedBox(height: 1),
                               Text(
-                                '📦 ${item.totalItems} Jenis Produk (${item.qtyKirim} pcs)',
+                                '📦 ${item.totalItems} Jenis (${item.qtyKirim} pcs) • Kirim: ${item.namaPengirim}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,

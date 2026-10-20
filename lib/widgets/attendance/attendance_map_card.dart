@@ -116,8 +116,6 @@ class _AttendanceMapCardState extends State<AttendanceMapCard> {
               onTap: () {
                 if (stallPoint != null) {
                   _mapController.move(stallPoint, 18.0);
-                } else if (userPoint != null) {
-                  _mapController.move(userPoint, 18.0);
                 }
               },
               child: Container(
@@ -163,13 +161,19 @@ class _AttendanceMapCardState extends State<AttendanceMapCard> {
             child: _buildGeofenceBadge(radiusMeter),
           ),
 
-          // 4. Bottom-Left Re-Center Button
+          // 4. Bottom-Left Re-Center Button (GPS: focus on user location)
           Positioned(
             bottom: 10,
             left: 10,
             child: GestureDetector(
               onTap: () {
-                _mapController.move(stallPoint ?? (userPoint ?? centerPoint), 18.0);
+                if (userPoint != null) {
+                  _mapController.move(userPoint, 18.0);
+                } else if (stallPoint != null) {
+                  _mapController.move(stallPoint, 18.0);
+                } else {
+                  _mapController.move(centerPoint, 18.0);
+                }
               },
               child: Container(
                 width: 34,

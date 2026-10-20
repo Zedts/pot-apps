@@ -9,6 +9,15 @@ import 'package:pot_apps/core/models/user_model.dart';
 import 'package:pot_apps/screens/penjualan_stok/repositories/penjualan_stok_repository.dart';
 import 'package:pot_apps/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart';
 import 'package:pot_apps/widgets/penjualan_stok/stok_saat_ini_list_view.dart';
+import 'package:pot_apps/core/services/activity_history_service.dart';
+import 'package:pot_apps/core/models/activity_history_model.dart';
+
+class MockActivityHistoryService extends ActivityHistoryService {
+  @override
+  Future<void> record(ActivityHistoryModel entry) async {
+    // In-memory no-op for tests
+  }
+}
 
 class MockPenjualanStokRepository implements PenjualanStokRepository {
   List<StokLapakModel> mockStock = [
@@ -107,6 +116,7 @@ class MockPenjualanStokRepository implements PenjualanStokRepository {
     required String lapakId,
     required String metodePembayaran,
     required List<Map<String, dynamic>> items,
+    int kembalianDisimpan = 0,
     String? catatan,
     File? buktiFile,
   }) async {
@@ -252,7 +262,11 @@ void main() {
         status: 'active',
         authProvider: 'local',
       );
-      vm = PenjualanStokViewModel(currentUser: mockUser, repository: mockRepo);
+      vm = PenjualanStokViewModel(
+        currentUser: mockUser,
+        repository: mockRepo,
+        activityHistoryService: MockActivityHistoryService(),
+      );
     });
 
     test('initial state has tab 0 and empty cart', () {
@@ -367,22 +381,31 @@ void main() {
 
     test('validates canSubmit based on payment method and proof photo', () async {
       await vm.initialize();
-      vm.toggleProductSelection('prod-1');
+      vm.toggleProductSelection('prod-1'); // 1x prod-1 = 5,000
 
       // Cash (tunai) does not require photo proof
       vm.setPaymentMethod('tunai');
       expect(vm.isNonCash, false);
       expect(vm.canSubmit, true);
 
-      // Non-cash (QRIS) requires photo proof
+      // Cash with insufficient customer cash cannot submit
+      vm.setCustomerCash(2000);
+      expect(vm.canSubmit, false);
+
+      // Cash with sufficient customer cash can submit
+      vm.setCustomerCash(10000);
+      expect(vm.canSubmit, true);
+      expect(vm.kembalian, 5000);
+
+      // Non-cash (QRIS) proof photo is now optional
       vm.setPaymentMethod('qris');
       expect(vm.isNonCash, true);
-      expect(vm.canSubmit, false); // No photo attached yet!
+      expect(vm.canSubmit, true);
 
-      // Non-cash (Transfer) requires photo proof
+      // Non-cash (Transfer) proof photo is now optional
       vm.setPaymentMethod('transfer');
       expect(vm.isNonCash, true);
-      expect(vm.canSubmit, false);
+      expect(vm.canSubmit, true);
     });
 
     test('submits sales transaction and clears cart state', () async {
@@ -430,6 +453,7 @@ void main() {
           authProvider: 'local',
         ),
         repository: mockRepo,
+        activityHistoryService: MockActivityHistoryService(),
       );
       await vm.initialize();
 

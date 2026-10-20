@@ -81,7 +81,9 @@ class PenerimaanReceivedItemsCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      shipment.uniqueId,
+                      '${shipment.uniqueId} • Pengirim: ${shipment.namaPengirim}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,

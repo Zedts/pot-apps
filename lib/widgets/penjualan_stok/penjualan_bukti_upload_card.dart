@@ -28,7 +28,7 @@ class PenjualanBuktiUploadCard extends StatelessWidget {
     return ProofPhotoUploadCard(
       photoFile: photoFile,
       title: title,
-      subtitle: 'Wajib upload foto/screenshot bukti transaksi $title',
+      subtitle: 'Opsional: upload foto/screenshot bukti transaksi $title',
       sheetTitle: 'Unggah Bukti Pembayaran',
       sheetSubtitle: 'Pilih sumber foto bukti pembayaran transaksi',
       statusText: 'Bukti Pembayaran Terlampir',

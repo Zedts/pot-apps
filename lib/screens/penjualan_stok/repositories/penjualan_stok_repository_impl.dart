@@ -38,6 +38,7 @@ class PenjualanStokRepositoryImpl implements PenjualanStokRepository {
     required String lapakId,
     required String metodePembayaran,
     required List<Map<String, dynamic>> items,
+    int kembalianDisimpan = 0,
     String? catatan,
     File? buktiFile,
   }) async {
@@ -51,6 +52,9 @@ class PenjualanStokRepositoryImpl implements PenjualanStokRepository {
         'tanggal': DateTime.now().toUtc().toIso8601String(),
         'items': jsonEncode(items),
       };
+      if (kembalianDisimpan > 0) {
+        fields['kembalian_disimpan'] = kembalianDisimpan.toString();
+      }
       if (catatan != null && catatan.trim().isNotEmpty) {
         fields['catatan'] = catatan.trim();
       }
@@ -74,6 +78,9 @@ class PenjualanStokRepositoryImpl implements PenjualanStokRepository {
       'tanggal': DateTime.now().toUtc().toIso8601String(),
       'items': items,
     };
+    if (kembalianDisimpan > 0) {
+      body['kembalian_disimpan'] = kembalianDisimpan;
+    }
     if (catatan != null && catatan.trim().isNotEmpty) {
       body['catatan'] = catatan.trim();
     }

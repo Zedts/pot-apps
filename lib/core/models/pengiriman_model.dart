@@ -80,6 +80,8 @@ class PengirimanModel {
   final int qtyKirim;
   final LapakModel? lapak;
   final Map<String, dynamic>? creator;
+  final String? pengirimId;
+  final Map<String, dynamic>? pengirim;
   final List<PengirimanItemModel> items;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -96,6 +98,8 @@ class PengirimanModel {
     this.qtyKirim = 0,
     this.lapak,
     this.creator,
+    this.pengirimId,
+    this.pengirim,
     this.items = const [],
     this.createdAt,
     this.updatedAt,
@@ -111,6 +115,12 @@ class PengirimanModel {
     return s == AppConstants.deliveryDiterimaSPG || s == 'diterima' || s == 'diterima spg';
   }
   bool get isSelesai => status.toLowerCase().trim() == AppConstants.deliverySelesai;
+
+  /// Display name of the shipment dispatcher/courier
+  String get namaPengirim =>
+      pengirim?['nama'] as String? ??
+      creator?['nama'] as String? ??
+      'Petugas Pengiriman';
 
   /// Priority ranking for status display:
   /// 1. "Di Jalan" (dikirim_viar / dikirim)
@@ -148,6 +158,8 @@ class PengirimanModel {
     int? qtyKirim,
     LapakModel? lapak,
     Map<String, dynamic>? creator,
+    String? pengirimId,
+    Map<String, dynamic>? pengirim,
     List<PengirimanItemModel>? items,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -164,6 +176,8 @@ class PengirimanModel {
       qtyKirim: qtyKirim ?? this.qtyKirim,
       lapak: lapak ?? this.lapak,
       creator: creator ?? this.creator,
+      pengirimId: pengirimId ?? this.pengirimId,
+      pengirim: pengirim ?? this.pengirim,
       items: items ?? this.items,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -242,6 +256,10 @@ class PengirimanModel {
       creator: json['creator'] is Map<String, dynamic>
           ? json['creator'] as Map<String, dynamic>
           : null,
+      pengirimId: json['pengirim_id'] as String?,
+      pengirim: json['pengirim'] is Map<String, dynamic>
+          ? json['pengirim'] as Map<String, dynamic>
+          : null,
       items: parseItems(json['items']),
       createdAt: ParserUtils.parseLocalDate(json['createdAt'] ?? json['created_at']),
       updatedAt: ParserUtils.parseLocalDate(json['updatedAt'] ?? json['updated_at']),
@@ -260,6 +278,8 @@ class PengirimanModel {
         'qty_kirim': qtyKirim,
         'lapak': lapak?.toJson(),
         'creator': creator,
+        'pengirim_id': pengirimId,
+        'pengirim': pengirim,
         'items': items.map((i) => i.toJson()).toList(),
         'createdAt': createdAt?.toIso8601String(),
         'updatedAt': updatedAt?.toIso8601String(),

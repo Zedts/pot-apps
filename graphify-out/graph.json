@@ -343,8 +343,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_const_string",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "static const string"
     },
     {
@@ -1212,7 +1212,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_material_dart",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "package:flutter/material.dart"
     },
@@ -1382,6 +1382,17 @@
       "norm_label": "shiftsiang"
     },
     {
+      "label": "shiftLong",
+      "file_type": "code",
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_constants_app_constants_shiftlong",
+      "community": 1,
+      "community_name": "app_constants.dart",
+      "norm_label": "shiftlong"
+    },
+    {
       "label": "defaultShiftPagiStart",
       "file_type": "code",
       "source_file": "lib/core/constants/app_constants.dart",
@@ -1424,6 +1435,50 @@
       "community": 1,
       "community_name": "app_constants.dart",
       "norm_label": "defaultshiftsiangend"
+    },
+    {
+      "label": "defaultShiftLongStart",
+      "file_type": "code",
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_constants_app_constants_defaultshiftlongstart",
+      "community": 1,
+      "community_name": "app_constants.dart",
+      "norm_label": "defaultshiftlongstart"
+    },
+    {
+      "label": "defaultShiftLongEnd",
+      "file_type": "code",
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_constants_app_constants_defaultshiftlongend",
+      "community": 1,
+      "community_name": "app_constants.dart",
+      "norm_label": "defaultshiftlongend"
+    },
+    {
+      "label": "earlyClockInWindowMinutes",
+      "file_type": "code",
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_constants_app_constants_earlyclockinwindowminutes",
+      "community": 1,
+      "community_name": "app_constants.dart",
+      "norm_label": "earlyclockinwindowminutes"
+    },
+    {
+      "label": "static const int",
+      "file_type": "code",
+      "source_file": null,
+      "source_location": null,
+      "_origin": "ast",
+      "id": "static_const_int",
+      "community": 91,
+      "community_name": "salary_history_table.dart",
+      "norm_label": "static const int"
     },
     {
       "label": "closingPending",
@@ -1652,8 +1707,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "app_images.dart"
     },
     {
@@ -1663,8 +1718,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images_appimages",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "appimages"
     },
     {
@@ -1674,8 +1729,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images_imagepath",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "imagepath"
     },
     {
@@ -1685,8 +1740,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images_iconpath",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "iconpath"
     },
     {
@@ -1696,8 +1751,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images_imagelogo",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "imagelogo"
     },
     {
@@ -1707,8 +1762,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_images_googleicon",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 113,
+      "community_name": "app_images.dart",
       "norm_label": "googleicon"
     },
     {
@@ -1806,7 +1861,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "list",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "list"
     },
@@ -1820,6 +1875,17 @@
       "community": 51,
       "community_name": "absensi_model.dart",
       "norm_label": "shiftsiang"
+    },
+    {
+      "label": "shiftLong",
+      "file_type": "code",
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_absensi_model_shiftlong",
+      "community": 51,
+      "community_name": "absensi_model.dart",
+      "norm_label": "shiftlong"
     },
     {
       "label": "id",
@@ -2015,7 +2081,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "bool_get",
-      "community": 123,
+      "community": 50,
       "community_name": "bool get",
       "norm_label": "bool get"
     },
@@ -2042,6 +2108,17 @@
       "norm_label": "isshiftsiang"
     },
     {
+      "label": "isShiftLong",
+      "file_type": "code",
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_absensi_model_isshiftlong",
+      "community": 51,
+      "community_name": "absensi_model.dart",
+      "norm_label": "isshiftlong"
+    },
+    {
       "label": "fromJson",
       "file_type": "code",
       "source_file": "lib/core/models/absensi_model.dart",
@@ -2062,6 +2139,17 @@
       "community": 51,
       "community_name": "absensi_model.dart",
       "norm_label": "tojson"
+    },
+    {
+      "label": "getShiftHours",
+      "file_type": "code",
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_absensi_model_getshifthours",
+      "community": 51,
+      "community_name": "absensi_model.dart",
+      "norm_label": "getshifthours"
     },
     {
       "label": "copyWith",
@@ -2103,8 +2191,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "utils_parser_utils_dart",
-      "community": 114,
-      "community_name": "slip_gaji_model.dart",
+      "community": 85,
+      "community_name": "produk_model.dart",
       "norm_label": "../utils/parser_utils.dart"
     },
     {
@@ -2125,7 +2213,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "user_model_dart",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "user_model.dart"
     },
@@ -2169,8 +2257,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "int",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "int?"
     },
     {
@@ -2279,7 +2367,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "api_response.dart"
     },
@@ -2290,7 +2378,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_apiresponse",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "apiresponse"
     },
@@ -2301,7 +2389,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_success",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "success"
     },
@@ -2312,7 +2400,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_message",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "message"
     },
@@ -2323,7 +2411,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_data",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "data"
     },
@@ -2334,7 +2422,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "t",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "t?"
     },
@@ -2345,7 +2433,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_error",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "error"
     },
@@ -2356,7 +2444,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_details",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "details"
     },
@@ -2367,7 +2455,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_api_response_fromjson",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "fromjson"
     },
@@ -2378,7 +2466,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "auth_response.dart"
     },
@@ -2389,7 +2477,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response_authresponse",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "authresponse"
     },
@@ -2400,7 +2488,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response_token",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "token"
     },
@@ -2411,7 +2499,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response_user",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "user"
     },
@@ -2422,7 +2510,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response_fromjson",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "fromjson"
     },
@@ -2433,7 +2521,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_auth_response_tojson",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "tojson"
     },
@@ -2455,8 +2543,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_closing_model_closingmodel",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "closingmodel"
     },
     {
@@ -2786,7 +2874,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "lapak_model.dart"
     },
     {
@@ -2808,7 +2896,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_id",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "id"
     },
     {
@@ -2819,7 +2907,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_nama",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "nama"
     },
     {
@@ -2830,7 +2918,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_lokasi",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "lokasi"
     },
     {
@@ -2841,7 +2929,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_keterangan",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "keterangan"
     },
     {
@@ -2852,7 +2940,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_latitude",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "latitude"
     },
     {
@@ -2863,7 +2951,7 @@
       "_origin": "ast",
       "id": "double",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "double?"
     },
     {
@@ -2874,7 +2962,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_longitude",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "longitude"
     },
     {
@@ -2885,7 +2973,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_radiusmeter",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "radiusmeter"
     },
     {
@@ -2896,7 +2984,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_spgid",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "spgid"
     },
     {
@@ -2907,7 +2995,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_shiftpagi",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "shiftpagi"
     },
     {
@@ -2918,8 +3006,19 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_shiftsiang",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "shiftsiang"
+    },
+    {
+      "label": "shiftLong",
+      "file_type": "code",
+      "source_file": "lib/core/models/lapak_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_lapak_model_shiftlong",
+      "community": 52,
+      "community_name": "lapak_model.dart",
+      "norm_label": "shiftlong"
     },
     {
       "label": "createdAt",
@@ -2929,7 +3028,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_createdat",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "createdat"
     },
     {
@@ -2940,7 +3039,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_updatedat",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "updatedat"
     },
     {
@@ -2951,7 +3050,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_hascoordinates",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "hascoordinates"
     },
     {
@@ -2962,7 +3061,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_getshifthours",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "getshifthours"
     },
     {
@@ -2973,7 +3072,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_formatshifthours",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "formatshifthours"
     },
     {
@@ -2984,7 +3083,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_fromjson",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "fromjson"
     },
     {
@@ -2995,7 +3094,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_tojson",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "tojson"
     },
     {
@@ -3006,7 +3105,7 @@
       "_origin": "ast",
       "id": "lib_core_models_lapak_model_copywith",
       "community": 52,
-      "community_name": "List",
+      "community_name": "lapak_model.dart",
       "norm_label": "copywith"
     },
     {
@@ -3017,7 +3116,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "payroll_model.dart"
     },
     {
@@ -3039,7 +3138,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_id",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "id"
     },
     {
@@ -3050,7 +3149,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_userid",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "userid"
     },
     {
@@ -3061,7 +3160,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_periode",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "periode"
     },
     {
@@ -3072,7 +3171,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_harikerja",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "harikerja"
     },
     {
@@ -3083,7 +3182,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_totalpenjualan",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "totalpenjualan"
     },
     {
@@ -3094,7 +3193,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_gajipokok",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "gajipokok"
     },
     {
@@ -3105,7 +3204,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_bonuspenjualan",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "bonuspenjualan"
     },
     {
@@ -3116,7 +3215,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_lembur",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "lembur"
     },
     {
@@ -3127,7 +3226,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_potongan",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "potongan"
     },
     {
@@ -3138,7 +3237,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_kasbon",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "kasbon"
     },
     {
@@ -3149,7 +3248,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_totalgaji",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "totalgaji"
     },
     {
@@ -3160,7 +3259,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_status",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "status"
     },
     {
@@ -3171,7 +3270,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_user",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "user"
     },
     {
@@ -3182,7 +3281,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_createdat",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "createdat"
     },
     {
@@ -3193,7 +3292,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_updatedat",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "updatedat"
     },
     {
@@ -3204,7 +3303,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_ispublished",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "ispublished"
     },
     {
@@ -3215,7 +3314,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_formattedperiode",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "formattedperiode"
     },
     {
@@ -3237,7 +3336,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_fromjson",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "fromjson"
     },
     {
@@ -3248,7 +3347,7 @@
       "_origin": "ast",
       "id": "lib_core_models_payroll_model_tojson",
       "community": 104,
-      "community_name": "payroll_model.dart",
+      "community_name": "UserModel",
       "norm_label": "tojson"
     },
     {
@@ -3269,8 +3368,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_penerimaan_model_penerimaanmodel",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "penerimaanmodel"
     },
     {
@@ -3533,8 +3632,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_pengiriman_model_pengirimanmodel",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "pengirimanmodel"
     },
     {
@@ -3802,6 +3901,28 @@
       "norm_label": "map"
     },
     {
+      "label": "pengirimId",
+      "file_type": "code",
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_pengiriman_model_pengirimid",
+      "community": 66,
+      "community_name": "pengiriman_model.dart",
+      "norm_label": "pengirimid"
+    },
+    {
+      "label": "pengirim",
+      "file_type": "code",
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_pengiriman_model_pengirim",
+      "community": 66,
+      "community_name": "pengiriman_model.dart",
+      "norm_label": "pengirim"
+    },
+    {
       "label": "items",
       "file_type": "code",
       "source_file": "lib/core/models/pengiriman_model.dart",
@@ -3855,6 +3976,17 @@
       "community": 66,
       "community_name": "pengiriman_model.dart",
       "norm_label": "isselesai"
+    },
+    {
+      "label": "namaPengirim",
+      "file_type": "code",
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_pengiriman_model_namapengirim",
+      "community": 66,
+      "community_name": "pengiriman_model.dart",
+      "norm_label": "namapengirim"
     },
     {
       "label": "fromJson",
@@ -4053,6 +4185,17 @@
       "community": 58,
       "community_name": "penjualan_model.dart",
       "norm_label": "buktiqrisurl"
+    },
+    {
+      "label": "kembalianDisimpan",
+      "file_type": "code",
+      "source_file": "lib/core/models/penjualan_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_core_models_penjualan_model_kembaliandisimpan",
+      "community": 58,
+      "community_name": "penjualan_model.dart",
+      "norm_label": "kembaliandisimpan"
     },
     {
       "label": "catatan",
@@ -4721,7 +4864,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_models_user_model_usermodel",
-      "community": 82,
+      "community": 104,
       "community_name": "UserModel",
       "norm_label": "usermodel"
     },
@@ -4902,26 +5045,15 @@
       "norm_label": "isshiftsiang"
     },
     {
-      "label": "shiftDisplay",
+      "label": "isShiftLong",
       "file_type": "code",
       "source_file": "lib/core/models/user_model.dart",
       "source_location": null,
       "_origin": "ast",
-      "id": "lib_core_models_user_model_shiftdisplay",
+      "id": "lib_core_models_user_model_isshiftlong",
       "community": 19,
       "community_name": "user_model.dart",
-      "norm_label": "shiftdisplay"
-    },
-    {
-      "label": "shiftFullDisplay",
-      "file_type": "code",
-      "source_file": "lib/core/models/user_model.dart",
-      "source_location": null,
-      "_origin": "ast",
-      "id": "lib_core_models_user_model_shiftfulldisplay",
-      "community": 19,
-      "community_name": "user_model.dart",
-      "norm_label": "shiftfulldisplay"
+      "norm_label": "isshiftlong"
     },
     {
       "label": "fromJson",
@@ -4974,8 +5106,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_client_apiclient",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "apiclient"
     },
     {
@@ -5150,7 +5282,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_io",
-      "community": 94,
+      "community": 62,
       "community_name": "dart:io",
       "norm_label": "dart:io"
     },
@@ -5183,8 +5315,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_http_parser_http_parser_dart",
-      "community": 77,
-      "community_name": "penerimaan_repository_impl.dart",
+      "community": 111,
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "package:http_parser/http_parser.dart"
     },
     {
@@ -5238,8 +5370,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_error_mapper",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "api_error_mapper.dart"
     },
     {
@@ -5249,8 +5381,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_error_mapper_apierrormapper",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "apierrormapper"
     },
     {
@@ -5260,8 +5392,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_error_mapper_networkerrormessage",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "networkerrormessage"
     },
     {
@@ -5271,8 +5403,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_error_mapper_defaulterrormessage",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "defaulterrormessage"
     },
     {
@@ -5282,8 +5414,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_error_mapper_mapstatustousermessage",
-      "community": 20,
-      "community_name": "api_endpoints.dart",
+      "community": 116,
+      "community_name": "api_error_mapper.dart",
       "norm_label": "mapstatustousermessage"
     },
     {
@@ -5293,7 +5425,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "api_exception.dart"
     },
@@ -5304,7 +5436,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_apiexception",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "apiexception"
     },
@@ -5315,7 +5447,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "exception",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "exception"
     },
@@ -5326,7 +5458,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_statuscode",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "statuscode"
     },
@@ -5337,7 +5469,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_rawmessage",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "rawmessage"
     },
@@ -5348,7 +5480,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_usermessage",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "usermessage"
     },
@@ -5359,7 +5491,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_error",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "error"
     },
@@ -5370,7 +5502,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_details",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "details"
     },
@@ -5381,7 +5513,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_exception_tostring",
-      "community": 52,
+      "community": 82,
       "community_name": "List",
       "norm_label": "tostring"
     },
@@ -5403,8 +5535,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_services_activity_history_service_activityhistoryservice",
-      "community": 112,
-      "community_name": "activity_history_service.dart",
+      "community": 125,
+      "community_name": "ActivityHistoryService",
       "norm_label": "activityhistoryservice"
     },
     {
@@ -5668,7 +5800,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "camera_service.dart"
     },
     {
@@ -5679,7 +5811,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service_cameraservice",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "cameraservice"
     },
     {
@@ -5690,7 +5822,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service_picker",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "_picker"
     },
     {
@@ -5701,7 +5833,7 @@
       "_origin": "ast",
       "id": "imagepicker",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "imagepicker"
     },
     {
@@ -5712,7 +5844,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service_takeselfiephoto",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "takeselfiephoto"
     },
     {
@@ -5723,7 +5855,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service_takedocumentphoto",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "takedocumentphoto"
     },
     {
@@ -5734,7 +5866,7 @@
       "_origin": "ast",
       "id": "lib_core_services_camera_service_pickimage",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "pickimage"
     },
     {
@@ -5745,7 +5877,7 @@
       "_origin": "ast",
       "id": "package_image_picker_image_picker_dart",
       "community": 62,
-      "community_name": "camera_service.dart",
+      "community_name": "dart:io",
       "norm_label": "package:image_picker/image_picker.dart"
     },
     {
@@ -5766,8 +5898,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_services_google_auth_service_googleauthservice",
-      "community": 37,
-      "community_name": "home_repository_impl.dart",
+      "community": 25,
+      "community_name": "google_auth_service.dart",
       "norm_label": "googleauthservice"
     },
     {
@@ -5920,8 +6052,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_services_location_service_locationservice",
-      "community": 4,
-      "community_name": "attendance_test.dart",
+      "community": 59,
+      "community_name": "package:flutter/foundation.dart",
       "norm_label": "locationservice"
     },
     {
@@ -6118,7 +6250,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_theme_app_theme",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "app_theme.dart"
     },
@@ -6129,7 +6261,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_theme_app_theme_apptheme",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "apptheme"
     },
@@ -6140,7 +6272,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_google_fonts_google_fonts_dart",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "package:google_fonts/google_fonts.dart"
     },
@@ -6151,7 +6283,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "constants_app_colors_dart",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "../constants/app_colors.dart"
     },
@@ -6734,7 +6866,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_viewmodels_base_view_model",
-      "community": 123,
+      "community": 50,
       "community_name": "bool get",
       "norm_label": "base_view_model.dart"
     },
@@ -6746,7 +6878,7 @@
       "_origin": "ast",
       "id": "lib_core_viewmodels_base_view_model_baseviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "baseviewmodel"
     },
     {
@@ -6757,7 +6889,7 @@
       "_origin": "ast",
       "id": "changenotifier",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "changenotifier"
     },
     {
@@ -6767,7 +6899,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_viewmodels_base_view_model_isdisposed",
-      "community": 123,
+      "community": 50,
       "community_name": "bool get",
       "norm_label": "_isdisposed"
     },
@@ -6778,7 +6910,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_viewmodels_base_view_model_notifylisteners",
-      "community": 123,
+      "community": 50,
       "community_name": "bool get",
       "norm_label": "notifylisteners"
     },
@@ -6789,7 +6921,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_viewmodels_base_view_model_dispose",
-      "community": 123,
+      "community": 50,
       "community_name": "bool get",
       "norm_label": "dispose"
     },
@@ -6932,8 +7064,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_network_api_client_dart",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "../../../core/network/api_client.dart"
     },
     {
@@ -6943,7 +7075,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_services_google_auth_service_dart",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "../../../core/services/google_auth_service.dart"
     },
@@ -6954,7 +7086,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_storage_token_storage_dart",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "../../../core/storage/token_storage.dart"
     },
@@ -7031,7 +7163,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "attendance_history_screen.dart"
     },
@@ -7042,8 +7174,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_attendancehistoryscreen",
-      "community": 36,
-      "community_name": "attendance_history_screen.dart",
+      "community": 21,
+      "community_name": "State",
       "norm_label": "attendancehistoryscreen"
     },
     {
@@ -7053,7 +7185,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "statefulwidget",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "statefulwidget"
     },
@@ -7064,8 +7196,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_attendancehistoryscreenstate",
-      "community": 36,
-      "community_name": "attendance_history_screen.dart",
+      "community": 21,
+      "community_name": "State",
       "norm_label": "_attendancehistoryscreenstate"
     },
     {
@@ -7075,7 +7207,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "state",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "state"
     },
@@ -7086,7 +7218,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_viewmodel",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "viewmodel"
     },
@@ -7097,7 +7229,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_selectedfilter",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "_selectedfilter"
     },
@@ -7108,7 +7240,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_createstate",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "createstate"
     },
@@ -7119,7 +7251,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_initstate",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "initstate"
     },
@@ -7130,7 +7262,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_handlerefresh",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "_handlerefresh"
     },
@@ -7141,7 +7273,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_build",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "build"
     },
@@ -7152,7 +7284,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_filterrecords",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "_filterrecords"
     },
@@ -7163,7 +7295,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_buildsummarycard",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "_buildsummarycard"
     },
@@ -7174,7 +7306,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_attendance_history_screen_buildfilterpill",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "_buildfilterpill"
     },
@@ -7186,7 +7318,7 @@
       "_origin": "ast",
       "id": "core_constants_app_colors_dart",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "../../core/constants/app_colors.dart"
     },
     {
@@ -7218,7 +7350,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widgets_attendance_attendance_detail_modal_dart",
-      "community": 36,
+      "community": 23,
       "community_name": "attendance_history_screen.dart",
       "norm_label": "../../widgets/attendance/attendance_detail_modal.dart"
     },
@@ -7240,8 +7372,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widgets_common_app_header_dart",
-      "community": 36,
-      "community_name": "attendance_history_screen.dart",
+      "community": 106,
+      "community_name": "riwayat_screen.dart",
       "norm_label": "../../widgets/common/app_header.dart"
     },
     {
@@ -7251,8 +7383,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widgets_common_app_toast_dart",
-      "community": 106,
-      "community_name": "riwayat_screen.dart",
+      "community": 23,
+      "community_name": "attendance_history_screen.dart",
       "norm_label": "../../widgets/common/app_toast.dart"
     },
     {
@@ -7724,8 +7856,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_constants_api_endpoints_dart",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "../../../core/constants/api_endpoints.dart"
     },
     {
@@ -7757,7 +7889,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_attendance_viewmodels_attendance_view_model_attendanceviewmodel",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendanceviewmodel"
     },
@@ -7988,8 +8120,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "file",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "file?"
     },
     {
@@ -8180,15 +8312,15 @@
       "norm_label": "usershift"
     },
     {
-      "label": "userShiftLabel",
+      "label": "hasShift",
       "file_type": "code",
       "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
       "source_location": null,
       "_origin": "ast",
-      "id": "lib_screens_attendance_viewmodels_attendance_view_model_usershiftlabel",
+      "id": "lib_screens_attendance_viewmodels_attendance_view_model_hasshift",
       "community": 11,
       "community_name": "attendance_view_model.dart",
-      "norm_label": "usershiftlabel"
+      "norm_label": "hasshift"
     },
     {
       "label": "scheduledClockInTime",
@@ -8211,6 +8343,50 @@
       "community": 11,
       "community_name": "attendance_view_model.dart",
       "norm_label": "scheduledclockouttime"
+    },
+    {
+      "label": "currentMinutes",
+      "file_type": "code",
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_attendance_viewmodels_attendance_view_model_currentminutes",
+      "community": 11,
+      "community_name": "attendance_view_model.dart",
+      "norm_label": "currentminutes"
+    },
+    {
+      "label": "earlyWindowOpenMinutes",
+      "file_type": "code",
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_attendance_viewmodels_attendance_view_model_earlywindowopenminutes",
+      "community": 11,
+      "community_name": "attendance_view_model.dart",
+      "norm_label": "earlywindowopenminutes"
+    },
+    {
+      "label": "isClockInAvailable",
+      "file_type": "code",
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_attendance_viewmodels_attendance_view_model_isclockinavailable",
+      "community": 11,
+      "community_name": "attendance_view_model.dart",
+      "norm_label": "isclockinavailable"
+    },
+    {
+      "label": "hasUnclosedPreviousSession",
+      "file_type": "code",
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_attendance_viewmodels_attendance_view_model_hasunclosedprevioussession",
+      "community": 11,
+      "community_name": "attendance_view_model.dart",
+      "norm_label": "hasunclosedprevioussession"
     },
     {
       "label": "formattedCurrentDate",
@@ -8538,8 +8714,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "texteditingcontroller",
-      "community": 101,
-      "community_name": "attendance_izin_dialog.dart",
+      "community": 61,
+      "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "texteditingcontroller"
     },
     {
@@ -8627,7 +8803,7 @@
       "_origin": "ast",
       "id": "core_constants_app_images_dart",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "../../core/constants/app_images.dart"
     },
     {
@@ -8648,8 +8824,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widgets_common_custom_button_dart",
-      "community": 98,
-      "community_name": "closingan_screen.dart",
+      "community": 22,
+      "community_name": "register_screen.dart",
       "norm_label": "../../widgets/common/custom_button.dart"
     },
     {
@@ -8934,8 +9110,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "auth_repository.dart"
     },
     {
@@ -8945,8 +9121,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_authrepository",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "authrepository"
     },
     {
@@ -8956,8 +9132,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_loginwithemail",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "loginwithemail"
     },
     {
@@ -8967,8 +9143,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_registerwithemail",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "registerwithemail"
     },
     {
@@ -8978,8 +9154,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_loginwithgoogle",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "loginwithgoogle"
     },
     {
@@ -8989,8 +9165,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_logout",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "logout"
     },
     {
@@ -9000,8 +9176,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_getcacheduser",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "getcacheduser"
     },
     {
@@ -9011,8 +9187,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_isauthenticated",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "isauthenticated"
     },
     {
@@ -9022,8 +9198,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_models_auth_response_dart",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "../../../core/models/auth_response.dart"
     },
     {
@@ -9033,7 +9209,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "auth_repository_impl.dart"
     },
@@ -9044,8 +9220,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_authrepositoryimpl",
-      "community": 99,
-      "community_name": "../../core/models/user_model.dart",
+      "community": 89,
+      "community_name": "login_view_model.dart",
       "norm_label": "authrepositoryimpl"
     },
     {
@@ -9055,7 +9231,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_authservice",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "_authservice"
     },
@@ -9066,7 +9242,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_googleauthservice",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "_googleauthservice"
     },
@@ -9077,7 +9253,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_loginwithemail",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "loginwithemail"
     },
@@ -9088,7 +9264,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_registerwithemail",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "registerwithemail"
     },
@@ -9099,7 +9275,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_loginwithgoogle",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "loginwithgoogle"
     },
@@ -9110,7 +9286,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_logout",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "logout"
     },
@@ -9121,7 +9297,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_getcacheduser",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "getcacheduser"
     },
@@ -9132,7 +9308,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_auth_repositories_auth_repository_impl_isauthenticated",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "isauthenticated"
     },
@@ -9154,7 +9330,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "auth_repository_dart",
-      "community": 23,
+      "community": 37,
       "community_name": "auth_repository_impl.dart",
       "norm_label": "auth_repository.dart"
     },
@@ -9177,7 +9353,7 @@
       "_origin": "ast",
       "id": "lib_screens_auth_viewmodels_login_view_model_loginviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "loginviewmodel"
     },
     {
@@ -9342,7 +9518,7 @@
       "_origin": "ast",
       "id": "lib_screens_auth_viewmodels_register_view_model_registerviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "registerviewmodel"
     },
     {
@@ -9726,8 +9902,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_models_closing_model_dart",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 80,
+      "community_name": "closingan_repository.dart",
       "norm_label": "../../core/models/closing_model.dart"
     },
     {
@@ -9935,8 +10111,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widgets_common_confirmation_dialog_dart",
-      "community": 71,
-      "community_name": "penerimaan_screen.dart",
+      "community": 98,
+      "community_name": "closingan_screen.dart",
       "norm_label": "../../widgets/common/confirmation_dialog.dart"
     },
     {
@@ -9979,8 +10155,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_closingan_repositories_closingan_repository_closinganrepository",
-      "community": 80,
-      "community_name": "closingan_repository.dart",
+      "community": 79,
+      "community_name": "closing_history_view_model.dart",
       "norm_label": "closinganrepository"
     },
     {
@@ -10067,8 +10243,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_models_penerimaan_model_dart",
-      "community": 80,
-      "community_name": "closingan_repository.dart",
+      "community": 94,
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "../../core/models/penerimaan_model.dart"
     },
     {
@@ -10079,7 +10255,7 @@
       "_origin": "ast",
       "id": "core_models_penjualan_model_dart",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "../../core/models/penjualan_model.dart"
     },
     {
@@ -10090,7 +10266,7 @@
       "_origin": "ast",
       "id": "core_models_stok_lapak_model_dart",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "../../core/models/stok_lapak_model.dart"
     },
     {
@@ -10111,8 +10287,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_closingan_repositories_closingan_repository_impl_closinganrepositoryimpl",
-      "community": 80,
-      "community_name": "closingan_repository.dart",
+      "community": 79,
+      "community_name": "closing_history_view_model.dart",
       "norm_label": "closinganrepositoryimpl"
     },
     {
@@ -10233,7 +10409,7 @@
       "_origin": "ast",
       "id": "lib_screens_closingan_viewmodels_closing_history_view_model_closinghistoryviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "closinghistoryviewmodel"
     },
     {
@@ -10453,7 +10629,7 @@
       "_origin": "ast",
       "id": "lib_screens_closingan_viewmodels_closingan_view_model_closinganviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "closinganviewmodel"
     },
     {
@@ -11079,7 +11255,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_home_screen_homescreen",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "homescreen"
     },
@@ -11090,7 +11266,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_home_screen_homescreenstate",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "_homescreenstate"
     },
@@ -11464,7 +11640,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "home_repository_impl.dart"
     },
@@ -11486,7 +11662,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_authservice",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "_authservice"
     },
@@ -11497,7 +11673,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_googleauthservice",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "_googleauthservice"
     },
@@ -11508,7 +11684,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_apiclient",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "_apiclient"
     },
@@ -11519,7 +11695,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_refreshprofile",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "refreshprofile"
     },
@@ -11530,7 +11706,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_getcacheduser",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "getcacheduser"
     },
@@ -11541,7 +11717,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_getlapakname",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "getlapakname"
     },
@@ -11552,7 +11728,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_getlapak",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "getlapak"
     },
@@ -11563,7 +11739,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_home_repositories_home_repository_impl_logout",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "logout"
     },
@@ -11574,7 +11750,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "home_repository_dart",
-      "community": 37,
+      "community": 95,
       "community_name": "home_repository_impl.dart",
       "norm_label": "home_repository.dart"
     },
@@ -11597,7 +11773,7 @@
       "_origin": "ast",
       "id": "lib_screens_home_viewmodels_home_view_model_homeviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "homeviewmodel"
     },
     {
@@ -11948,8 +12124,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "viewmodels_penerimaan_view_model_dart",
-      "community": 72,
-      "community_name": "penerimaan_history_screen.dart",
+      "community": 75,
+      "community_name": "pengiriman_list_screen.dart",
       "norm_label": "viewmodels/penerimaan_view_model.dart"
     },
     {
@@ -11970,7 +12146,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penerimaan_penerimaan_screen_penerimaanscreen",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "penerimaanscreen"
     },
@@ -11981,7 +12157,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penerimaan_penerimaan_screen_penerimaanscreenstate",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "_penerimaanscreenstate"
     },
@@ -12300,8 +12476,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "core_models_pengiriman_model_dart",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "../../core/models/pengiriman_model.dart"
     },
     {
@@ -12312,7 +12488,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "penerimaan_repository.dart"
     },
     {
@@ -12322,8 +12498,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_penerimaanrepository",
-      "community": 94,
-      "community_name": "dart:io",
+      "community": 123,
+      "community_name": "PenerimaanRepository",
       "norm_label": "penerimaanrepository"
     },
     {
@@ -12334,7 +12510,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_getavailableshipments",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "getavailableshipments"
     },
     {
@@ -12345,7 +12521,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_getshipmentdetail",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "getshipmentdetail"
     },
     {
@@ -12356,7 +12532,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_updateshipmentstatus",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "updateshipmentstatus"
     },
     {
@@ -12367,7 +12543,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_createpenerimaan",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "createpenerimaan"
     },
     {
@@ -12378,7 +12554,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_uploadnota",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "uploadnota"
     },
     {
@@ -12389,7 +12565,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_getreceipthistory",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "getreceipthistory"
     },
     {
@@ -12400,7 +12576,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_getlapak",
       "community": 94,
-      "community_name": "dart:io",
+      "community_name": "penerimaan_repository.dart",
       "norm_label": "getlapak"
     },
     {
@@ -12421,8 +12597,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penerimaan_repositories_penerimaan_repository_impl_penerimaanrepositoryimpl",
-      "community": 94,
-      "community_name": "dart:io",
+      "community": 123,
+      "community_name": "PenerimaanRepository",
       "norm_label": "penerimaanrepositoryimpl"
     },
     {
@@ -12543,7 +12719,7 @@
       "_origin": "ast",
       "id": "lib_screens_penerimaan_viewmodels_penerimaan_view_model_penerimaanviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "penerimaanviewmodel"
     },
     {
@@ -13086,6 +13262,17 @@
       "norm_label": "_catatancontroller"
     },
     {
+      "label": "_cashController",
+      "file_type": "code",
+      "source_file": "lib/screens/penjualan_stok/penjualan_stok_screen.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_penjualan_stok_penjualan_stok_screen_cashcontroller",
+      "community": 63,
+      "community_name": "penjualan_stok_screen.dart",
+      "norm_label": "_cashcontroller"
+    },
+    {
       "label": "_searchQuery",
       "file_type": "code",
       "source_file": "lib/screens/penjualan_stok/penjualan_stok_screen.dart",
@@ -13291,7 +13478,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "penjualan_stok_repository.dart"
     },
     {
@@ -13301,8 +13488,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_penjualanstokrepository",
-      "community": 65,
-      "community_name": "penjualan_stok_test.dart",
+      "community": 111,
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "penjualanstokrepository"
     },
     {
@@ -13313,7 +13500,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_getstoklapak",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getstoklapak"
     },
     {
@@ -13324,7 +13511,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_createpenjualan",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "createpenjualan"
     },
     {
@@ -13335,7 +13522,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_uploadbuktibayar",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "uploadbuktibayar"
     },
     {
@@ -13346,7 +13533,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_getsaleshistory",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getsaleshistory"
     },
     {
@@ -13357,7 +13544,7 @@
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_getlapak",
       "community": 111,
-      "community_name": "../../core/models/stok_lapak_model.dart",
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getlapak"
     },
     {
@@ -13367,7 +13554,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "penjualan_stok_repository_impl.dart"
     },
@@ -13378,8 +13565,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_penjualanstokrepositoryimpl",
-      "community": 65,
-      "community_name": "penjualan_stok_test.dart",
+      "community": 111,
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "penjualanstokrepositoryimpl"
     },
     {
@@ -13389,7 +13576,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_apiclient",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "_apiclient"
     },
@@ -13400,7 +13587,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_getstoklapak",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getstoklapak"
     },
@@ -13411,7 +13598,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_createpenjualan",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "createpenjualan"
     },
@@ -13422,7 +13609,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_uploadbuktibayar",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "uploadbuktibayar"
     },
@@ -13433,7 +13620,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_getsaleshistory",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getsaleshistory"
     },
@@ -13444,7 +13631,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_repositories_penjualan_stok_repository_impl_getlapak",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "getlapak"
     },
@@ -13455,7 +13642,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "penjualan_stok_repository_dart",
-      "community": 95,
+      "community": 111,
       "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "penjualan_stok_repository.dart"
     },
@@ -13477,8 +13664,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_penjualanstokviewmodel",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "penjualanstokviewmodel"
     },
     {
@@ -13590,6 +13777,28 @@
       "community": 57,
       "community_name": "penjualan_stok_view_model.dart",
       "norm_label": "_buktibayarfile"
+    },
+    {
+      "label": "_customerCash",
+      "file_type": "code",
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_customercash",
+      "community": 57,
+      "community_name": "penjualan_stok_view_model.dart",
+      "norm_label": "_customercash"
+    },
+    {
+      "label": "_isKembalianDisimpan",
+      "file_type": "code",
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_iskembaliandisimpan",
+      "community": 57,
+      "community_name": "penjualan_stok_view_model.dart",
+      "norm_label": "_iskembaliandisimpan"
     },
     {
       "label": "_catatan",
@@ -13922,6 +14131,28 @@
       "norm_label": "setpaymentmethod"
     },
     {
+      "label": "setCustomerCash",
+      "file_type": "code",
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_setcustomercash",
+      "community": 57,
+      "community_name": "penjualan_stok_view_model.dart",
+      "norm_label": "setcustomercash"
+    },
+    {
+      "label": "toggleKembalianDisimpan",
+      "file_type": "code",
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_togglekembaliandisimpan",
+      "community": 57,
+      "community_name": "penjualan_stok_view_model.dart",
+      "norm_label": "togglekembaliandisimpan"
+    },
+    {
       "label": "setCatatan",
       "file_type": "code",
       "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
@@ -14049,7 +14280,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_profile_profile_screen_profilescreen",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "profilescreen"
     },
@@ -14060,7 +14291,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_profile_profile_screen_profilescreenstate",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "_profilescreenstate"
     },
@@ -14160,7 +14391,7 @@
       "_origin": "ast",
       "id": "valuechanged",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "valuechanged"
     },
     {
@@ -14236,7 +14467,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "voidcallback",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "voidcallback"
     },
@@ -14611,7 +14842,7 @@
       "_origin": "ast",
       "id": "lib_screens_profile_viewmodels_profile_view_model_profileviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "profileviewmodel"
     },
     {
@@ -14985,7 +15216,7 @@
       "_origin": "ast",
       "id": "lib_screens_riwayat_viewmodels_riwayat_view_model_riwayatviewmodel",
       "community": 50,
-      "community_name": "BaseViewModel",
+      "community_name": "bool get",
       "norm_label": "riwayatviewmodel"
     },
     {
@@ -15149,8 +15380,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_repositories_slip_gaji_repository_impl",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "slip_gaji_repository_impl.dart"
     },
     {
@@ -15171,8 +15402,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_repositories_slip_gaji_repository_impl_apiclient",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "_apiclient"
     },
     {
@@ -15182,8 +15413,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_repositories_slip_gaji_repository_impl_getpayrolls",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "getpayrolls"
     },
     {
@@ -15193,8 +15424,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_repositories_slip_gaji_repository_impl_getslipgajibypayrollid",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "getslipgajibypayrollid"
     },
     {
@@ -15204,8 +15435,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "slip_gaji_repository_dart",
-      "community": 95,
-      "community_name": "penjualan_stok_repository_impl.dart",
+      "community": 78,
+      "community_name": "absensi_repository_impl.dart",
       "norm_label": "slip_gaji_repository.dart"
     },
     {
@@ -15380,8 +15611,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_slip_gaji_screen_slipgajiscreen",
-      "community": 102,
-      "community_name": "slip_gaji_screen.dart",
+      "community": 21,
+      "community_name": "State",
       "norm_label": "slipgajiscreen"
     },
     {
@@ -15391,8 +15622,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_slip_gaji_screen_slipgajiscreenstate",
-      "community": 102,
-      "community_name": "slip_gaji_screen.dart",
+      "community": 21,
+      "community_name": "State",
       "norm_label": "_slipgajiscreenstate"
     },
     {
@@ -15556,8 +15787,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_screens_slip_gaji_viewmodels_slip_gaji_view_model_slipgajiviewmodel",
-      "community": 102,
-      "community_name": "slip_gaji_screen.dart",
+      "community": 50,
+      "community_name": "bool get",
       "norm_label": "slipgajiviewmodel"
     },
     {
@@ -15908,7 +16139,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_action_buttons",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendance_action_buttons.dart"
     },
@@ -15919,7 +16150,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_action_buttons_attendanceactionbuttons",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendanceactionbuttons"
     },
@@ -15930,7 +16161,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_action_buttons_viewmodel",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "viewmodel"
     },
@@ -15941,7 +16172,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_action_buttons_build",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "build"
     },
@@ -15952,7 +16183,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_action_buttons_confirmclockout",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "_confirmclockout"
     },
@@ -15963,7 +16194,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "screens_attendance_viewmodels_attendance_view_model_dart",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "../../screens/attendance/viewmodels/attendance_view_model.dart"
     },
@@ -15985,7 +16216,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "common_confirmation_dialog_dart",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "../common/confirmation_dialog.dart"
     },
@@ -15996,7 +16227,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_clock_card",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendance_clock_card.dart"
     },
@@ -16007,7 +16238,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_clock_card_attendanceclockcard",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendanceclockcard"
     },
@@ -16018,7 +16249,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_clock_card_viewmodel",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "viewmodel"
     },
@@ -16029,7 +16260,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_clock_card_build",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "build"
     },
@@ -16040,7 +16271,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_clock_card_resolvestatustext",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "_resolvestatustext"
     },
@@ -16216,7 +16447,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "attendance_status_badge_dart",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendance_status_badge.dart"
     },
@@ -16227,7 +16458,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_history_table",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendance_history_table.dart"
     },
@@ -16238,7 +16469,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_history_table_attendancehistorytable",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendancehistorytable"
     },
@@ -16249,7 +16480,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_history_table_viewmodel",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "viewmodel"
     },
@@ -16260,7 +16491,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_history_table_onseealltap",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "onseealltap"
     },
@@ -16271,7 +16502,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_history_table_build",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "build"
     },
@@ -16282,7 +16513,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "attendance_detail_modal_dart",
-      "community": 53,
+      "community": 101,
       "community_name": "attendance_action_buttons.dart",
       "norm_label": "attendance_detail_modal.dart"
     },
@@ -16293,7 +16524,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "attendance_izin_dialog.dart"
     },
@@ -16304,7 +16535,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_attendanceizindialog",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "attendanceizindialog"
     },
@@ -16315,7 +16546,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_attendanceizindialogstate",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "_attendanceizindialogstate"
     },
@@ -16326,7 +16557,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_viewmodel",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "viewmodel"
     },
@@ -16337,7 +16568,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_keterangancontroller",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "_keterangancontroller"
     },
@@ -16348,7 +16579,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_issubmitting",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "_issubmitting"
     },
@@ -16359,7 +16590,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_error",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "_error"
     },
@@ -16370,7 +16601,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_show",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "show"
     },
@@ -16381,7 +16612,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_createstate",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "createstate"
     },
@@ -16392,7 +16623,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_dispose",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "dispose"
     },
@@ -16403,7 +16634,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_handlesubmit",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "_handlesubmit"
     },
@@ -16414,7 +16645,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_izin_dialog_build",
-      "community": 101,
+      "community": 56,
       "community_name": "attendance_izin_dialog.dart",
       "norm_label": "build"
     },
@@ -16425,8 +16656,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "common_custom_button_dart",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "../common/custom_button.dart"
     },
     {
@@ -16436,7 +16667,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "attendance_map_card.dart"
     },
@@ -16447,7 +16678,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_attendancemapcard",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "attendancemapcard"
     },
@@ -16458,7 +16689,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_attendancemapcardstate",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "_attendancemapcardstate"
     },
@@ -16469,7 +16700,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_viewmodel",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "viewmodel"
     },
@@ -16480,7 +16711,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_mapcontroller",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "_mapcontroller"
     },
@@ -16491,7 +16722,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "mapcontroller",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "mapcontroller"
     },
@@ -16502,7 +16733,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_createstate",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "createstate"
     },
@@ -16513,7 +16744,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_build",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "build"
     },
@@ -16524,7 +16755,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_buildstallpin",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "_buildstallpin"
     },
@@ -16535,7 +16766,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_builduserradar",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "_builduserradar"
     },
@@ -16546,7 +16777,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_attendance_attendance_map_card_buildgeofencebadge",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "_buildgeofencebadge"
     },
@@ -16557,7 +16788,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_map_flutter_map_dart",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "package:flutter_map/flutter_map.dart"
     },
@@ -16568,7 +16799,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_latlong2_latlong_dart",
-      "community": 56,
+      "community": 53,
       "community_name": "attendance_map_card.dart",
       "norm_label": "package:latlong2/latlong.dart"
     },
@@ -16657,7 +16888,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "google_login_button.dart"
     },
     {
@@ -16668,7 +16899,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_googleloginbutton",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "googleloginbutton"
     },
     {
@@ -16679,7 +16910,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_googleloginbuttonstate",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "_googleloginbuttonstate"
     },
     {
@@ -16690,7 +16921,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_onpressed",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "onpressed"
     },
     {
@@ -16701,7 +16932,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_isloading",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "isloading"
     },
     {
@@ -16712,7 +16943,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_label",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "label"
     },
     {
@@ -16723,7 +16954,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_ispressed",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "_ispressed"
     },
     {
@@ -16734,7 +16965,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_createstate",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "createstate"
     },
     {
@@ -16745,7 +16976,7 @@
       "_origin": "ast",
       "id": "lib_widgets_auth_login_google_login_button_build",
       "community": 118,
-      "community_name": "State",
+      "community_name": "google_login_button.dart",
       "norm_label": "build"
     },
     {
@@ -16755,7 +16986,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_auth_login_skyline_footer",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "skyline_footer.dart"
     },
@@ -16766,8 +16997,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_auth_login_skyline_footer_skylinefooter",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 105,
+      "community_name": "StatelessWidget",
       "norm_label": "skylinefooter"
     },
     {
@@ -16799,7 +17030,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_auth_login_skyline_footer_build",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "build"
     },
@@ -16810,7 +17041,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_auth_login_skyline_footer_paint",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "paint"
     },
@@ -16821,7 +17052,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_auth_login_skyline_footer_shouldrepaint",
-      "community": 108,
+      "community": 5,
       "community_name": "package:flutter/material.dart",
       "norm_label": "shouldrepaint"
     },
@@ -16832,8 +17063,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "closing_detail_sheet.dart"
     },
     {
@@ -16843,8 +17074,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_closingdetailsheet",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "closingdetailsheet"
     },
     {
@@ -16854,8 +17085,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_item",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "item"
     },
     {
@@ -16865,8 +17096,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_show",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "show"
     },
     {
@@ -16876,8 +17107,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_build",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "build"
     },
     {
@@ -16887,8 +17118,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_buildinforow",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "_buildinforow"
     },
     {
@@ -16898,8 +17129,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_detail_sheet_builddatarow",
-      "community": 121,
-      "community_name": "closing_detail_sheet.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "_builddatarow"
     },
     {
@@ -16909,8 +17140,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "attendance_attendance_status_badge_dart",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "../attendance/attendance_status_badge.dart"
     },
     {
@@ -17316,8 +17547,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "common_custom_text_field_dart",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "../common/custom_text_field.dart"
     },
     {
@@ -17327,8 +17558,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "common_dynamic_field_hint_dart",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "../common/dynamic_field_hint.dart"
     },
     {
@@ -17338,8 +17569,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "closing_sales_summary_card.dart"
     },
     {
@@ -17349,8 +17580,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_closingsalessummarycard",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "closingsalessummarycard"
     },
     {
@@ -17360,8 +17591,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_tunai",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "tunai"
     },
     {
@@ -17371,8 +17602,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_qris",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "qris"
     },
     {
@@ -17382,8 +17613,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_transfer",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "transfer"
     },
     {
@@ -17393,8 +17624,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_totalomset",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "totalomset"
     },
     {
@@ -17404,8 +17635,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_build",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "build"
     },
     {
@@ -17415,8 +17646,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_closingan_closing_sales_summary_card_buildrow",
-      "community": 47,
-      "community_name": "../../core/utils/currency_formatter.dart",
+      "community": 110,
+      "community_name": "closing_sales_summary_card.dart",
       "norm_label": "_buildrow"
     },
     {
@@ -18471,7 +18702,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "dynamic_field_hint.dart"
     },
@@ -18482,7 +18713,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint_dynamicfieldhint",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "dynamicfieldhint"
     },
@@ -18493,7 +18724,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint_hinttext",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "hinttext"
     },
@@ -18504,7 +18735,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint_iswarning",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "iswarning"
     },
@@ -18515,7 +18746,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint_ontap",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "ontap"
     },
@@ -18526,7 +18757,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_dynamic_field_hint_build",
-      "community": 91,
+      "community": 121,
       "community_name": "VoidCallback",
       "norm_label": "build"
     },
@@ -18647,8 +18878,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "lapak_info_card.dart"
     },
     {
@@ -18658,8 +18889,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_lapakinfocard",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "lapakinfocard"
     },
     {
@@ -18669,8 +18900,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_stall",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "stall"
     },
     {
@@ -18680,8 +18911,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_customtitle",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "customtitle"
     },
     {
@@ -18691,8 +18922,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_statustext",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "statustext"
     },
     {
@@ -18702,8 +18933,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_isverified",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "isverified"
     },
     {
@@ -18713,8 +18944,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_common_lapak_info_card_build",
-      "community": 108,
-      "community_name": "package:flutter/material.dart",
+      "community": 107,
+      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
       "norm_label": "build"
     },
     {
@@ -19329,8 +19560,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "penerimaan_catatan_card.dart"
     },
     {
@@ -19340,8 +19571,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_penerimaancatatancard",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "penerimaancatatancard"
     },
     {
@@ -19351,8 +19582,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_penerimaancatatancardstate",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "_penerimaancatatancardstate"
     },
     {
@@ -19362,8 +19593,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_catatan",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "catatan"
     },
     {
@@ -19373,8 +19604,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_oncatatanchanged",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "oncatatanchanged"
     },
     {
@@ -19384,8 +19615,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_hinttext",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "hinttext"
     },
     {
@@ -19395,8 +19626,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_hasdiscrepancy",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "hasdiscrepancy"
     },
     {
@@ -19406,8 +19637,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_totalselisih",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "totalselisih"
     },
     {
@@ -19417,8 +19648,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_discrepantitems",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "discrepantitems"
     },
     {
@@ -19428,8 +19659,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_controller",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "_controller"
     },
     {
@@ -19439,8 +19670,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_createstate",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "createstate"
     },
     {
@@ -19450,8 +19681,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_initstate",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "initstate"
     },
     {
@@ -19461,8 +19692,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_didupdatewidget",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "didupdatewidget"
     },
     {
@@ -19472,8 +19703,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_dispose",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "dispose"
     },
     {
@@ -19483,8 +19714,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_handlehinttap",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "_handlehinttap"
     },
     {
@@ -19494,8 +19725,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_catatan_card_build",
-      "community": 61,
-      "community_name": "penerimaan_catatan_card.dart",
+      "community": 55,
+      "community_name": "closing_reconciliation_card.dart",
       "norm_label": "build"
     },
     {
@@ -19505,8 +19736,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "penerimaan_detail_sheet.dart"
     },
     {
@@ -19516,8 +19747,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet_penerimaandetailsheet",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "penerimaandetailsheet"
     },
     {
@@ -19527,8 +19758,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet_receipt",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "receipt"
     },
     {
@@ -19538,8 +19769,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet_show",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "show"
     },
     {
@@ -19549,8 +19780,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet_build",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "build"
     },
     {
@@ -19560,8 +19791,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_detail_sheet_buildinforow",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 68,
+      "community_name": "pengiriman_inspection_sheet.dart",
       "norm_label": "_buildinforow"
     },
     {
@@ -19626,8 +19857,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "penerimaan_received_items_card.dart"
     },
     {
@@ -19637,8 +19868,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card_penerimaanreceiveditemscard",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "penerimaanreceiveditemscard"
     },
     {
@@ -19648,8 +19879,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card_shipment",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "shipment"
     },
     {
@@ -19659,8 +19890,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card_items",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "items"
     },
     {
@@ -19670,8 +19901,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card_onbacktap",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "onbacktap"
     },
     {
@@ -19681,8 +19912,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_received_items_card_build",
-      "community": 68,
-      "community_name": "pengiriman_inspection_sheet.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "build"
     },
     {
@@ -19692,8 +19923,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "penerimaan_shipment_picker_card.dart"
     },
     {
@@ -19703,8 +19934,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card_penerimaanshipmentpickercard",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "penerimaanshipmentpickercard"
     },
     {
@@ -19714,8 +19945,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card_shipments",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "shipments"
     },
     {
@@ -19725,8 +19956,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card_onshipmenttap",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "onshipmenttap"
     },
     {
@@ -19736,8 +19967,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card_onseealltap",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "onseealltap"
     },
     {
@@ -19747,8 +19978,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_penerimaan_shipment_picker_card_build",
-      "community": 107,
-      "community_name": "package:iconsax_flutter/iconsax_flutter.dart",
+      "community": 121,
+      "community_name": "VoidCallback",
       "norm_label": "build"
     },
     {
@@ -19769,7 +20000,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_pengiriman_inspection_sheet_pengirimaninspectionsheet",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "pengirimaninspectionsheet"
     },
@@ -19780,7 +20011,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penerimaan_pengiriman_inspection_sheet_pengirimaninspectionsheetstate",
-      "community": 118,
+      "community": 21,
       "community_name": "State",
       "norm_label": "_pengirimaninspectionsheetstate"
     },
@@ -19912,8 +20143,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "penjualan_bukti_upload_card.dart"
     },
     {
@@ -19923,8 +20154,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_penjualanbuktiuploadcard",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "penjualanbuktiuploadcard"
     },
     {
@@ -19934,8 +20165,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_photofile",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "photofile"
     },
     {
@@ -19945,8 +20176,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_paymentmethod",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "paymentmethod"
     },
     {
@@ -19956,8 +20187,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_oncameratap",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "oncameratap"
     },
     {
@@ -19967,8 +20198,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_ongallerytap",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "ongallerytap"
     },
     {
@@ -19978,8 +20209,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_onremovetap",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "onremovetap"
     },
     {
@@ -19989,8 +20220,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_bukti_upload_card_build",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "build"
     },
     {
@@ -20000,8 +20231,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "common_proof_photo_upload_card_dart",
-      "community": 90,
-      "community_name": "proof_photo_upload_card.dart",
+      "community": 36,
+      "community_name": "penjualan_bukti_upload_card.dart",
       "norm_label": "../common/proof_photo_upload_card.dart"
     },
     {
@@ -20012,7 +20243,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_payment_method_selector",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "penjualan_payment_method_selector.dart"
     },
     {
@@ -20023,7 +20254,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_payment_method_selector_penjualanpaymentmethodselector",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "penjualanpaymentmethodselector"
     },
     {
@@ -20034,7 +20265,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_payment_method_selector_selectedmethod",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "selectedmethod"
     },
     {
@@ -20045,7 +20276,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_payment_method_selector_onmethodselected",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "onmethodselected"
     },
     {
@@ -20056,7 +20287,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_payment_method_selector_build",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "build"
     },
     {
@@ -20221,7 +20452,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "penjualan_stok_tab_bar.dart"
     },
     {
@@ -20231,8 +20462,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar_penjualanstoktabbar",
-      "community": 105,
-      "community_name": "StatelessWidget",
+      "community": 5,
+      "community_name": "package:flutter/material.dart",
       "norm_label": "penjualanstoktabbar"
     },
     {
@@ -20243,7 +20474,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar_selectedindex",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "selectedindex"
     },
     {
@@ -20254,7 +20485,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar_ontabchanged",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "ontabchanged"
     },
     {
@@ -20265,7 +20496,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar_build",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "build"
     },
     {
@@ -20276,7 +20507,7 @@
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_penjualan_stok_tab_bar_buildtabbutton",
       "community": 5,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "_buildtabbutton"
     },
     {
@@ -20286,8 +20517,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "riwayat_penjualan_sheet.dart"
     },
     {
@@ -20297,8 +20528,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_riwayatpenjualansheet",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "riwayatpenjualansheet"
     },
     {
@@ -20308,8 +20539,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_viewmodel",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "viewmodel"
     },
     {
@@ -20319,8 +20550,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_show",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "show"
     },
     {
@@ -20330,8 +20561,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_build",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "build"
     },
     {
@@ -20341,8 +20572,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_buildhistorycard",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "_buildhistorycard"
     },
     {
@@ -20352,8 +20583,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_riwayat_penjualan_sheet_showfullimagemodal",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "_showfullimagemodal"
     },
     {
@@ -20363,8 +20594,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "screens_penjualan_stok_viewmodels_penjualan_stok_view_model_dart",
-      "community": 21,
-      "community_name": "stok_saat_ini_list_view.dart",
+      "community": 96,
+      "community_name": "riwayat_penjualan_sheet.dart",
       "norm_label": "../../screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart"
     },
     {
@@ -20374,8 +20605,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "stok_balance_card.dart"
     },
     {
@@ -20385,8 +20616,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_stokbalancecard",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "stokbalancecard"
     },
     {
@@ -20396,8 +20627,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_stockitem",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "stockitem"
     },
     {
@@ -20407,8 +20638,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_issummary",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "issummary"
     },
     {
@@ -20418,8 +20649,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_totalawal",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "totalawal"
     },
     {
@@ -20429,8 +20660,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_totalmasuk",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "totalmasuk"
     },
     {
@@ -20440,8 +20671,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_totalterjual",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "totalterjual"
     },
     {
@@ -20451,8 +20682,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_totalakhir",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "totalakhir"
     },
     {
@@ -20462,8 +20693,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_build",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "build"
     },
     {
@@ -20473,8 +20704,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_buildmetriccolumn",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "_buildmetriccolumn"
     },
     {
@@ -20484,8 +20715,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_balance_card_builddivider",
-      "community": 110,
-      "community_name": "stok_balance_card.dart",
+      "community": 47,
+      "community_name": "../../core/utils/currency_formatter.dart",
       "norm_label": "_builddivider"
     },
     {
@@ -20495,7 +20726,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "stok_saat_ini_list_view.dart"
     },
@@ -20506,7 +20737,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_stoksaatinilistview",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "stoksaatinilistview"
     },
@@ -20517,7 +20748,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_stoksaatinilistviewstate",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "_stoksaatinilistviewstate"
     },
@@ -20528,7 +20759,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_viewmodel",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "viewmodel"
     },
@@ -20539,7 +20770,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_searchcontroller",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "_searchcontroller"
     },
@@ -20550,7 +20781,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_searchquery",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "_searchquery"
     },
@@ -20561,7 +20792,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_createstate",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "createstate"
     },
@@ -20572,7 +20803,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_dispose",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "dispose"
     },
@@ -20583,7 +20814,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_penjualan_stok_stok_saat_ini_list_view_build",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "build"
     },
@@ -20594,7 +20825,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "stok_balance_card_dart",
-      "community": 21,
+      "community": 61,
       "community_name": "stok_saat_ini_list_view.dart",
       "norm_label": "stok_balance_card.dart"
     },
@@ -20693,7 +20924,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "salary_breakdown_card.dart"
     },
@@ -20704,7 +20935,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_salarybreakdowncard",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "salarybreakdowncard"
     },
@@ -20715,7 +20946,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_gajipokok",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "gajipokok"
     },
@@ -20726,7 +20957,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_bonuspenjualan",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "bonuspenjualan"
     },
@@ -20737,7 +20968,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_lembur",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "lembur"
     },
@@ -20748,7 +20979,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_potongan",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "potongan"
     },
@@ -20759,7 +20990,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_kasbon",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "kasbon"
     },
@@ -20770,7 +21001,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_totalgaji",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "totalgaji"
     },
@@ -20781,7 +21012,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_isopening",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "isopening"
     },
@@ -20792,7 +21023,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_onlihatdetail",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "onlihatdetail"
     },
@@ -20803,7 +21034,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_build",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "build"
     },
@@ -20814,7 +21045,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_breakdown_card_buildrow",
-      "community": 96,
+      "community": 108,
       "community_name": "salary_breakdown_card.dart",
       "norm_label": "_buildrow"
     },
@@ -20947,7 +21178,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "salary_history_table.dart"
     },
     {
@@ -20958,7 +21189,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_salaryhistorytable",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "salaryhistorytable"
     },
     {
@@ -20969,7 +21200,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_items",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "items"
     },
     {
@@ -20980,7 +21211,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_selectedpayrollid",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "selectedpayrollid"
     },
     {
@@ -20991,7 +21222,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_onrowtap",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "onrowtap"
     },
     {
@@ -21002,7 +21233,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_onseealltap",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "onseealltap"
     },
     {
@@ -21013,7 +21244,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_title",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "title"
     },
     {
@@ -21024,19 +21255,8 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_previewrowlimit",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "previewrowlimit"
-    },
-    {
-      "label": "static const int",
-      "file_type": "code",
-      "source_file": null,
-      "source_location": null,
-      "_origin": "ast",
-      "id": "static_const_int",
-      "community": 91,
-      "community_name": "VoidCallback",
-      "norm_label": "static const int"
     },
     {
       "label": "build",
@@ -21046,7 +21266,7 @@
       "_origin": "ast",
       "id": "lib_widgets_slip_gaji_salary_history_table_build",
       "community": 91,
-      "community_name": "VoidCallback",
+      "community_name": "salary_history_table.dart",
       "norm_label": "build"
     },
     {
@@ -21747,8 +21967,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_attendance_test_fakelocationservice",
-      "community": 4,
-      "community_name": "attendance_test.dart",
+      "community": 59,
+      "community_name": "package:flutter/foundation.dart",
       "norm_label": "fakelocationservice"
     },
     {
@@ -21816,6 +22036,17 @@
       "community": 4,
       "community_name": "attendance_test.dart",
       "norm_label": "uploadphotocallcount"
+    },
+    {
+      "label": "clockOutCallCount",
+      "file_type": "code",
+      "source_file": "test/attendance_test.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "test_attendance_test_clockoutcallcount",
+      "community": 4,
+      "community_name": "attendance_test.dart",
+      "norm_label": "clockoutcallcount"
     },
     {
       "label": "isServiceEnabled",
@@ -21967,8 +22198,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_pot_apps_core_models_lapak_model_dart",
-      "community": 65,
-      "community_name": "penjualan_stok_test.dart",
+      "community": 73,
+      "community_name": "penerimaan_bugs_and_minors_test.dart",
       "norm_label": "package:pot_apps/core/models/lapak_model.dart"
     },
     {
@@ -21978,8 +22209,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_pot_apps_core_models_user_model_dart",
-      "community": 109,
-      "community_name": "package:flutter_test/flutter_test.dart",
+      "community": 122,
+      "community_name": "package:pot_apps/core/models/user_model.dart",
       "norm_label": "package:pot_apps/core/models/user_model.dart"
     },
     {
@@ -22176,8 +22407,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_closingan_test_mockclosinganrepository",
-      "community": 80,
-      "community_name": "closingan_repository.dart",
+      "community": 79,
+      "community_name": "closing_history_view_model.dart",
       "norm_label": "mockclosinganrepository"
     },
     {
@@ -22528,8 +22759,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_penerimaan_bugs_and_minors_test_mockpenerimaanrepo",
-      "community": 94,
-      "community_name": "dart:io",
+      "community": 123,
+      "community_name": "PenerimaanRepository",
       "norm_label": "mockpenerimaanrepo"
     },
     {
@@ -22649,8 +22880,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_pot_apps_core_models_pengiriman_model_dart",
-      "community": 73,
-      "community_name": "penerimaan_bugs_and_minors_test.dart",
+      "community": 74,
+      "community_name": "penerimaan_test.dart",
       "norm_label": "package:pot_apps/core/models/pengiriman_model.dart"
     },
     {
@@ -22715,8 +22946,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_penerimaan_test_mockpenerimaanrepository",
-      "community": 94,
-      "community_name": "dart:io",
+      "community": 123,
+      "community_name": "PenerimaanRepository",
       "norm_label": "mockpenerimaanrepository"
     },
     {
@@ -22852,14 +23083,25 @@
       "norm_label": "penjualan_stok_test.dart"
     },
     {
+      "label": "MockActivityHistoryService",
+      "file_type": "code",
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "test_penjualan_stok_test_mockactivityhistoryservice",
+      "community": 125,
+      "community_name": "ActivityHistoryService",
+      "norm_label": "mockactivityhistoryservice"
+    },
+    {
       "label": "MockPenjualanStokRepository",
       "file_type": "code",
       "source_file": "test/penjualan_stok_test.dart",
       "source_location": null,
       "_origin": "ast",
       "id": "test_penjualan_stok_test_mockpenjualanstokrepository",
-      "community": 65,
-      "community_name": "penjualan_stok_test.dart",
+      "community": 111,
+      "community_name": "penjualan_stok_repository_impl.dart",
       "norm_label": "mockpenjualanstokrepository"
     },
     {
@@ -22894,6 +23136,17 @@
       "community": 65,
       "community_name": "penjualan_stok_test.dart",
       "norm_label": "createcalled"
+    },
+    {
+      "label": "record",
+      "file_type": "code",
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "test_penjualan_stok_test_record",
+      "community": 65,
+      "community_name": "penjualan_stok_test.dart",
+      "norm_label": "record"
     },
     {
       "label": "getStokLapak",
@@ -23006,6 +23259,28 @@
       "norm_label": "package:pot_apps/widgets/penjualan_stok/stok_saat_ini_list_view.dart"
     },
     {
+      "label": "package:pot_apps/core/services/activity_history_service.dart",
+      "file_type": "code",
+      "source_file": null,
+      "source_location": null,
+      "_origin": "ast",
+      "id": "package_pot_apps_core_services_activity_history_service_dart",
+      "community": 65,
+      "community_name": "penjualan_stok_test.dart",
+      "norm_label": "package:pot_apps/core/services/activity_history_service.dart"
+    },
+    {
+      "label": "package:pot_apps/core/models/activity_history_model.dart",
+      "file_type": "code",
+      "source_file": null,
+      "source_location": null,
+      "_origin": "ast",
+      "id": "package_pot_apps_core_models_activity_history_model_dart",
+      "community": 65,
+      "community_name": "penjualan_stok_test.dart",
+      "norm_label": "package:pot_apps/core/models/activity_history_model.dart"
+    },
+    {
       "label": "utils_test.dart",
       "file_type": "code",
       "source_file": "test/utils_test.dart",
@@ -23045,8 +23320,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_widget_test",
-      "community": 109,
-      "community_name": "package:flutter_test/flutter_test.dart",
+      "community": 122,
+      "community_name": "package:pot_apps/core/models/user_model.dart",
       "norm_label": "widget_test.dart"
     },
     {
@@ -23056,8 +23331,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_widget_test_main",
-      "community": 109,
-      "community_name": "package:flutter_test/flutter_test.dart",
+      "community": 122,
+      "community_name": "package:pot_apps/core/models/user_model.dart",
       "norm_label": "main"
     },
     {
@@ -23067,8 +23342,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_pot_apps_main_dart",
-      "community": 109,
-      "community_name": "package:flutter_test/flutter_test.dart",
+      "community": 122,
+      "community_name": "package:pot_apps/core/models/user_model.dart",
       "norm_label": "package:pot_apps/main.dart"
     },
     {
@@ -23078,8 +23353,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_pot_apps_screens_home_home_screen_dart",
-      "community": 109,
-      "community_name": "package:flutter_test/flutter_test.dart",
+      "community": 122,
+      "community_name": "package:pot_apps/core/models/user_model.dart",
       "norm_label": "package:pot_apps/screens/home/home_screen.dart"
     },
     {
@@ -26235,6 +26510,28 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_constants_app_constants",
+      "target": "lib_core_constants_app_constants_defaultshiftlongend"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_constants_app_constants",
+      "target": "lib_core_constants_app_constants_defaultshiftlongstart"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_constants_app_constants",
       "target": "lib_core_constants_app_constants_defaultshiftpagiend"
     },
     {
@@ -26313,6 +26610,17 @@
       "_origin": "ast",
       "source": "lib_core_constants_app_constants",
       "target": "lib_core_constants_app_constants_deliveryselesai"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_constants_app_constants",
+      "target": "lib_core_constants_app_constants_earlyclockinwindowminutes"
     },
     {
       "relation": "defines",
@@ -26455,6 +26763,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_constants_app_constants",
+      "target": "lib_core_constants_app_constants_shiftlong"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_constants_app_constants",
       "target": "lib_core_constants_app_constants_shiftpagi"
     },
     {
@@ -26489,6 +26808,30 @@
       "_origin": "ast",
       "source": "lib_core_constants_app_constants",
       "target": "lib_core_constants_app_constants_statusinactive"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/constants/app_constants.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "context": "variable_type",
+      "_origin": "ast",
+      "source": "lib_core_constants_app_constants",
+      "target": "static_const_int"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/widgets/slip_gaji/salary_history_table.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "context": "variable_type",
+      "_origin": "ast",
+      "source": "lib_widgets_slip_gaji_salary_history_table",
+      "target": "static_const_int"
     },
     {
       "relation": "defines",
@@ -26667,6 +27010,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_models_absensi_model",
+      "target": "lib_core_models_absensi_model_getshifthours"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_absensi_model",
       "target": "lib_core_models_absensi_model_id"
     },
     {
@@ -26679,6 +27033,17 @@
       "_origin": "ast",
       "source": "lib_core_models_absensi_model",
       "target": "lib_core_models_absensi_model_isclockedout"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_absensi_model",
+      "target": "lib_core_models_absensi_model_isshiftlong"
     },
     {
       "relation": "defines",
@@ -26812,6 +27177,17 @@
       "context": "variable_type",
       "source": "lib_core_models_absensi_model",
       "target": "lib_core_models_absensi_model_shiftlapakmodel"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/absensi_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_absensi_model",
+      "target": "lib_core_models_absensi_model_shiftlong"
     },
     {
       "relation": "defines",
@@ -28932,6 +29308,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_models_lapak_model",
+      "target": "lib_core_models_lapak_model_shiftlong"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/lapak_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_lapak_model",
       "target": "lib_core_models_lapak_model_shiftpagi"
     },
     {
@@ -29484,18 +29871,6 @@
       "context": "variable_type",
       "_origin": "ast",
       "source": "lib_core_models_stok_lapak_model",
-      "target": "string_get"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/core/models/user_model.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "context": "variable_type",
-      "_origin": "ast",
-      "source": "lib_core_models_user_model",
       "target": "string_get"
     },
     {
@@ -30128,7 +30503,29 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_models_pengiriman_model",
+      "target": "lib_core_models_pengiriman_model_namapengirim"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_pengiriman_model",
       "target": "lib_core_models_pengiriman_model_namaproduk"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_pengiriman_model",
+      "target": "lib_core_models_pengiriman_model_pengirim"
     },
     {
       "relation": "defines",
@@ -30163,6 +30560,17 @@
       "_origin": "ast",
       "source": "lib_core_models_pengiriman_model",
       "target": "lib_core_models_pengiriman_model_pengirimanmodel"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/pengiriman_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_pengiriman_model",
+      "target": "lib_core_models_pengiriman_model_pengirimid"
     },
     {
       "relation": "defines",
@@ -30366,6 +30774,18 @@
       "context": "variable_type",
       "_origin": "ast",
       "source": "lib_core_models_stok_lapak_model",
+      "target": "int_get"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "context": "variable_type",
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "int_get"
     },
     {
@@ -30583,6 +31003,17 @@
       "_origin": "ast",
       "source": "lib_core_models_penjualan_model",
       "target": "lib_core_models_penjualan_model_items"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/penjualan_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_penjualan_model",
+      "target": "lib_core_models_penjualan_model_kembaliandisimpan"
     },
     {
       "relation": "defines",
@@ -31403,6 +31834,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_core_models_user_model",
+      "target": "lib_core_models_user_model_isshiftlong"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/core/models/user_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_core_models_user_model",
       "target": "lib_core_models_user_model_isshiftpagi"
     },
     {
@@ -31470,28 +31912,6 @@
       "_origin": "ast",
       "source": "lib_core_models_user_model",
       "target": "lib_core_models_user_model_shift"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/core/models/user_model.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_core_models_user_model",
-      "target": "lib_core_models_user_model_shiftdisplay"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/core/models/user_model.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_core_models_user_model",
-      "target": "lib_core_models_user_model_shiftfulldisplay"
     },
     {
       "relation": "defines",
@@ -32921,6 +33341,17 @@
       "target": "lib_core_services_activity_history_service_activityhistoryservice"
     },
     {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_penjualan_stok_test_mockactivityhistoryservice",
+      "target": "lib_core_services_activity_history_service_activityhistoryservice"
+    },
+    {
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -33826,6 +34257,17 @@
       "_origin": "ast",
       "source": "lib_core_utils_currency_formatter_currencyinputformatter",
       "target": "textinputformatter"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/penjualan_stok_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_penjualan_stok_screen",
+      "target": "package_flutter_services_dart"
     },
     {
       "relation": "imports",
@@ -39259,6 +39701,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_attendance_viewmodels_attendance_view_model",
+      "target": "lib_screens_attendance_viewmodels_attendance_view_model_currentminutes"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "lib_screens_attendance_viewmodels_attendance_view_model_currentposition"
     },
     {
@@ -39303,6 +39756,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_attendance_viewmodels_attendance_view_model",
+      "target": "lib_screens_attendance_viewmodels_attendance_view_model_earlywindowopenminutes"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "lib_screens_attendance_viewmodels_attendance_view_model_errormessage"
     },
     {
@@ -39336,7 +39800,29 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_attendance_viewmodels_attendance_view_model",
+      "target": "lib_screens_attendance_viewmodels_attendance_view_model_hasshift"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "lib_screens_attendance_viewmodels_attendance_view_model_hasstalllocation"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
+      "target": "lib_screens_attendance_viewmodels_attendance_view_model_hasunclosedprevioussession"
     },
     {
       "relation": "defines",
@@ -39381,6 +39867,17 @@
       "_origin": "ast",
       "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "lib_screens_attendance_viewmodels_attendance_view_model_isclockedouttoday"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
+      "target": "lib_screens_attendance_viewmodels_attendance_view_model_isclockinavailable"
     },
     {
       "relation": "defines",
@@ -39634,17 +40131,6 @@
       "_origin": "ast",
       "source": "lib_screens_attendance_viewmodels_attendance_view_model",
       "target": "lib_screens_attendance_viewmodels_attendance_view_model_usershift"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/screens/attendance/viewmodels/attendance_view_model.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_screens_attendance_viewmodels_attendance_view_model",
-      "target": "lib_screens_attendance_viewmodels_attendance_view_model_usershiftlabel"
     },
     {
       "relation": "references",
@@ -46418,6 +46904,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_penjualan_stok_penjualan_stok_screen",
+      "target": "lib_screens_penjualan_stok_penjualan_stok_screen_cashcontroller"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/penjualan_stok_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_penjualan_stok_screen",
       "target": "lib_screens_penjualan_stok_penjualan_stok_screen_catatancontroller"
     },
     {
@@ -46915,6 +47412,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
+      "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_customercash"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
       "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_decrementquantity"
     },
     {
@@ -46982,6 +47490,17 @@
       "_origin": "ast",
       "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
       "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_initialize"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
+      "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_iskembaliandisimpan"
     },
     {
       "relation": "defines",
@@ -47223,6 +47742,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
+      "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_setcustomercash"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
       "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_setpaymentmethod"
     },
     {
@@ -47301,6 +47831,17 @@
       "_origin": "ast",
       "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
       "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_successmessage"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model",
+      "target": "lib_screens_penjualan_stok_viewmodels_penjualan_stok_view_model_togglekembaliandisimpan"
     },
     {
       "relation": "defines",
@@ -54803,18 +55344,6 @@
       "target": "lib_widgets_slip_gaji_salary_history_table_title"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/widgets/slip_gaji/salary_history_table.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "context": "variable_type",
-      "_origin": "ast",
-      "source": "lib_widgets_slip_gaji_salary_history_table",
-      "target": "static_const_int"
-    },
-    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -55768,6 +56297,17 @@
       "_origin": "ast",
       "source": "test_attendance_test",
       "target": "test_attendance_test_clockout"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/attendance_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_attendance_test",
+      "target": "test_attendance_test_clockoutcallcount"
     },
     {
       "relation": "defines",
@@ -57032,7 +57572,29 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "test_penjualan_stok_test",
+      "target": "package_pot_apps_core_models_activity_history_model_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_penjualan_stok_test",
       "target": "package_pot_apps_core_models_produk_model_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_penjualan_stok_test",
+      "target": "package_pot_apps_core_services_activity_history_service_dart"
     },
     {
       "relation": "imports",
@@ -57142,6 +57704,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "test_penjualan_stok_test",
+      "target": "test_penjualan_stok_test_mockactivityhistoryservice"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_penjualan_stok_test",
       "target": "test_penjualan_stok_test_mockhistory"
     },
     {
@@ -57165,6 +57738,17 @@
       "_origin": "ast",
       "source": "test_penjualan_stok_test",
       "target": "test_penjualan_stok_test_mockstock"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/penjualan_stok_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_penjualan_stok_test",
+      "target": "test_penjualan_stok_test_record"
     },
     {
       "relation": "defines",
@@ -58917,5 +59501,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "00232b17f9a3436867cf5a4038cb9628a9bf7036"
+  "built_at_commit": "0aa428443ee0505b2ec9c8fb9c5067dacc4352be"
 }

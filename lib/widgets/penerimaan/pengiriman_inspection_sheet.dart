@@ -179,7 +179,7 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
                                         const Text('Pengirim',
                                             style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
                                         Text(
-                                          _shipment.creator?['nama'] ?? 'Petugas Pengiriman',
+                                          _shipment.namaPengirim,
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w700,

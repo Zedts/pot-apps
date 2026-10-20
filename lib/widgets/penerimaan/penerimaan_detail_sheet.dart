@@ -38,6 +38,7 @@ class PenerimaanDetailSheet extends StatelessWidget {
 
     final stallName = receipt.lapak?.nama ?? 'Lapak SPG';
     final spgName = receipt.spg?.nama ?? 'Petugas SPG';
+    final pengirimName = receipt.pengiriman?.namaPengirim ?? '-';
 
     return Container(
       constraints: BoxConstraints(
@@ -134,6 +135,15 @@ class PenerimaanDetailSheet extends StatelessWidget {
                             icon: Iconsax.truck_fast,
                             label: 'ID Pengiriman',
                             value: shipmentId,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Divider(color: PotColors.warmBorder, height: 1),
+                          ),
+                          _buildInfoRow(
+                            icon: Iconsax.truck,
+                            label: 'Petugas Pengirim',
+                            value: pengirimName,
                           ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),

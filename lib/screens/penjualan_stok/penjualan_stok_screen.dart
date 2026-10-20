@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/stok_lapak_model.dart';
@@ -35,6 +36,7 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
   late final PenjualanStokViewModel _viewModel;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _catatanController = TextEditingController();
+  final TextEditingController _cashController = TextEditingController();
   String _searchQuery = '';
 
   @override
@@ -48,6 +50,7 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
   void dispose() {
     _searchController.dispose();
     _catatanController.dispose();
+    _cashController.dispose();
     super.dispose();
   }
 
@@ -81,6 +84,7 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
       );
       _searchController.clear();
       _catatanController.clear();
+      _cashController.clear();
       setState(() {
         _searchQuery = '';
       });
@@ -607,6 +611,154 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
                   ),
                 ],
               ),
+
+              // Cash Payment Input & Kembalian Section (Only for Tunai)
+              if (!_viewModel.isNonCash) ...[
+                const SizedBox(height: 14),
+                const Divider(height: 1, color: PotColors.warmBorder),
+                const SizedBox(height: 12),
+
+                // Cash Received Input Field
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Uang Diterima (Tunai)',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: PotColors.textDark,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: PotColors.cardCream.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: PotColors.warmBorder),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Rp ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: PotColors.textDark,
+                            ),
+                          ),
+                          Expanded(
+                            child: TextField(
+                              controller: _cashController,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CurrencyFormatter.inputFormatter,
+                              ],
+                              onChanged: (val) {
+                                final clean = val.replaceAll(RegExp(r'[^0-9]'), '');
+                                final amount = int.tryParse(clean) ?? 0;
+                                _viewModel.setCustomerCash(amount);
+                              },
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800,
+                                color: PotColors.textDark,
+                              ),
+                              decoration: const InputDecoration(
+                                hintText: '0',
+                                hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: PotColors.textLight,
+                                ),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.symmetric(vertical: 12),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 12),
+
+                // Kembalian Display Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Kembalian',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: PotColors.textDark,
+                      ),
+                    ),
+                    Text(
+                      CurrencyFormatter.formatRupiah(_viewModel.kembalian),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: _viewModel.kembalian > 0 ? PotColors.primaryRed : PotColors.textMuted,
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Keep Changes (Simpan Kembalian) Switch
+                if (_viewModel.kembalian > 0) ...[
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: _viewModel.isKembalianDisimpan ? PotColors.menuOrange : PotColors.cardCream,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: _viewModel.isKembalianDisimpan ? PotColors.borderOrange : PotColors.warmBorder,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Simpan Kembalian',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: PotColors.textDark,
+                                ),
+                              ),
+                              Text(
+                                _viewModel.isKembalianDisimpan
+                                    ? 'Kembalian disimpan ke pembukuan'
+                                    : 'Kembalian dikembalikan ke pelanggan',
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: PotColors.textMuted,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Switch.adaptive(
+                          value: _viewModel.isKembalianDisimpan,
+                          activeThumbColor: PotColors.primaryRed,
+                          activeTrackColor: PotColors.primaryRed.withValues(alpha: 0.3),
+                          onChanged: _viewModel.toggleKembalianDisimpan,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ],
             ],
           ),
         ),

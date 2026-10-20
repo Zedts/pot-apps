@@ -56,6 +56,7 @@ class PenjualanModel {
   final String metodePembayaran;
   final String? buktiBayarUrl;
   final String? buktiQrisUrl;
+  final int kembalianDisimpan;
   final String catatan;
   final UserModel? spg;
   final LapakModel? lapak;
@@ -70,6 +71,7 @@ class PenjualanModel {
     required this.metodePembayaran,
     this.buktiBayarUrl,
     this.buktiQrisUrl,
+    this.kembalianDisimpan = 0,
     this.catatan = '',
     this.spg,
     this.lapak,
@@ -117,6 +119,7 @@ class PenjualanModel {
       metodePembayaran: json['metode_pembayaran']?.toString() ?? 'tunai',
       buktiBayarUrl: proof,
       buktiQrisUrl: proof,
+      kembalianDisimpan: ParserUtils.parseInt(json['kembalian_disimpan'] ?? json['keep_changes']),
       catatan: json['catatan']?.toString() ?? '',
       spg: json['spg'] is Map ? UserModel.fromJson(Map<String, dynamic>.from(json['spg'])) : null,
       lapak: json['lapak'] is Map ? LapakModel.fromJson(Map<String, dynamic>.from(json['lapak'])) : null,
@@ -134,6 +137,7 @@ class PenjualanModel {
       'metode_pembayaran': metodePembayaran,
       'bukti_bayar_url': buktiBayarUrl,
       'bukti_qris_url': buktiQrisUrl,
+      'kembalian_disimpan': kembalianDisimpan,
       'catatan': catatan,
       if (spg != null) 'spg': spg!.toJson(),
       if (lapak != null) 'lapak': lapak!.toJson(),

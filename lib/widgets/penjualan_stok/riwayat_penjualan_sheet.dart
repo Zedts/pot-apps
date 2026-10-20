@@ -257,6 +257,34 @@ class RiwayatPenjualanSheet extends StatelessWidget {
             ],
           ),
 
+          // Kept Change Badge if saved to bookkeeping
+          if (item.kembalianDisimpan > 0) ...[
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: PotColors.menuOrange,
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: PotColors.borderOrange),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Iconsax.wallet_money, size: 12, color: PotColors.iconOrange),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Simpan Kembalian: ${CurrencyFormatter.formatRupiah(item.kembalianDisimpan)}',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: PotColors.iconOrange,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           // Items Details
           if (item.items.isNotEmpty) ...[
             const SizedBox(height: 8),

@@ -34,6 +34,8 @@ class PenjualanStokViewModel extends BaseViewModel {
   bool _isViewingSelectedProducts = false;
   String _selectedPaymentMethod = 'tunai'; // 'tunai' | 'qris' | 'transfer'
   File? _buktiBayarFile;
+  int _customerCash = 0; // cash received from customer in IDR
+  bool _isKembalianDisimpan = false; // toggle switch to keep change
   String _catatan = '';
 
   // Current Stock Balances (Tab 1 source & Tab 2 display)
@@ -67,7 +69,23 @@ class PenjualanStokViewModel extends BaseViewModel {
   bool get isViewingSelectedProducts => _isViewingSelectedProducts;
   String get selectedPaymentMethod => _selectedPaymentMethod;
   File? get buktiBayarFile => _buktiBayarFile;
+  int get customerCash => _customerCash;
+  bool get isKembalianDisimpan => _isKembalianDisimpan;
   String get catatan => _catatan;
+
+  /// Real-time change (Kembalian) calculated from cash received
+  int get kembalian {
+    if (_selectedPaymentMethod != 'tunai') return 0;
+    if (_customerCash <= 0) return 0;
+    final diff = _customerCash - totalHarga;
+    return diff > 0 ? diff : 0;
+  }
+
+  /// Amount of change to be saved/kept in transaction
+  int get kembalianDisimpanAmount {
+    if (!_isKembalianDisimpan) return 0;
+    return kembalian;
+  }
 
   List<StokLapakModel> get stokList => _stokList;
   List<PenjualanModel> get salesHistory => _salesHistory;
@@ -132,7 +150,10 @@ class PenjualanStokViewModel extends BaseViewModel {
   /// Whether current transaction is ready for submission
   bool get canSubmit {
     if (totalQuantity <= 0 || _isSubmitting) return false;
-    if (isNonCash && _buktiBayarFile == null) return false;
+    // For cash: if user explicitly entered a non-zero cash received, it must be >= totalHarga
+    if (_selectedPaymentMethod == 'tunai' && _customerCash > 0 && _customerCash < totalHarga) {
+      return false;
+    }
     return true;
   }
 
@@ -285,7 +306,23 @@ class PenjualanStokViewModel extends BaseViewModel {
     _selectedPaymentMethod = method;
     if (!isNonCash) {
       _buktiBayarFile = null;
+    } else {
+      _customerCash = 0;
+      _isKembalianDisimpan = false;
     }
+    notifyListeners();
+  }
+
+  void setCustomerCash(int amount) {
+    _customerCash = amount < 0 ? 0 : amount;
+    if (kembalian <= 0 && _isKembalianDisimpan) {
+      _isKembalianDisimpan = false;
+    }
+    notifyListeners();
+  }
+
+  void toggleKembalianDisimpan(bool value) {
+    _isKembalianDisimpan = value;
     notifyListeners();
   }
 
@@ -297,7 +334,10 @@ class PenjualanStokViewModel extends BaseViewModel {
   void clearCart() {
     _quantities.clear();
     _isViewingSelectedProducts = false;
+    _selectedPaymentMethod = 'tunai';
     _buktiBayarFile = null;
+    _customerCash = 0;
+    _isKembalianDisimpan = false;
     _catatan = '';
     notifyListeners();
   }
@@ -368,6 +408,7 @@ class PenjualanStokViewModel extends BaseViewModel {
         lapakId: lapakId,
         metodePembayaran: _selectedPaymentMethod,
         items: items,
+        kembalianDisimpan: kembalianDisimpanAmount,
         catatan: _catatan,
         buktiFile: _buktiBayarFile,
       );

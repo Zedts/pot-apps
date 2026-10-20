@@ -13,6 +13,7 @@ abstract class PenjualanStokRepository {
     required String lapakId,
     required String metodePembayaran,
     required List<Map<String, dynamic>> items,
+    int kembalianDisimpan = 0,
     String? catatan,
     File? buktiFile,
   });
