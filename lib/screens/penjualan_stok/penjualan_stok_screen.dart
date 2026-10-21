@@ -709,7 +709,7 @@ class _PenjualanStokScreenState extends State<PenjualanStokScreen> {
                   ],
                 ),
 
-                // Keep Changes (Simpan Kembalian) Switch
+                // Simpan Kembalian Switch
                 if (_viewModel.kembalian > 0) ...[
                   const SizedBox(height: 10),
                   Container(

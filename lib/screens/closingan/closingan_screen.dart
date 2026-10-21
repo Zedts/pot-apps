@@ -8,6 +8,7 @@ import '../../core/utils/currency_formatter.dart';
 import '../../widgets/attendance/attendance_status_badge.dart';
 import '../../widgets/closingan/closing_detail_sheet.dart';
 import '../../widgets/closingan/closing_inventory_summary_card.dart';
+import '../../widgets/closingan/closing_kembalian_summary_card.dart';
 import '../../widgets/closingan/closing_reconciliation_card.dart';
 import '../../widgets/closingan/closing_sales_summary_card.dart';
 import '../../widgets/common/app_header.dart';
@@ -231,7 +232,14 @@ class _ClosinganScreenState extends State<ClosinganScreen> {
                     ),
                     const SizedBox(height: 14),
 
-                    // 4. Rekonsiliasi & Input Fisik Card
+                    // 4. Kembalian Disimpan Shift (Shift / Hari Ini)
+                    ClosingKembalianSummaryCard(
+                      totalKembalian: _viewModel.totalKembalianDisimpan,
+                      jumlahTransaksi: _viewModel.kembalianDisimpanCount,
+                    ),
+                    const SizedBox(height: 14),
+
+                    // 5. Rekonsiliasi & Input Fisik Card
                     ClosingReconciliationCard(
                       stokSistem: _viewModel.stokSistem,
                       tunaiSistem: _viewModel.totalOmset,

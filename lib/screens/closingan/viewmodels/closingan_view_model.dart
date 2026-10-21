@@ -103,7 +103,16 @@ class ClosinganViewModel extends BaseViewModel {
 
   int get totalOmset => tunaiSistem + qrisSistem + transferSistem;
 
-  // --- 3. Reconciliation Values & Discrepancies ---
+  // --- 3. Kembalian Disimpan (Shift / Hari Ini) ---
+  int get totalKembalianDisimpan {
+    return _todaySales.fold(0, (sum, s) => sum + s.kembalianDisimpan);
+  }
+
+  int get kembalianDisimpanCount {
+    return _todaySales.where((s) => s.kembalianDisimpan > 0).length;
+  }
+
+  // --- 4. Reconciliation Values & Discrepancies ---
   int get effectiveStokFisik => _stokFisik ?? stokSistem;
   int get effectiveUangTunaiFisik => _uangTunaiFisik ?? totalOmset;
 
