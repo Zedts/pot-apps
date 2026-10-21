@@ -137,10 +137,10 @@ class _PenerimaanScreenState extends State<PenerimaanScreen> {
                   // 2. Upload Foto Nota Card (Reusable Component)
                   ProofPhotoUploadCard(
                     photoFile: _viewModel.capturedFotoNota,
-                    title: 'Unggah Foto Nota',
-                    subtitle: 'Ambil foto nota fisik pengiriman barang',
-                    sheetTitle: 'Unggah Foto Nota',
-                    sheetSubtitle: 'Pilih sumber pengambilan foto nota fisik pengiriman',
+                    title: 'Unggah Foto Nota (Opsional)',
+                    subtitle: 'Ambil foto nota fisik pengiriman barang jika ada',
+                    sheetTitle: 'Unggah Foto Nota (Opsional)',
+                    sheetSubtitle: 'Pilih sumber pengambilan foto nota fisik pengiriman jika tersedia',
                     statusText: 'Foto Nota Terlampir',
                     onCameraTap: () => _viewModel.captureFotoNota(source: ImageSource.camera),
                     onGalleryTap: () => _viewModel.captureFotoNota(source: ImageSource.gallery),

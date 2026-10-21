@@ -7,6 +7,7 @@ class ClosingInventorySummaryCard extends StatelessWidget {
   final int stokAwal;
   final int barangMasuk;
   final int terjual;
+  final int transferStok;
   final int stokAkhir;
 
   const ClosingInventorySummaryCard({
@@ -14,6 +15,7 @@ class ClosingInventorySummaryCard extends StatelessWidget {
     required this.stokAwal,
     required this.barangMasuk,
     required this.terjual,
+    this.transferStok = 0,
     required this.stokAkhir,
   });
 
@@ -92,6 +94,8 @@ class ClosingInventorySummaryCard extends StatelessWidget {
           _buildRow('Barang Masuk', '$barangMasuk pcs', isBoldValue: true),
           const SizedBox(height: 8),
           _buildRow('Terjual', '$terjual pcs', isBoldValue: true),
+          const SizedBox(height: 8),
+          _buildRow('Transfer Stok', '$transferStok pcs', isBoldValue: true),
 
           const SizedBox(height: 10),
           Divider(height: 1, color: PotColors.warmBorder.withValues(alpha: 0.7)),

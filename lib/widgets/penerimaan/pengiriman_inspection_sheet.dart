@@ -170,42 +170,77 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(color: PotColors.warmBorder),
                               ),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const Text('Pengirim',
+                                                style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
+                                            Text(
+                                              _shipment.namaPengirim,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: PotColors.textDark,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              _shipment.isTransfer ? 'Lapak Asal' : 'Lapak Tujuan',
+                                              style: const TextStyle(fontSize: 10, color: PotColors.textMuted),
+                                            ),
+                                            Text(
+                                              _shipment.isTransfer
+                                                  ? (_shipment.asalLapak?.nama ?? 'Lapak Asal')
+                                                  : (_shipment.lapak?.nama ?? 'Lapak'),
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: PotColors.textDark,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  if (_shipment.isTransfer) ...[
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 8),
+                                      child: Divider(color: PotColors.warmBorder, height: 1),
+                                    ),
+                                    Row(
                                       children: [
-                                        const Text('Pengirim',
-                                            style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
-                                        Text(
-                                          _shipment.namaPengirim,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                            color: PotColors.textDark,
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              const Text('Lapak Tujuan',
+                                                  style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
+                                              Text(
+                                                _shipment.lapak?.nama ?? 'Lapak',
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: PotColors.textDark,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        const Text('Lapak Tujuan',
-                                            style: TextStyle(fontSize: 10, color: PotColors.textMuted)),
-                                        Text(
-                                          _shipment.lapak?.nama ?? 'Lapak',
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                            color: PotColors.textDark,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -279,6 +314,100 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
                                 },
                               ),
                             ),
+
+                            // Digital Signature Preview Card
+                            if (_shipment.ttdPengirimUrl != null &&
+                                _shipment.ttdPengirimUrl!.trim().isNotEmpty) ...[
+                              const SizedBox(height: 12),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: PotColors.pureWhite,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(color: PotColors.warmBorder),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Icon(Iconsax.edit_2, size: 14, color: PotColors.primaryRed),
+                                            SizedBox(width: 6),
+                                            Text(
+                                              'Tanda Tangan Pengirim',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w800,
+                                                color: PotColors.textDark,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          'Ketuk untuk perbesar',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600,
+                                            color: PotColors.primaryRed.withValues(alpha: 0.8),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    InkWell(
+                                      onTap: () => _showFullImageModal(
+                                        context,
+                                        _shipment.ttdPengirimUrl!,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 84,
+                                        decoration: BoxDecoration(
+                                          color: PotColors.bgCream.withValues(alpha: 0.5),
+                                          borderRadius: BorderRadius.circular(12),
+                                          border: Border.all(color: PotColors.warmBorder),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(12),
+                                          child: Image.network(
+                                            _shipment.ttdPengirimUrl!,
+                                            fit: BoxFit.contain,
+                                            loadingBuilder: (context, child, loadingProgress) {
+                                              if (loadingProgress == null) return child;
+                                              return const Center(
+                                                child: SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    color: PotColors.primaryRed,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            errorBuilder: (context, error, stackTrace) {
+                                              return const Center(
+                                                child: Text(
+                                                  'Gagal memuat tanda tangan.',
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: PotColors.textMuted,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
 
                             if (isDraft) ...[
                               const SizedBox(height: 12),
@@ -450,5 +579,93 @@ class _PengirimanInspectionSheetState extends State<PengirimanInspectionSheet> {
         );
       }
     }
+  }
+
+  void _showFullImageModal(BuildContext context, String imageUrl) {
+    showDialog(
+      context: context,
+      builder: (ctx) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(16),
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                color: PotColors.pureWhite,
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Tanda Tangan Pengirim',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: PotColors.textDark,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Image.network(
+                      imageUrl,
+                      fit: BoxFit.contain,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          padding: const EdgeInsets.all(48),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: PotColors.primaryRed,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          padding: const EdgeInsets.all(32),
+                          child: const Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Iconsax.warning_2, size: 36, color: PotColors.primaryRed),
+                              SizedBox(height: 8),
+                              Text(
+                                'Gagal memuat tanda tangan.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: PotColors.textDark,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Material(
+                color: Colors.black45,
+                shape: const CircleBorder(),
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () => Navigator.of(ctx).pop(),
+                  child: const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Icon(Icons.close, size: 18, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

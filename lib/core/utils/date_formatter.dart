@@ -42,9 +42,16 @@ class DateFormatter {
     'Des',
   ];
 
+  static const Duration wibOffset = Duration(hours: 7);
+
+  /// Converts any [DateTime] (UTC or local) to Asia/Jakarta (WIB, UTC+7).
+  static DateTime toWib(DateTime date) {
+    return date.isUtc ? date.add(wibOffset) : date.toUtc().add(wibOffset);
+  }
+
   /// Formats a [DateTime] into Indonesian format: e.g. "Kamis, 8 Oktober 2026"
   static String formatFullDate(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     final dayName = indonesianDays[local.weekday - 1];
     final monthName = indonesianMonths[local.month - 1];
     return '$dayName, ${local.day} $monthName ${local.year}';
@@ -57,22 +64,23 @@ class DateFormatter {
 
   /// Formats a [DateTime] into Indonesian compact date: e.g. "8 Okt 2026"
   static String formatShortDate(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     return '${local.day} ${shortMonths[local.month - 1]} ${local.year}';
   }
 
   /// Formats a [DateTime] into Indonesian date and time: e.g. "08 Okt 2026, 14:30"
   static String formatDateTime(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     final dayStr = local.day.toString().padLeft(2, '0');
     final monthStr = shortMonths[local.month - 1];
-    final timePart = formatTime(local);
-    return '$dayStr $monthStr ${local.year}, $timePart';
+    final h = local.hour.toString().padLeft(2, '0');
+    final m = local.minute.toString().padLeft(2, '0');
+    return '$dayStr $monthStr ${local.year}, $h:$m';
   }
 
   /// Formats a [DateTime] into 24-hour time: e.g. "14:30"
   static String formatTime(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     final h = local.hour.toString().padLeft(2, '0');
     final m = local.minute.toString().padLeft(2, '0');
     return '$h:$m';
@@ -80,13 +88,19 @@ class DateFormatter {
 
   /// Returns Indonesian day name for a [DateTime]: e.g. "Kamis"
   static String formatDayName(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     return indonesianDays[local.weekday - 1];
+  }
+
+  /// Returns Indonesian month name for a [DateTime]: e.g. "Oktober"
+  static String formatMonthName(DateTime date) {
+    final local = toWib(date);
+    return indonesianMonths[local.month - 1];
   }
 
   /// Formats a [DateTime] into standard ISO date string: e.g. "2026-10-09"
   static String formatDateIso(DateTime date) {
-    final local = date.toLocal();
+    final local = toWib(date);
     final y = local.year.toString();
     final m = local.month.toString().padLeft(2, '0');
     final d = local.day.toString().padLeft(2, '0');
@@ -95,8 +109,8 @@ class DateFormatter {
 
   /// Returns `true` if [a] and [b] represent the same calendar day in local time.
   static bool isSameDay(DateTime a, DateTime b) {
-    final localA = a.toLocal();
-    final localB = b.toLocal();
+    final localA = toWib(a);
+    final localB = toWib(b);
     return localA.year == localB.year && localA.month == localB.month && localA.day == localB.day;
   }
 

@@ -11,6 +11,7 @@ class StokLapakModel {
   final int stokAwal;
   final int stokMasuk;
   final int stokTerjual;
+  final int stokTransfer;
   final int stokAkhir;
   final LapakModel? lapak;
   final ProdukModel? produk;
@@ -24,6 +25,7 @@ class StokLapakModel {
     required this.stokAwal,
     required this.stokMasuk,
     required this.stokTerjual,
+    this.stokTransfer = 0,
     required this.stokAkhir,
     this.lapak,
     this.produk,
@@ -41,8 +43,9 @@ class StokLapakModel {
     final sAwal = ParserUtils.parseInt(json['stok_awal']);
     final sMasuk = ParserUtils.parseInt(json['stok_masuk']);
     final sTerjual = ParserUtils.parseInt(json['stok_terjual']);
+    final sTransfer = ParserUtils.parseInt(json['stok_transfer'] ?? json['stokTransfer']);
     final sAkhirRaw = json['stok_akhir'];
-    final sAkhir = sAkhirRaw != null ? ParserUtils.parseInt(sAkhirRaw) : (sAwal + sMasuk - sTerjual);
+    final sAkhir = sAkhirRaw != null ? ParserUtils.parseInt(sAkhirRaw) : (sAwal + sMasuk - sTerjual - sTransfer);
 
     LapakModel? lapakModel;
     if (json['lapak'] is Map) {
@@ -66,6 +69,7 @@ class StokLapakModel {
       stokAwal: sAwal,
       stokMasuk: sMasuk,
       stokTerjual: sTerjual,
+      stokTransfer: sTransfer,
       stokAkhir: sAkhir,
       lapak: lapakModel,
       produk: produkModel,
@@ -82,6 +86,7 @@ class StokLapakModel {
       'stok_awal': stokAwal,
       'stok_masuk': stokMasuk,
       'stok_terjual': stokTerjual,
+      'stok_transfer': stokTransfer,
       'stok_akhir': stokAkhir,
       if (lapak != null) 'lapak': lapak!.toJson(),
       if (produk != null) 'produk': produk!.toJson(),

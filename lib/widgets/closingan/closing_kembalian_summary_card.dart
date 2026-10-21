@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/currency_formatter.dart';
 
@@ -101,49 +100,6 @@ class ClosingKembalianSummaryCard extends StatelessWidget {
           const SizedBox(height: 10),
           Divider(height: 1, color: PotColors.warmBorder.withValues(alpha: 0.7)),
           const SizedBox(height: 10),
-
-          // Contextual Information Banner / Status
-          if (jumlahTransaksi > 0)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              decoration: BoxDecoration(
-                color: PotColors.menuOrange,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: PotColors.borderOrange.withValues(alpha: 0.8)),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Iconsax.wallet_money,
-                    size: 15,
-                    color: PotColors.iconOrange,
-                  ),
-                  const SizedBox(width: 8),
-                  const Expanded(
-                    child: Text(
-                      'Dana kembalian dialokasikan ke pembukuan kasir lapak.',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: PotColors.iconOrange,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          else
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 2),
-              child: Text(
-                'Tidak ada kembalian disimpan pada shift ini.',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: PotColors.textMuted,
-                ),
-              ),
-            ),
         ],
       ),
     );

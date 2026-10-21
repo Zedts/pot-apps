@@ -219,6 +219,7 @@ class _ClosinganScreenState extends State<ClosinganScreen> {
                       stokAwal: _viewModel.totalStokAwalHariIni,
                       barangMasuk: _viewModel.totalBarangMasukHariIni,
                       terjual: _viewModel.totalStokTerjualHariIni,
+                      transferStok: _viewModel.totalStokTransferHariIni,
                       stokAkhir: _viewModel.stokSistem,
                     ),
                     const SizedBox(height: 14),
@@ -242,7 +243,7 @@ class _ClosinganScreenState extends State<ClosinganScreen> {
                     // 5. Rekonsiliasi & Input Fisik Card
                     ClosingReconciliationCard(
                       stokSistem: _viewModel.stokSistem,
-                      tunaiSistem: _viewModel.totalOmset,
+                      tunaiSistem: _viewModel.tunaiSistem,
                       effectiveStokFisik: _viewModel.effectiveStokFisik,
                       effectiveUangTunaiFisik: _viewModel.effectiveUangTunaiFisik,
                       selisihStok: _viewModel.selisihStok,

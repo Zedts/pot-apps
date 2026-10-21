@@ -6,6 +6,7 @@ class AppConstants {
   static const String roleViar = "viar";
   static const String roleAdmin = "admin";
   static const String roleOwner = "owner";
+  static const String roleUnassigned = "unassigned";
 
   // Transaction Payment Methods
   static const String paymentTunai = "Tunai";

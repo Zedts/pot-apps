@@ -9,6 +9,7 @@ class CustomButton extends StatefulWidget {
   final bool isDisabled;
   final IconData? icon;
   final bool isOutlined;
+  final double? width;
 
   const CustomButton({
     super.key,
@@ -18,6 +19,7 @@ class CustomButton extends StatefulWidget {
     this.isDisabled = false,
     this.icon,
     this.isOutlined = false,
+    this.width = double.infinity,
   });
 
   @override
@@ -43,7 +45,7 @@ class _CustomButtonState extends State<CustomButton> {
           opacity: isEnabled ? 1.0 : 0.5,
           duration: const Duration(milliseconds: 150),
           child: Container(
-            width: double.infinity,
+            width: widget.width,
             height: 48,
             decoration: widget.isOutlined
                 ? BoxDecoration(

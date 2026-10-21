@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
+import '../../screens/penjualan_stok/stok_transfer_screen.dart';
 import '../../screens/penjualan_stok/viewmodels/penjualan_stok_view_model.dart';
 import 'stok_balance_card.dart';
 
@@ -102,10 +103,56 @@ class _StokSaatIniListViewState extends State<StokSaatIniListView> {
           totalAwal: widget.viewModel.totalStokAwal,
           totalMasuk: widget.viewModel.totalStokMasuk,
           totalTerjual: widget.viewModel.totalStokTerjual,
+          totalTransfer: widget.viewModel.totalStokTransfer,
           totalAkhir: widget.viewModel.totalStokAkhir,
         ),
 
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
+
+        // Action Button: Transfer Stok Antar Lapak
+        InkWell(
+          onTap: () async {
+            final result = await Navigator.of(context).push<bool>(
+              MaterialPageRoute(
+                builder: (_) => StokTransferScreen(
+                  currentUser: widget.viewModel.user,
+                  originStall: widget.viewModel.stall,
+                ),
+              ),
+            );
+            if (result == true) {
+              widget.viewModel.refreshStok();
+            }
+          },
+          borderRadius: BorderRadius.circular(14),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              color: PotColors.menuPink,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: PotColors.primaryRed.withValues(alpha: 0.3)),
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Iconsax.truck_fast, size: 18, color: PotColors.primaryRed),
+                SizedBox(width: 8),
+                Text(
+                  'Transfer Stok Antar Lapak',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    color: PotColors.primaryRed,
+                    letterSpacing: -0.1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 14),
 
         // Search Input Field matching Input Penjualan tab
         Container(

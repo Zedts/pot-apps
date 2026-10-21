@@ -161,6 +161,7 @@ class PenjualanStokViewModel extends BaseViewModel {
   int get totalStokAwal => _stokList.fold(0, (s, item) => s + item.stokAwal);
   int get totalStokMasuk => _stokList.fold(0, (s, item) => s + item.stokMasuk);
   int get totalStokTerjual => _stokList.fold(0, (s, item) => s + item.stokTerjual);
+  int get totalStokTransfer => _stokList.fold(0, (s, item) => s + item.stokTransfer);
   int get totalStokAkhir => _stokList.fold(0, (s, item) => s + item.stokAkhir);
 
   /// Localized dynamic date subtitle (e.g. "Kamis, 8 Oktober 2026")

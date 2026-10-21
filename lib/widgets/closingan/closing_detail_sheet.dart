@@ -149,6 +149,10 @@ class ClosingDetailSheet extends StatelessWidget {
                         _buildDataRow('Stok Sistem', '${item.stokSistem} pcs'),
                         const SizedBox(height: 6),
                         _buildDataRow('Stok Fisik', '${item.stokFisik} pcs'),
+                        if (item.stokTransfer > 0) ...[
+                          const SizedBox(height: 6),
+                          _buildDataRow('Transfer Stok', '${item.stokTransfer} pcs'),
+                        ],
                         const SizedBox(height: 8),
                         const Divider(height: 1, color: PotColors.warmBorder),
                         const SizedBox(height: 8),

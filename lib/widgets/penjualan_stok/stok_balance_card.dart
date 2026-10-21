@@ -11,6 +11,7 @@ class StokBalanceCard extends StatelessWidget {
   final int? totalAwal;
   final int? totalMasuk;
   final int? totalTerjual;
+  final int? totalTransfer;
   final int? totalAkhir;
 
   const StokBalanceCard({
@@ -20,6 +21,7 @@ class StokBalanceCard extends StatelessWidget {
     this.totalAwal,
     this.totalMasuk,
     this.totalTerjual,
+    this.totalTransfer,
     this.totalAkhir,
   });
 
@@ -28,6 +30,7 @@ class StokBalanceCard extends StatelessWidget {
     final awal = isSummary ? (totalAwal ?? 0) : (stockItem?.stokAwal ?? 0);
     final masuk = isSummary ? (totalMasuk ?? 0) : (stockItem?.stokMasuk ?? 0);
     final terjual = isSummary ? (totalTerjual ?? 0) : (stockItem?.stokTerjual ?? 0);
+    final transfer = isSummary ? (totalTransfer ?? 0) : (stockItem?.stokTransfer ?? 0);
     final akhir = isSummary ? (totalAkhir ?? 0) : (stockItem?.stokAkhir ?? 0);
 
     final title = isSummary ? 'Total Keseimbangan Stok' : (stockItem?.productName ?? 'Produk');
@@ -126,6 +129,8 @@ class StokBalanceCard extends StatelessWidget {
                 _buildMetricColumn('Masuk', '+$masuk', PotColors.locationGreen),
                 _buildDivider(),
                 _buildMetricColumn('Terjual', '-$terjual', PotColors.primaryRed),
+                _buildDivider(),
+                _buildMetricColumn('Transfer', '-$transfer', Colors.deepOrange),
                 _buildDivider(),
                 _buildMetricColumn('Akhir', '$akhir', isSummary ? PotColors.primaryRed : PotColors.textDark, isBold: true),
               ],

@@ -237,7 +237,7 @@ class _ClosingReconciliationCardState extends State<ClosingReconciliationCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Selisih Fisik vs Total Penjualan:',
+                'Selisih Fisik vs Tunai Sistem:',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,

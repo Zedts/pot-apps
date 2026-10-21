@@ -75,12 +75,15 @@ class ClosinganViewModel extends BaseViewModel {
   int get stokSistem => _stokList.fold(0, (sum, item) => sum + item.stokAkhir);
   int get totalBarangMasukHariIni => _todayReceipts.fold(0, (sum, item) => sum + item.qtyTerima);
   int get totalStokTerjualHariIni => _todaySales.fold(0, (sum, item) => sum + item.totalQty);
-  int get totalStokAwalHariIni => (stokSistem - totalBarangMasukHariIni + totalStokTerjualHariIni).clamp(0, 999999);
+  int get totalStokTransferHariIni => _stokList.fold(0, (sum, item) => sum + item.stokTransfer);
+  int get totalStokAwalHariIni =>
+      (stokSistem - totalBarangMasukHariIni + totalStokTerjualHariIni + totalStokTransferHariIni).clamp(0, 999999);
 
   // Canonical getters mapped to today's shift metrics for UI & tests
   int get totalStokAwal => totalStokAwalHariIni;
   int get totalStokMasuk => totalBarangMasukHariIni;
   int get totalStokTerjual => totalStokTerjualHariIni;
+  int get totalStokTransfer => totalStokTransferHariIni;
 
   // --- 2. Penjualan Omzet Shift (Strictly for THAT DAY only) ---
   int get tunaiSistem {
@@ -114,10 +117,10 @@ class ClosinganViewModel extends BaseViewModel {
 
   // --- 4. Reconciliation Values & Discrepancies ---
   int get effectiveStokFisik => _stokFisik ?? stokSistem;
-  int get effectiveUangTunaiFisik => _uangTunaiFisik ?? totalOmset;
+  int get effectiveUangTunaiFisik => _uangTunaiFisik ?? tunaiSistem;
 
   int get selisihStok => effectiveStokFisik - stokSistem;
-  int get selisihUang => effectiveUangTunaiFisik - totalOmset;
+  int get selisihUang => effectiveUangTunaiFisik - tunaiSistem;
 
   bool get hasStockDiscrepancy => selisihStok != 0;
   bool get hasCashDiscrepancy => selisihUang != 0;
@@ -199,7 +202,7 @@ class ClosinganViewModel extends BaseViewModel {
         } else {
           // Default initial physical inputs to system baseline
           _stokFisik = stokSistem;
-          _uangTunaiFisik = totalOmset;
+          _uangTunaiFisik = tunaiSistem;
         }
       }
     } on ApiException catch (e) {
@@ -253,6 +256,7 @@ class ClosinganViewModel extends BaseViewModel {
         'tanggal': todayIsoDate,
         'stok_sistem': stokSistem,
         'stok_fisik': effectiveStokFisik,
+        'stok_transfer': totalStokTransferHariIni,
         'total_omset': totalOmset,
         'tunai_sistem': tunaiSistem,
         'qris_sistem': qrisSistem,

@@ -41,6 +41,5 @@ class EnvConfig {
 
   /// Firebase Web API Key used for Identity Toolkit token exchange.
   static String get firebaseWebApiKey =>
-      dotenv.maybeGet('FIREBASE_WEB_API_KEY') ??
-      'AIzaSyC0HOpFl93eKvqat0mfRrauhCr7ahQ_s60';
+      dotenv.maybeGet('FIREBASE_WEB_API_KEY')!;
 }

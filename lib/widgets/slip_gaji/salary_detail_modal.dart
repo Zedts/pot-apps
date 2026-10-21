@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/models/payroll_model.dart';
@@ -289,7 +290,7 @@ class SalaryDetailModal extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      'Salin tautan untuk membuka di browser',
+                      'Ketuk untuk menyalin tautan dokumen',
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -299,6 +300,33 @@ class SalaryDetailModal extends StatelessWidget {
                   ],
                 ),
               ),
+              InkWell(
+                onTap: () => _copyUrl(context, url),
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: PotColors.accentRed.withValues(alpha: 0.10),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: PotColors.accentRed.withValues(alpha: 0.3)),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Iconsax.copy, size: 14, color: PotColors.accentRed),
+                      SizedBox(width: 4),
+                      Text(
+                        'Salin',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: PotColors.accentRed,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -306,9 +334,7 @@ class SalaryDetailModal extends StatelessWidget {
           const SizedBox(height: 10),
           InkWell(
             borderRadius: BorderRadius.circular(12),
-            onTap: () {
-              AppToast.showSuccess(context, 'Tautan slip gaji siap disalin.');
-            },
+            onTap: () => _copyUrl(context, url),
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -317,18 +343,28 @@ class SalaryDetailModal extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: PotColors.warmBorder),
               ),
-              child: SelectableText(
-                url,
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: PotColors.textDark,
-                  height: 1.4,
-                ),
-                maxLines: 4,
-                onTap: () {
-                  AppToast.showSuccess(context, 'Salin tautan untuk membuka slip PDF.');
-                },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      url,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                        color: PotColors.textDark,
+                        height: 1.4,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(
+                    Iconsax.copy,
+                    size: 16,
+                    color: PotColors.textMuted,
+                  ),
+                ],
               ),
             ),
           ),
@@ -346,6 +382,13 @@ class SalaryDetailModal extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _copyUrl(BuildContext context, String url) async {
+    await Clipboard.setData(ClipboardData(text: url));
+    if (context.mounted) {
+      AppToast.showSuccess(context, 'Tautan slip gaji berhasil disalin ke clipboard.');
+    }
   }
 
   Widget _buildInfoRow({

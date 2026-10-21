@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pot_apps/core/models/lapak_model.dart';
+import 'package:pot_apps/core/models/pengiriman_model.dart';
 import 'package:pot_apps/core/models/penjualan_model.dart';
 import 'package:pot_apps/core/models/produk_model.dart';
 import 'package:pot_apps/core/models/stok_lapak_model.dart';
@@ -167,6 +168,46 @@ class MockPenjualanStokRepository implements PenjualanStokRepository {
       lokasi: 'Bekasi Selatan',
       latitude: -6.26,
       longitude: 106.97,
+    );
+  }
+
+  @override
+  Future<List<LapakModel>> getAllLapak() async => [
+    const LapakModel(id: 'lapak-1', nama: 'Lapak Grand Galaxy', lokasi: 'Bekasi Selatan'),
+    const LapakModel(id: 'lapak-2', nama: 'Lapak Summarecon', lokasi: 'Bekasi Utara'),
+  ];
+
+  @override
+  Future<List<UserModel>> getAllUsers() async => [
+    const UserModel(
+      id: 'u-1',
+      nama: 'Budi Kurir',
+      username: 'budi',
+      email: 'budi@pot.id',
+      role: 'viar',
+      noHp: '08123456789',
+      status: 'active',
+      authProvider: 'local',
+    ),
+  ];
+
+  @override
+  Future<PengirimanModel> createTransferPengiriman({
+    required String asalLapakId,
+    required String tujuanLapakId,
+    required String pengirimId,
+    required DateTime tanggal,
+    required List<Map<String, dynamic>> items,
+    File? ttdPengirimFile,
+  }) async {
+    return PengirimanModel(
+      id: 'pg-transfer-1',
+      uniqueId: '#PG-TRANSFER-001',
+      lapakId: tujuanLapakId,
+      asalLapakId: asalLapakId,
+      pengirimId: pengirimId,
+      tanggal: tanggal,
+      status: 'draft',
     );
   }
 }

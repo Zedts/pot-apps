@@ -79,6 +79,9 @@ class PengirimanModel {
   final int totalItems;
   final int qtyKirim;
   final LapakModel? lapak;
+  final String? asalLapakId;
+  final LapakModel? asalLapak;
+  final String? ttdPengirimUrl;
   final Map<String, dynamic>? creator;
   final String? pengirimId;
   final Map<String, dynamic>? pengirim;
@@ -92,6 +95,9 @@ class PengirimanModel {
     this.countersId,
     this.tanggal,
     required this.lapakId,
+    this.asalLapakId,
+    this.asalLapak,
+    this.ttdPengirimUrl,
     this.createdBy = '',
     required this.status,
     this.totalItems = 0,
@@ -105,6 +111,7 @@ class PengirimanModel {
     this.updatedAt,
   });
 
+  bool get isTransfer => asalLapakId != null && asalLapakId!.trim().isNotEmpty;
   bool get isDraft => status.toLowerCase().trim() == AppConstants.deliveryDraft;
   bool get isDikirimViar {
     final s = status.toLowerCase().trim();
@@ -141,8 +148,8 @@ class PengirimanModel {
   static int compareByPriority(PengirimanModel a, PengirimanModel b) {
     final pDiff = a.statusPriority.compareTo(b.statusPriority);
     if (pDiff != 0) return pDiff;
-    final dateA = a.createdAt ?? a.tanggal ?? DateTime.fromMillisecondsSinceEpoch(0);
-    final dateB = b.createdAt ?? b.tanggal ?? DateTime.fromMillisecondsSinceEpoch(0);
+    final dateA = a.tanggal ?? a.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+    final dateB = b.tanggal ?? b.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
     return dateB.compareTo(dateA);
   }
 
@@ -152,6 +159,9 @@ class PengirimanModel {
     String? countersId,
     DateTime? tanggal,
     String? lapakId,
+    String? asalLapakId,
+    LapakModel? asalLapak,
+    String? ttdPengirimUrl,
     String? createdBy,
     String? status,
     int? totalItems,
@@ -170,6 +180,9 @@ class PengirimanModel {
       countersId: countersId ?? this.countersId,
       tanggal: tanggal ?? this.tanggal,
       lapakId: lapakId ?? this.lapakId,
+      asalLapakId: asalLapakId ?? this.asalLapakId,
+      asalLapak: asalLapak ?? this.asalLapak,
+      ttdPengirimUrl: ttdPengirimUrl ?? this.ttdPengirimUrl,
       createdBy: createdBy ?? this.createdBy,
       status: status ?? this.status,
       totalItems: totalItems ?? this.totalItems,
@@ -186,38 +199,36 @@ class PengirimanModel {
 
   /// User-friendly formatted time
   String get formattedJam {
-    final d = (createdAt ?? tanggal)?.toLocal();
+    final d = tanggal ?? createdAt;
     if (d == null) return '--:-- WIB';
-    final h = d.hour.toString().padLeft(2, '0');
-    final m = d.minute.toString().padLeft(2, '0');
-    return '$h:$m WIB';
+    return '${DateFormatter.formatTime(d)} WIB';
   }
 
   /// Formatted date string in Indonesian: e.g. "08 Okt 2026"
   String get formattedTanggal {
-    final d = createdAt ?? tanggal;
+    final d = tanggal ?? createdAt;
     if (d == null) return '-';
     return DateFormatter.formatShortDate(d);
   }
 
   /// Day name in Indonesian: e.g. "Kamis"
   String get dayNameIndo {
-    final d = createdAt ?? tanggal;
+    final d = tanggal ?? createdAt;
     if (d == null) return '';
     return DateFormatter.formatDayName(d);
   }
 
   /// Month name in Indonesian: e.g. "Oktober"
   String get monthNameIndo {
-    final d = createdAt ?? tanggal;
+    final d = tanggal ?? createdAt;
     if (d == null) return '';
-    return DateFormatter.indonesianMonths[d.toLocal().month - 1];
+    return DateFormatter.formatMonthName(d);
   }
 
   /// Formatted creation timestamp with Indonesian day, date, month, year, and time
   /// Example: "Kamis, 8 Oktober 2026 • 14:30 WIB"
   String get formattedCreatedDateTime {
-    final d = createdAt ?? tanggal;
+    final d = tanggal ?? createdAt;
     if (d == null) return formattedJam;
     final fullDate = DateFormatter.formatFullDate(d);
     final jam = formattedJam;
@@ -248,6 +259,9 @@ class PengirimanModel {
       countersId: json['counters_id'] as String?,
       tanggal: ParserUtils.parseLocalDate(json['tanggal']),
       lapakId: json['lapak_id'] as String? ?? '',
+      asalLapakId: json['asal_lapak_id'] as String?,
+      asalLapak: parseLapak(json['asal_lapak']),
+      ttdPengirimUrl: json['ttd_pengirim_url'] as String?,
       createdBy: json['created_by'] as String? ?? '',
       status: json['status'] as String? ?? AppConstants.deliveryDraft,
       totalItems: ParserUtils.parseInt(json['total_items']),
@@ -272,6 +286,9 @@ class PengirimanModel {
         'counters_id': countersId,
         'tanggal': tanggal?.toIso8601String(),
         'lapak_id': lapakId,
+        if (asalLapakId != null) 'asal_lapak_id': asalLapakId,
+        if (asalLapak != null) 'asal_lapak': asalLapak?.toJson(),
+        if (ttdPengirimUrl != null) 'ttd_pengirim_url': ttdPengirimUrl,
         'created_by': createdBy,
         'status': status,
         'total_items': totalItems,

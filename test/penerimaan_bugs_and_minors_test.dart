@@ -294,4 +294,54 @@ void main() {
       expect(find.text('Sesuai'), findsNWidgets(2)); // Badge and verification label
     });
   });
+
+  group('PengirimanInspectionSheet: Transfer Stall & TTD Signature Preview', () {
+    testWidgets('renders origin stall, destination stall, and digital signature preview card', (tester) async {
+      final transferShipment = PengirimanModel(
+        id: 'SHIP-TRANSFER-01',
+        uniqueId: '#PG-TRANSFER-001',
+        lapakId: 'LAPAK-DEST',
+        lapak: const LapakModel(id: 'LAPAK-DEST', nama: 'Lapak Grand Galaxy', lokasi: 'Bekasi'),
+        asalLapakId: 'LAPAK-ORIGIN',
+        asalLapak: const LapakModel(id: 'LAPAK-ORIGIN', nama: 'Lapak Senayan City', lokasi: 'Jakarta'),
+        ttdPengirimUrl: 'https://storage.pot.com/pot_pengiriman_ttd/signature_01.png',
+        status: 'dikirim_viar',
+        qtyKirim: 15,
+        items: const [
+          PengirimanItemModel(
+            id: 'ITEM-1',
+            produkId: 'PROD-1',
+            namaProduk: 'Pisang Goreng Madu',
+            qty: 15,
+            jenisSatuan: 'pcs',
+          ),
+        ],
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PengirimanInspectionSheet(
+              initialShipment: transferShipment,
+              loadDetail: (id) async => transferShipment,
+              onSelectShipment: (s) {},
+              onToggleStatus: (s) {},
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      // Check stall labels
+      expect(find.text('Lapak Asal'), findsOneWidget);
+      expect(find.text('Lapak Senayan City'), findsOneWidget);
+      expect(find.text('Lapak Tujuan'), findsOneWidget);
+      expect(find.text('Lapak Grand Galaxy'), findsOneWidget);
+
+      // Check Digital Signature section
+      expect(find.text('Tanda Tangan Pengirim'), findsOneWidget);
+      expect(find.text('Ketuk untuk perbesar'), findsOneWidget);
+    });
+  });
 }

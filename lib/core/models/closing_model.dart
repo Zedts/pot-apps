@@ -13,6 +13,7 @@ class ClosingModel {
   final String tanggal; // YYYY-MM-DD
   final int stokSistem;
   final int stokFisik;
+  final int stokTransfer;
   final int totalOmset;
   final int tunaiSistem;
   final int qrisSistem;
@@ -36,6 +37,7 @@ class ClosingModel {
     required this.tanggal,
     required this.stokSistem,
     required this.stokFisik,
+    this.stokTransfer = 0,
     required this.totalOmset,
     required this.tunaiSistem,
     required this.qrisSistem,
@@ -132,6 +134,7 @@ class ClosingModel {
 
     final sSistem = ParserUtils.parseInt(json['stok_sistem']);
     final sFisik = ParserUtils.parseInt(json['stok_fisik']);
+    final sTransfer = ParserUtils.parseInt(json['stok_transfer'] ?? json['stokTransfer']);
     final tOmset = ParserUtils.parseInt(json['total_omset']);
     final tSistem = ParserUtils.parseInt(json['tunai_sistem']);
     final qSistem = ParserUtils.parseInt(json['qris_sistem']);
@@ -151,6 +154,7 @@ class ClosingModel {
       tanggal: json['tanggal']?.toString() ?? '',
       stokSistem: sSistem,
       stokFisik: sFisik,
+      stokTransfer: sTransfer,
       totalOmset: tOmset,
       tunaiSistem: tSistem,
       qrisSistem: qSistem,
@@ -177,6 +181,7 @@ class ClosingModel {
       'tanggal': tanggal,
       'stok_sistem': stokSistem,
       'stok_fisik': stokFisik,
+      'stok_transfer': stokTransfer,
       'total_omset': totalOmset,
       'tunai_sistem': tunaiSistem,
       'qris_sistem': qrisSistem,

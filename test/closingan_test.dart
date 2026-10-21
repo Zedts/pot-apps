@@ -84,6 +84,7 @@ void main() {
         'tanggal': '2026-09-11',
         'stok_sistem': 87,
         'stok_fisik': 80,
+        'stok_transfer': 15,
         'total_omset': 1245000,
         'tunai_sistem': 820000,
         'qris_sistem': 425000,
@@ -100,6 +101,7 @@ void main() {
       expect(model.id, 'closing_123');
       expect(model.stokSistem, 87);
       expect(model.stokFisik, 80);
+      expect(model.stokTransfer, 15);
       expect(model.selisihStok, -7);
       expect(model.selisihUang, -48000);
       expect(model.hasStockDiscrepancy, isTrue);
@@ -119,6 +121,7 @@ void main() {
         tanggal: '2026-10-09',
         stokSistem: 100,
         stokFisik: 100,
+        stokTransfer: 15,
         totalOmset: 500000,
         tunaiSistem: 300000,
         qrisSistem: 200000,
@@ -132,6 +135,7 @@ void main() {
       final json = model.toJson();
       expect(json['id'], 'c1');
       expect(json['stok_sistem'], 100);
+      expect(json['stok_transfer'], 15);
       expect(json['selisih_stok'], 0);
       expect(json['selisih_uang'], 0);
       expect(json['total_omset'], 500000);
@@ -273,15 +277,52 @@ void main() {
       expect(viewModel.stokSistem, 150);
       expect(viewModel.totalBarangMasukHariIni, 20);
       expect(viewModel.totalStokTerjualHariIni, 22);
+      expect(viewModel.totalStokTransferHariIni, 0);
       expect(viewModel.totalStokAwalHariIni, 152);
 
-      // Verify invariant: Stok Awal + Barang Masuk - Terjual == Stok Sistem
+      // Verify invariant: Stok Awal + Barang Masuk - Terjual - Transfer == Stok Sistem
       expect(
         viewModel.totalStokAwalHariIni +
             viewModel.totalBarangMasukHariIni -
-            viewModel.totalStokTerjualHariIni,
+            viewModel.totalStokTerjualHariIni -
+            viewModel.totalStokTransferHariIni,
         viewModel.stokSistem,
       );
+    });
+
+    test('Incorporates transfer stok in inventory balance and submitClosing payload', () async {
+      mockRepo.mockStock = [
+        const StokLapakModel(
+          id: 's1',
+          lapakId: 'lapak_1',
+          produkId: 'p1',
+          stokAwal: 200,
+          stokMasuk: 50,
+          stokTerjual: 150,
+          stokTransfer: 25,
+          stokAkhir: 75,
+        ),
+      ];
+
+      await viewModel.initialize();
+
+      expect(viewModel.totalStokTransferHariIni, 25);
+      expect(viewModel.totalStokTransfer, 25);
+      expect(viewModel.stokSistem, 75);
+
+      // Verify invariant: stokAwal = stokAkhir - barangMasuk + stokTerjual + stokTransfer
+      expect(
+        viewModel.totalStokAwalHariIni +
+            viewModel.totalBarangMasukHariIni -
+            viewModel.totalStokTerjualHariIni -
+            viewModel.totalStokTransferHariIni,
+        viewModel.stokSistem,
+      );
+
+      // Submit closing and verify payload contains stok_transfer
+      final closingResult = await viewModel.submitClosing();
+      expect(closingResult, isNotNull);
+      expect(closingResult!.stokTransfer, 25);
     });
 
     test('Correctly handles transaction made at 00:43 after midnight with UTC parse', () async {
@@ -329,8 +370,7 @@ void main() {
       expect(viewModel.dynamicHintText, contains('Terdapat selisih'));
       expect(viewModel.suggestedDiscrepancyNote, contains('selisih stok -5 pcs'));
 
-      // User enters cash shortage of Rp 20.000 against totalOmset (450.000)
-      viewModel.setUangTunaiFisik(430000);
+      viewModel.setUangTunaiFisik(230000);
       expect(viewModel.selisihUang, -20000);
       expect(viewModel.hasCashDiscrepancy, isTrue);
       expect(viewModel.suggestedDiscrepancyNote, contains('selisih kasir -Rp 20.000'));
@@ -455,14 +495,15 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('ClosingInventorySummaryCard renders all 4 inventory metrics', (tester) async {
+    testWidgets('ClosingInventorySummaryCard renders all inventory metrics including transfer stok', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
             body: ClosingInventorySummaryCard(
-              stokAwal: 375,
+              stokAwal: 390,
               barangMasuk: 10,
               terjual: 287,
+              transferStok: 15,
               stokAkhir: 98,
             ),
           ),
@@ -471,9 +512,11 @@ void main() {
 
       expect(find.text('Ringkasan'), findsOneWidget);
       expect(find.text('Inventaris'), findsOneWidget);
-      expect(find.text('375 pcs'), findsOneWidget);
+      expect(find.text('390 pcs'), findsOneWidget);
       expect(find.text('10 pcs'), findsOneWidget);
       expect(find.text('287 pcs'), findsOneWidget);
+      expect(find.text('Transfer Stok'), findsOneWidget);
+      expect(find.text('15 pcs'), findsOneWidget);
       expect(find.text('98 pcs'), findsOneWidget);
     });
 
